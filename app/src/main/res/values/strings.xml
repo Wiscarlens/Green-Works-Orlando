@@ -5,4 +5,15 @@
     <string name="home">Home</string>
     <string name="navigation_drawer_close">Close Navigation</string>
     <string name="navigation_drawer_open">Open Navigation</string>
+    <string name="rewards">Rewards</string>
+    <string name="greeting">Hello</string>
+    <string name="default_name">Joe</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="default_points">100 points</string>
+    <string name="sorting_guide">Sorting Guide</string>
+    <string name="location">Location</string>
+    <string name="scan">Scan</string>
+    <string name="calendar">Calendar</string>
+    <string name="history">History</string>
+    <string name="scan_button">Scan Button</string>
 </resources>

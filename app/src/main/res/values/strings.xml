@@ -25,4 +25,8 @@
     <string name="cardboard">Cardboard</string>
     <string name="material">Material</string>
     <string name="water_bottle">Water Bottle</string>
+    <string name="materials">Materials</string>
+    <string name="_20">20</string>
+    <string name="_10">10</string>
+    <string name="_7">7</string>
 </resources>

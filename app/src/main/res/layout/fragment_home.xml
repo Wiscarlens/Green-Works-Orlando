@@ -85,6 +85,7 @@
             android:layoutDirection="rtl" />
 
         <ImageButton
+            android:id="@+id/sorting_guideIB"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -131,8 +132,9 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="125dp"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -173,9 +175,9 @@
                 <LinearLayout
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:background="@drawable/circle_selection"
                     android:gravity="center"
-                    android:background="@drawable/circle">
+                    android:orientation="vertical">
 
                     <ImageButton
                         android:layout_width="wrap_content"
@@ -184,16 +186,16 @@
                         android:contentDescription="@string/sorting_guide"
                         android:scaleType="center"
                         android:src="@drawable/baseline_calendar_month_24"
-                        app:tint="@color/dark_bleu" />
+                        app:tint="@color/light_blue" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:text="@string/weekly"
-                        android:textColor="@color/dark_bleu"
+                        android:textColor="@color/light_blue"
                         android:textSize="11sp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="5dp"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -264,7 +266,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -292,12 +294,20 @@
 
                     </LinearLayout>
 
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/light_gray" />
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginStart="50dp"
-                        android:layout_marginEnd="50dp"
                         android:gravity="center">
 
                         <TextView
@@ -317,6 +327,15 @@
                             android:textStyle="bold" />
 
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/light_gray" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"

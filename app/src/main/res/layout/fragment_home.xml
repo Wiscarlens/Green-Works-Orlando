@@ -29,10 +29,23 @@
                 android:textStyle="bold"
                 android:textSize="11sp"
                 android:textColor="@color/black"/>
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/default_points" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/rewardsPointsTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_100"
+                    android:layout_marginEnd="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/points" />
+            </LinearLayout>
+
 
         </LinearLayout>
 
@@ -45,6 +58,7 @@
             android:background="@drawable/border">
 
             <ImageView
+                android:id="@+id/profileImageIV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/fake_profile_picture"
@@ -72,12 +86,14 @@
             android:layout_marginEnd="5dp"/>
 
         <TextView
+            android:id="@+id/userFirstNameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="17sp"
             android:text="@string/default_name"/>
 
         <SearchView
+            android:id="@+id/searchView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="15dp"
@@ -85,7 +101,7 @@
             android:layoutDirection="rtl" />
 
         <ImageButton
-            android:id="@+id/sorting_guideIB"
+            android:id="@+id/sortingGuideIB"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -173,13 +189,14 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/weeklyStatsLL"
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/circle_selection"
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageButton
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -199,6 +216,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/monthlyStatsLL"
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -207,7 +225,7 @@
                     android:layout_marginEnd="45dp"
                     android:background="@drawable/circle">
 
-                    <ImageButton
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -227,13 +245,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/yearlyStatsLL"
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center"
                     android:background="@drawable/circle">
 
-                    <ImageButton
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"

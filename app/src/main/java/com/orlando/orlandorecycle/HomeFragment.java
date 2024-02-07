@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SearchView;
+import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
 
@@ -23,13 +27,34 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        ImageButton sortingGuideButton = view.findViewById(R.id.sorting_guideIB);
+
+        TextView rewardsPoint = view.findViewById(R.id.rewardsPointsTV);
+        ImageView profileImage = view.findViewById(R.id.profileImageIV);
+        TextView userFirstName = view.findViewById(R.id.userFirstNameTV);
+        SearchView searchView = view.findViewById(R.id.searchView);
+        ImageButton sortingGuideButton = view.findViewById(R.id.sortingGuideIB);
+        LinearLayout weeklyStats = view.findViewById(R.id.weeklyStatsLL);
+        LinearLayout monthlyStats = view.findViewById(R.id.monthlyStatsLL);
+        LinearLayout yearlyStats = view.findViewById(R.id.yearlyStatsLL);
+
+
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requireActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new ProfileFragment())
+                        .addToBackStack(null).commit();
+            }
+        });
 
         sortingGuideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ForgotPasswordFragment forgotPasswordFragment = new ForgotPasswordFragment();
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, forgotPasswordFragment).addToBackStack(null).commit();
+                SortingGuideFragment sortingGuideFragment = new SortingGuideFragment();
+
+                requireActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, sortingGuideFragment)
+                        .addToBackStack(null).commit();
             }
         });
 

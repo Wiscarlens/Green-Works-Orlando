@@ -6,9 +6,9 @@
         android:icon="@drawable/baseline_home_24"
         android:title="@string/home"/>
     <item
-        android:id="@+id/nav_location"
+        android:id="@+id/nav_map"
         android:icon="@drawable/baseline_location_pin_24"
-        android:title="@string/location"/>
+        android:title="@string/map"/>
     <item
         android:id="@+id/placeHolder"
         android:title="" />

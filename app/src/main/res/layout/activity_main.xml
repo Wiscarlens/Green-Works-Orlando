@@ -34,10 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/snow"
         android:fitsSystemWindows="false"
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
+        app:headerLayout="@layout/nav_header"
         app:menu="@menu/main_menu" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

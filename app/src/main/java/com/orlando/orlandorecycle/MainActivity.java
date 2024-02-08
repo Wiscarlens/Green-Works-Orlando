@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -99,8 +98,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_settings) {
-            Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
-            // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
+            SettingFragment settingFragment = new SettingFragment();
+            settingFragment.show(getSupportFragmentManager(), settingFragment.getTag());
         } else if (id == R.id.nav_logout) {
             Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
             // Confirmation Message for log out

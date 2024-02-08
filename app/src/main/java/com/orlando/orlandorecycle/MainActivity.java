@@ -98,9 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-        } else if (id == R.id.nav_settings) {
+        if (id == R.id.nav_settings) {
             Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
             // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
         } else if (id == R.id.nav_logout) {

@@ -44,4 +44,6 @@
     <string name="points">points</string>
     <string name="_100">100</string>
     <string name="map">Map</string>
+    <string name="close_button">Close Button</string>
+    <string name="logo">Logo</string>
 </resources>

@@ -41,20 +41,18 @@ public class HomeFragment extends Fragment {
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new ProfileFragment())
-                        .addToBackStack(null).commit();
+                ProfileFragment profileFragment = new ProfileFragment();
+                profileFragment.show(getParentFragmentManager(), profileFragment.getTag());
             }
         });
+
+
 
         sortingGuideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SortingGuideFragment sortingGuideFragment = new SortingGuideFragment();
-
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, sortingGuideFragment)
-                        .addToBackStack(null).commit();
+                sortingGuideFragment.show(getParentFragmentManager(), sortingGuideFragment.getTag());
             }
         });
 

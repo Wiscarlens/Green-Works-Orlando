@@ -2,57 +2,28 @@ package com.orlando.orlandorecycle;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SortingGuideFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SortingGuideFragment extends Fragment {
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.Objects;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public SortingGuideFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SortingGuideFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SortingGuideFragment newInstance(String param1, String param2) {
-        SortingGuideFragment fragment = new SortingGuideFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+public class SortingGuideFragment extends BottomSheetDialogFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -60,5 +31,37 @@ public class SortingGuideFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sorting_guide, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ImageButton closeButton = view.findViewById(R.id.closeButton);
+        closeButton.setOnClickListener(v -> dismiss());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
+
+        if (dialog != null) {
+            ViewGroup bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setSkipCollapsed(true);
+                behavior.setHideable(true);
+
+                ViewGroup.LayoutParams layoutParams = bottomSheet.getLayoutParams();
+                if (layoutParams != null) {
+                    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                    bottomSheet.setLayoutParams(layoutParams);
+                }
+            }
+
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
+        }
     }
 }

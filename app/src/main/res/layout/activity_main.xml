@@ -38,7 +38,18 @@
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/main_menu" />
+        app:menu="@menu/main_menu" >
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/black" />
+
+    </com.google.android.material.navigation.NavigationView>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="wrap_content"

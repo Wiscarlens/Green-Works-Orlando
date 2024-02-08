@@ -46,4 +46,8 @@
     <string name="map">Map</string>
     <string name="close_button">Close Button</string>
     <string name="logo">Logo</string>
+    <string name="last_scanned">Last Scanned</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="version">"Version "</string>
 </resources>

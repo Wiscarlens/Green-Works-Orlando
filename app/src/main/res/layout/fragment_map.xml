@@ -1,15 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MapFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Title -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Map Goes Here"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:text="Recycling Drop-Off Locations:\n\nEmbedded Interactive Map Will Go Below"
+        android:gravity="start"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp" />
 
-</FrameLayout>
+
+    <!-- Map Goes Here -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/orlando_map_1"
+        android:layout_marginTop="-100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+
+    <!-- Recycling Drop-Off Locations -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="
+        If you live in an apartment complex or condo community\n
+        and don't have access to recycling, bring your materials\n
+        to one of our convenient drop-off locations.\n\n
+        • Dover Shore Community Center\n
+          1400 Gaston Foster Road\n\n
+        • Engelwood Neighborhood Center\n
+          6123 Lacosta Drive\n\n
+        • Northwest Community Center\n
+          3955 WD Judge Road\n\n
+        • Solid Waste Management Division\n
+          1028 South Woods Avenue\n
+          (Front of the building)"
+        android:gravity="start"
+        android:layout_weight="1"
+        android:layout_marginLeft="-20dp"
+        />
+
+</LinearLayout>
+

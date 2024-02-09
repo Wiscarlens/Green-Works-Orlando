@@ -116,7 +116,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         android:orientation="vertical"
         android:layout_marginTop="15dp"
         android:gravity="center">
@@ -147,16 +147,16 @@
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="145dp"
         android:gravity="center"
         android:paddingTop="5dp"
         android:paddingBottom="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/lastScannedRV"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            tools:listitem="@layout/material_design"
+            tools:listitem="@layout/item_design"
             tools:listitemcount="5"/>
 
     </HorizontalScrollView>

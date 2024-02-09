@@ -15,7 +15,6 @@
         android:layout_weight="1"
         android:layout_marginLeft="10dp" />
 
-
     <!-- Map Goes Here -->
     <ImageView
         android:id="@+id/imageView"

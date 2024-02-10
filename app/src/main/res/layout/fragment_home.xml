@@ -198,15 +198,17 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/weeklyStatsIV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:contentDescription="@string/sorting_guide"
+                        android:contentDescription="@string/calendar"
                         android:scaleType="center"
                         android:src="@drawable/baseline_calendar_month_24"
                         app:tint="@color/light_blue" />
 
                     <TextView
+                        android:id="@+id/weeklyStatsTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -227,6 +229,7 @@
                     android:background="@drawable/circle">
 
                     <ImageView
+                        android:id="@+id/monthlyStatsIV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -236,6 +239,7 @@
                         app:tint="@color/dark_bleu" />
 
                     <TextView
+                        android:id="@+id/monthlyStatsTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/monthly"
@@ -254,6 +258,7 @@
                     android:background="@drawable/circle">
 
                     <ImageView
+                        android:id="@+id/yearlyStatsIV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -263,6 +268,7 @@
                         app:tint="@color/dark_bleu" />
 
                     <TextView
+                        android:id="@+id/yearlyStatsTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/yearly"
@@ -297,6 +303,7 @@
                         android:gravity="center">
 
                         <TextView
+                            android:id="@+id/statsTopOnePointsTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/_20"
@@ -305,6 +312,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/statsTopOneMaterialTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/cardboard"
@@ -331,6 +339,7 @@
                         android:gravity="center">
 
                         <TextView
+                            android:id="@+id/statsTopTwoPointsTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/_10"
@@ -339,6 +348,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/statsTopTwoMaterialTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/plastic"
@@ -364,6 +374,7 @@
                         android:gravity="center">
 
                         <TextView
+                            android:id="@+id/statsTopThreePointsTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/_7"
@@ -372,6 +383,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/statsTopThreeMaterialTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/glass"

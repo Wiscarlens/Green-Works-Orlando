@@ -1,5 +1,15 @@
 package com.orlando.orlandorecycle;
 
+/*
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;

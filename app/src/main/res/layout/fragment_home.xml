@@ -127,11 +127,18 @@
             app:cardCornerRadius="10dp"
             android:elevation="10dp">
 
-            <TextView
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="Heat Map"-->
+<!--                android:gravity="center"/>-->
+
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Heat Map"
-                android:gravity="center"/>
+                android:src="@drawable/heatmap"
+                android:layout_gravity="center"
+                android:contentDescription="TODO" />
 
         </androidx.cardview.widget.CardView>
 

@@ -95,8 +95,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         });
 
+        ScannerManager scannerManager = new ScannerManager(this);
+
         fab.setOnClickListener(v -> {
-            Toast.makeText(MainActivity.this, "Floating Action Button", Toast.LENGTH_SHORT).show();
+            scannerManager.startBarcodeScanning(); // Scan barcode
+            String barcode = scannerManager.getScanItem(); // get barcode
+            Toast.makeText(MainActivity.this, barcode, Toast.LENGTH_SHORT).show();
         });
 
 

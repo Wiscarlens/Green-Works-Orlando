@@ -13,6 +13,7 @@ package com.orlando.orlandorecycle;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
-        ProfileFragment profileFragment = new ProfileFragment();
 
         // Initialize scannerManager in onCreate
         scannerManager = new ScannerManager(this, result -> {
@@ -115,7 +114,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         fab.setOnClickListener(v -> {
-            scannerManager.startBarcodeScanning(); // Start scanning when button is clicked
+            ScannerFragment scannerFragment = new ScannerFragment();
+            scannerFragment.show(getSupportFragmentManager(), scannerFragment.getTag());
+
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScannerFragment()).commit();
         });
 
 

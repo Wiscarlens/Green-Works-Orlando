@@ -3,6 +3,7 @@ package com.orlando.orlandorecycle;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.fragment.app.Fragment;
 
+import com.google.zxing.Result;
 import com.journeyapps.barcodescanner.CaptureActivity;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
@@ -24,13 +25,6 @@ public class ScannerManager {
         );
     }
 
-//    public ScannerManager(MainActivity mainActivity) {
-//        // Initialize the scannerLauncher using the provided fragment
-//        scannerLauncher = mainActivity.registerForActivityResult(
-//                new ScanContract(), result -> scanItem = result.getContents()
-//        );
-//    }
-
     public String getScanItem() {
         return scanItem;
     }
@@ -47,6 +41,7 @@ public class ScannerManager {
     }
 
     public static class CaptureAct extends CaptureActivity {
+
     }
 
     public interface ScanCompleteListener {

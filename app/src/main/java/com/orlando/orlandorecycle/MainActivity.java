@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,6 +33,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawerLayout;
+    ScannerManager scannerManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        ProfileFragment profileFragment = new ProfileFragment();
+
+        // Initialize scannerManager in onCreate
+        scannerManager = new ScannerManager(this, result -> {
+            if (result != null) {
+                Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "No barcode scanned", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
@@ -65,7 +78,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         TextView versionTV = navigationView.findViewById(R.id.version);
-        versionTV.setText(getString(R.string.version) + versionName);
+        String version = getString(R.string.version) + versionName;
+        versionTV.setText(version);
 
         // Set Home fragment as default fragment
         if (savedInstanceState == null) {
@@ -95,12 +109,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         });
 
-        ScannerManager scannerManager = new ScannerManager(this);
+
+
+
+
 
         fab.setOnClickListener(v -> {
-            scannerManager.startBarcodeScanning(); // Scan barcode
-            String barcode = scannerManager.getScanItem(); // get barcode
-            Toast.makeText(MainActivity.this, barcode, Toast.LENGTH_SHORT).show();
+            scannerManager.startBarcodeScanning(); // Start scanning when button is clicked
         });
 
 

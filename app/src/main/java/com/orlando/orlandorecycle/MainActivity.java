@@ -13,6 +13,7 @@ package com.orlando.orlandorecycle;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,6 +34,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawerLayout;
+    ScannerManager scannerManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        // Initialize scannerManager in onCreate
+        scannerManager = new ScannerManager(this, result -> {
+            if (result != null) {
+                Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "No barcode scanned", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
@@ -65,7 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         TextView versionTV = navigationView.findViewById(R.id.version);
-        versionTV.setText(getString(R.string.version) + versionName);
+        String version = getString(R.string.version) + versionName;
+        versionTV.setText(version);
 
         // Set Home fragment as default fragment
         if (savedInstanceState == null) {
@@ -95,8 +108,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         });
 
+
+
+
+
+
         fab.setOnClickListener(v -> {
-            Toast.makeText(MainActivity.this, "Floating Action Button", Toast.LENGTH_SHORT).show();
+            ScannerFragment scannerFragment = new ScannerFragment();
+            scannerFragment.show(getSupportFragmentManager(), scannerFragment.getTag());
+
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScannerFragment()).commit();
         });
 
 

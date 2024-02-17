@@ -25,6 +25,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -34,28 +35,25 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawerLayout;
-    ScannerManager scannerManager;
+    NavigationView navigationView;
+    private Toolbar toolbar;
+    private BottomAppBar bottomAppBar;
+    BottomNavigationView bottomNavigationView;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar = findViewById(R.id.toolbar);
+        bottomAppBar = findViewById(R.id.bottomAppBar);
         drawerLayout = findViewById(R.id.drawer_layout);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        fab = findViewById(R.id.fab);
 
-        // Initialize scannerManager in onCreate
-        scannerManager = new ScannerManager(this, result -> {
-            if (result != null) {
-                Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(MainActivity.this, "No barcode scanned", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        FloatingActionButton fab = findViewById(R.id.fab);
+        switchFragment(new LoginFragment());
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
@@ -80,15 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String version = getString(R.string.version) + versionName;
         versionTV.setText(version);
 
-        // Set Home fragment as default fragment
-        if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new HomeFragment())
-                    .commit();
 
-            navigationView.setCheckedItem(R.id.nav_home);
-        }
 
         // TODO: Disable placeholder item button
 
@@ -110,14 +100,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-
-
-
         fab.setOnClickListener(v -> {
             ScannerFragment scannerFragment = new ScannerFragment();
             scannerFragment.show(getSupportFragmentManager(), scannerFragment.getTag());
-
-            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScannerFragment()).commit();
         });
 
 
@@ -138,5 +123,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    protected void enableNavigationViews(int visibility) {
+        toolbar.setVisibility(visibility);
+        bottomAppBar.setVisibility(visibility);
+        fab.setVisibility(visibility);
+    }
+
+    private void switchFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
+
     }
 }

@@ -6,5 +6,6 @@
     <color name="light_blue">#e0fbfc</color>
     <color name="snow">#FFFAFA</color>
     <color name="light_gray">#DCDDDF</color>
-    <color name="green">#4CAF50</color>
+    <color name="green">#8dc63f</color>
+    <color name="red">#FF0000</color>
 </resources>

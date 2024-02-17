@@ -117,8 +117,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             SettingFragment settingFragment = new SettingFragment();
             settingFragment.show(getSupportFragmentManager(), settingFragment.getTag());
         } else if (id == R.id.nav_logout) {
+            // Dialog to confirm log out
+
+            switchFragment(new LoginFragment());
             Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
-            // Confirmation Message for log out
+
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

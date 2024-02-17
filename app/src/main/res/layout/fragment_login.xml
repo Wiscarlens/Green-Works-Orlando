@@ -100,16 +100,6 @@
                 tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <CheckBox
-            android:id="@+id/checkBoxRememberMe"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="60dp"
-            android:text="@string/remember_me"
-            android:textColor="@color/black"
-            android:textSize="11sp" />
-
         <Button
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
@@ -117,6 +107,7 @@
             android:maxWidth="290dp"
             android:layout_marginStart="60dp"
             android:layout_marginEnd="60dp"
+            android:layout_marginTop="10dp"
             android:backgroundTint="@color/green"
             android:text="@string/login"
             android:textColor="#FFFFFF"

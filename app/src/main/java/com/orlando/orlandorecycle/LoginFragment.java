@@ -42,7 +42,8 @@ public class LoginFragment extends Fragment {
         mainActivity.enableNavigationViews(View.GONE);
 
         forgotPassword.setOnClickListener(view1 -> {
-            changeFragment(new ForgotPasswordFragment());
+            ResetPasswordFragment resetPassword = new ResetPasswordFragment();
+            resetPassword.show(getParentFragmentManager(), resetPassword.getTag());
         });
 
         signUp.setOnClickListener(view1 -> {

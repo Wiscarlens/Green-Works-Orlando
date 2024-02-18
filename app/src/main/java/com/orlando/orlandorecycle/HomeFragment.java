@@ -96,6 +96,10 @@ public class HomeFragment extends Fragment {
         int lightBlue = R.color.light_blue;
         int darkBlue = R.color.dark_bleu;
 
+        MainActivity mainActivity = (MainActivity) getActivity();
+        assert mainActivity != null;
+        mainActivity.enableNavigationViews(View.VISIBLE);
+
         weeklyStats.setOnClickListener(v -> {
             setBackgroundResources(weeklyStats, monthlyStats, yearlyStats, circleSelection, circle, circle);
 

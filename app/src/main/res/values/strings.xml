@@ -30,9 +30,6 @@
     <string name="_10">10</string>
     <string name="_7">7</string>
     <string name="pipe_symbol">|</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -50,4 +47,12 @@
     <string name="terms_of_service">Terms of Service</string>
     <string name="contact_us">Contact Us</string>
     <string name="version">"Version "</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="forgot_password_message">Enter the email you used to sign up to reset your password.</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password_question">Forgot password?</string>
+    <string name="remember_me">Remember me</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign up</string>
 </resources>

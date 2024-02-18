@@ -11,7 +11,7 @@
         android:id="@+id/header_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/gw_orlando_logo"
+        android:src="@drawable/gw_orlando_logo_1"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:layout_alignParentTop="true"/>
@@ -58,7 +58,7 @@
         android:id="@+id/city_of_orlando_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/city_of_orlando_logo_new"
+        android:src="@drawable/city_of_orlando_logo_new_1"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="65dp"  />
 

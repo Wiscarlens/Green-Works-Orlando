@@ -71,7 +71,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         int scaledSize = 90; // adjust this size as needed,, default is 60
 
         // Create a scaled bitmap from the original drawable resource
-        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.recycle_bin);
+        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.recycle_bin_1);
         Bitmap b = bitmapdraw.getBitmap();
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, scaledSize, scaledSize, false);
 

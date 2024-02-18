@@ -1,70 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#FFFFFF"
     tools:context=".MapFragment">
 
-    <!-- Title -->
-    <TextView
+
+    <ImageView
+        android:id="@+id/header_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="28sp"
-        android:text="Recycling Drop-Off Locations\n"
-        android:gravity="start"
-        android:layout_weight="1"
-        android:layout_marginLeft="10dp" />
+        android:src="@drawable/gw_orlando_logo"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"/>
 
-    <EditText
-        android:id="@+id/addressInput"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:hint="Enter address"
-        android:textColorHint="@android:color/black"
-        android:inputType="text"
-        android:background="@drawable/rounded_input_box"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recycling Center Drop-off Locations"
+        android:textSize="18sp"
+        android:textColor="#FF000000"
+        android:layout_below="@id/header_image"
+        android:layout_marginLeft="10dp"/>
+
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/title"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="0dp"
-        android:layout_marginTop="-60dp"
-        android:padding="10dp"
-        />
-
-    <!-- Map Goes Here -->
-    <org.osmdroid.views.MapView
-        android:id="@+id/map"
-        android:layout_width="390dp"
-        android:layout_height="390dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-
+        android:layout_marginTop="15dp"
+        tools:context=".MapFragment"
         />
 
 
-
-
-    <!-- Recycling Drop-Off Locations -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/recycle_locations"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="
-        If you live in an apartment complex or condo community\n
-        and don't have access to recycling, bring your materials\n
-        to one of our convenient drop-off locations.\n\n
-        • Dover Shore Community Center\n
-          1400 Gaston Foster Road\n\n
-        • Engelwood Neighborhood Center\n
-          6123 Lacosta Drive\n\n
-        • Northwest Community Center\n
-          3955 WD Judge Road\n\n
-        • Solid Waste Management Division\n
-          1028 South Woods Avenue\n
-          (Front of the building)"
-        android:gravity="start"
-        android:layout_weight="1"
-        android:layout_marginLeft="-20dp"
+        android:textColor="#FF000000"
+        android:text="If you live in an apartment complex or condo community and\ndon't have access to recycling, bring your materials to one of\nour convenient drop-off locations.\n\n• Dover Shore Community Center\n  1400 Gaston Foster Road\n\n• Engelwood Neighborhood Center\n  6123 Lacosta Drive\n\n• Northwest Community Center\n  3955 WD Judge Road\n\n• Solid Waste Management Division\n  1028 South Woods Avenue\n  (Front of the building)"
+        android:layout_below="@id/map"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
         />
 
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/city_of_orlando_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/city_of_orlando_logo_new"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="65dp"  />
+
+</RelativeLayout>
+
+
+
+
+
+
+
+
 

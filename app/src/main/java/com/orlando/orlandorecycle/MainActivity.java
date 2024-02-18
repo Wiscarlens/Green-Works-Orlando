@@ -34,7 +34,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawerLayout;
-    ScannerManager scannerManager;
+    //ScannerManager scannerManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +47,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         // Initialize scannerManager in onCreate
-        scannerManager = new ScannerManager(this, result -> {
+        /*scannerManager = new ScannerManager(this, result -> {
             if (result != null) {
                 Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(MainActivity.this, "No barcode scanned", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
         FloatingActionButton fab = findViewById(R.id.fab);
 

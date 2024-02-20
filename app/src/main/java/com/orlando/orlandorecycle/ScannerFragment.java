@@ -1,13 +1,19 @@
 package com.orlando.orlandorecycle;
 
+import android.app.AlertDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -62,6 +68,8 @@ public class ScannerFragment extends BottomSheetDialogFragment {
 
         beepManager = new BeepManager(requireActivity());
 
+        barcodeView.setStatusText("");
+
         backButton.setOnClickListener(v -> {
             // Close the bottom sheet
             dismiss();
@@ -101,7 +109,7 @@ public class ScannerFragment extends BottomSheetDialogFragment {
 //        return barcodeView.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
 //    }
 
-    private BarcodeCallback callback = new BarcodeCallback() {
+    private final BarcodeCallback callback = new BarcodeCallback() {
         @Override
         public void barcodeResult(BarcodeResult result) {
             if(result.getText() == null || result.getText().equals(lastText)) {
@@ -110,15 +118,20 @@ public class ScannerFragment extends BottomSheetDialogFragment {
             }
 
             lastText = result.getText();
-            barcodeView.setStatusText(result.getText());
+
+
+            if (result.getText().equals("096619332748")) {
+                Drawable image = getResources().getDrawable(R.drawable.water_bottle, null);
+
+                showItemDialog(image, "Water Bottle", "This is a water bottle");
+            } else {
+                Toast.makeText(requireActivity(), result.getText() + " Not found", Toast.LENGTH_SHORT).show();
+            }
+
+
 
             beepManager.playBeepSoundAndVibrate();
 
-            Toast.makeText(requireActivity(), result.getText(), Toast.LENGTH_SHORT).show();
-
-//            //Added preview of scanned barcode
-//            ImageView imageView = findViewById(R.id.barcodePreview);
-//            imageView.setImageBitmap(result.getBitmapWithResultPoints(Color.YELLOW));
         }
 
 
@@ -151,6 +164,47 @@ public class ScannerFragment extends BottomSheetDialogFragment {
 
             Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
         }
+    }
+
+    void showItemDialog(Drawable image, String name, String description) {
+        RelativeLayout relativeLayout = requireActivity().findViewById(R.id.fragment_scanner);
+        View view = LayoutInflater.from(requireActivity()).inflate(R.layout.item_dialog, relativeLayout);
+
+        ImageView itemImage = view.findViewById(R.id.itemImageIV);
+        TextView itemName = view.findViewById(R.id.itemNameTV);
+        TextView itemDescription = view.findViewById(R.id.itemDescriptionTV);
+        ImageButton openButton = view.findViewById(R.id.openButton);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+
+        itemImage.setImageDrawable(image);
+        itemName.setText(name);
+        itemDescription.setText(description);
+
+        openButton.setOnClickListener(v -> {
+            // Open the item in the browser
+            dialog.dismiss();
+
+            Toast.makeText(requireActivity(), "Opening item...", Toast.LENGTH_SHORT).show();
+        });
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+            params.gravity = Gravity.BOTTOM;
+            params.width = WindowManager.LayoutParams.MATCH_PARENT;
+            params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            dialog.getWindow().setAttributes(params);
+            dialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
+
+            // Convert 20dp to pixels and subtract it from the screen height
+            params.y = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+        }
+
+        dialog.show();
+
     }
 
 

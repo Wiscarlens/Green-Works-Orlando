@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="20dp"
+    android:elevation="10dp"
+    android:layout_gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/itemImageIV"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/water_bottle"
+            tools:layout_editor_absoluteX="29dp"
+            tools:layout_editor_absoluteY="50dp"
+            android:contentDescription="Item Image" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="40dp">
+
+            <TextView
+                android:id="@+id/itemNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Plastic Bottle"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                tools:layout_editor_absoluteX="163dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <TextView
+                android:id="@+id/itemDescriptionTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Place it in the recycling bin designated for plastics in your area."
+                android:textSize="12sp"
+                android:textColor="#65676A"
+                tools:layout_editor_absoluteX="163dp"
+                tools:layout_editor_absoluteY="39dp" />
+
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/openButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/baseline_arrow_forward_ios_24"
+            android:background="@drawable/circle_selection"
+            tools:layout_editor_absoluteX="301dp"
+            tools:layout_editor_absoluteY="58dp"
+            app:tint="@color/white"
+            android:contentDescription="Open Button" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

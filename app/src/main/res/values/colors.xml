@@ -4,8 +4,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="dark_bleu">#005399</color>
     <color name="light_blue">#e0fbfc</color>
+    <color name="green">#8dc63f</color>
+    <color name="light_green">#c4e9a6</color>
+    <color name="dark_green">#397245</color>
     <color name="snow">#FFFAFA</color>
     <color name="light_gray">#DCDDDF</color>
-    <color name="green">#8dc63f</color>
+
     <color name="red">#FF0000</color>
 </resources>

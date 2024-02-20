@@ -183,7 +183,7 @@
         android:layout_height="160dp"
         app:cardCornerRadius="10dp"
         android:elevation="10dp"
-        android:backgroundTint="@color/light_blue">
+        android:backgroundTint="@color/light_green">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -213,7 +213,7 @@
                         android:contentDescription="@string/calendar"
                         android:scaleType="center"
                         android:src="@drawable/baseline_calendar_month_24"
-                        app:tint="@color/light_blue" />
+                        app:tint="@color/light_green" />
 
                     <TextView
                         android:id="@+id/weeklyStatsTV"
@@ -221,7 +221,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="@string/weekly"
-                        android:textColor="@color/light_blue"
+                        android:textColor="@color/light_green"
                         android:textSize="11sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -244,14 +244,14 @@
                         android:contentDescription="@string/sorting_guide"
                         android:scaleType="center"
                         android:src="@drawable/baseline_calendar_month_24"
-                        app:tint="@color/dark_bleu" />
+                        app:tint="@color/dark_green" />
 
                     <TextView
                         android:id="@+id/monthlyStatsTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/monthly"
-                        android:textColor="@color/dark_bleu"
+                        android:textColor="@color/dark_green"
                         android:textSize="11sp"
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"/>
@@ -273,14 +273,14 @@
                         android:contentDescription="@string/sorting_guide"
                         android:scaleType="center"
                         android:src="@drawable/baseline_calendar_month_24"
-                        app:tint="@color/dark_bleu" />
+                        app:tint="@color/dark_green" />
 
                     <TextView
                         android:id="@+id/yearlyStatsTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/yearly"
-                        android:textColor="@color/dark_bleu"
+                        android:textColor="@color/dark_green"
                         android:textSize="11sp"
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"/>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/snow"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
     tools:context=".MainActivity">
@@ -19,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/snow"
+            android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout

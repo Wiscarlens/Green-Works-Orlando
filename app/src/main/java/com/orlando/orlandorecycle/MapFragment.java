@@ -27,13 +27,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1; // Added constant for location permission request code
 
-    public MapFragment() {
-        // Required empty public constructor
-    }
-
-    public static MapFragment newInstance() {
-        return new MapFragment();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

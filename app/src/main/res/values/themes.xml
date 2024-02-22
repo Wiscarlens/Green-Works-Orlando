@@ -2,15 +2,15 @@
     <!-- Base application theme. -->
 <!--    <style name="Base.Theme.OrlandoRecycle" parent="Theme.Material3.DayNight.NoActionBar">-->
     <style name="Base.Theme.OrlandoRecycle" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/dark_bleu</item>
-        <item name="colorPrimaryDark">@color/dark_bleu</item>
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryDark">@color/dark_green</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/black</item>
         <item name="colorSecondaryVariant">@color/black</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/snow</item>
+        <item name="android:statusBarColor">@color/white</item>
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">@color/light_gray</item>

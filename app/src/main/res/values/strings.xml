@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Orlando Recycle</string>
+    <string name="app_name" translatable="false">GREEN WORKS</string>
     <string name="logout">Logout</string>
     <string name="settings">Settings</string>
     <string name="home">Home</string>
@@ -55,4 +55,6 @@
     <string name="remember_me">Remember me</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign up</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

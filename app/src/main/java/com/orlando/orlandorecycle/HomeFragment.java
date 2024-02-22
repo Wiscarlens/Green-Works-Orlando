@@ -60,6 +60,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        LinearLayout reward = view.findViewById(R.id.rewards);
         TextView rewardsPoint = view.findViewById(R.id.rewardsPointsTV);
         ImageView profileImage = view.findViewById(R.id.profileImageIV);
         TextView userFirstName = view.findViewById(R.id.userFirstNameTV);
@@ -93,18 +94,26 @@ public class HomeFragment extends Fragment {
 
         int circleSelection = R.drawable.circle_selection;
         int circle = R.drawable.circle;
-        int lightBlue = R.color.light_blue;
-        int darkBlue = R.color.dark_bleu;
+        int lightGreen = R.color.light_green;
+        int darkGreen = R.color.dark_green;
 
         MainActivity mainActivity = (MainActivity) getActivity();
         assert mainActivity != null;
         mainActivity.enableNavigationViews(View.VISIBLE);
 
+        reward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                RewardsFragment rewardsFragment = new RewardsFragment();
+//                rewardsFragment.show(getParentFragmentManager(), rewardsFragment.getTag());
+            }
+        });
+
         weeklyStats.setOnClickListener(v -> {
             setBackgroundResources(weeklyStats, monthlyStats, yearlyStats, circleSelection, circle, circle);
 
-            setColorFilters(weeklyStatsImage, monthlyStatsImage, yearlyStatsImage, lightBlue, darkBlue, darkBlue);
-            setTextColors(weeklyStatsPoints, monthlyStatsPoints, yearlyStatsPoints, lightBlue, darkBlue, darkBlue);
+            setColorFilters(weeklyStatsImage, monthlyStatsImage, yearlyStatsImage, lightGreen, darkGreen, darkGreen);
+            setTextColors(weeklyStatsPoints, monthlyStatsPoints, yearlyStatsPoints, lightGreen, darkGreen, darkGreen);
 
             setTextValues("20", "Textile",
                     "16", "Aluminum",
@@ -115,8 +124,8 @@ public class HomeFragment extends Fragment {
         monthlyStats.setOnClickListener(v -> {
             setBackgroundResources(weeklyStats, monthlyStats, yearlyStats, circle, circleSelection, circle);
 
-            setColorFilters(weeklyStatsImage, monthlyStatsImage, yearlyStatsImage,  darkBlue, lightBlue, darkBlue);
-            setTextColors(weeklyStatsPoints, monthlyStatsPoints, yearlyStatsPoints, darkBlue, lightBlue, darkBlue);
+            setColorFilters(weeklyStatsImage, monthlyStatsImage, yearlyStatsImage,  darkGreen, lightGreen, darkGreen);
+            setTextColors(weeklyStatsPoints, monthlyStatsPoints, yearlyStatsPoints, darkGreen, lightGreen, darkGreen);
 
             setTextValues("80", "Cardboard",
                     "64", "Aluminum",
@@ -128,8 +137,8 @@ public class HomeFragment extends Fragment {
         yearlyStats.setOnClickListener(v -> {
             setBackgroundResources(weeklyStats, monthlyStats, yearlyStats, circle, circle, circleSelection);
 
-            setColorFilters(weeklyStatsImage, monthlyStatsImage, yearlyStatsImage,  darkBlue, darkBlue, lightBlue);
-            setTextColors(weeklyStatsPoints, monthlyStatsPoints, yearlyStatsPoints, darkBlue, darkBlue, lightBlue);
+            setColorFilters(weeklyStatsImage, monthlyStatsImage, yearlyStatsImage,  darkGreen, darkGreen, lightGreen);
+            setTextColors(weeklyStatsPoints, monthlyStatsPoints, yearlyStatsPoints, darkGreen, darkGreen, lightGreen);
 
             setTextValues("960", "Cardboard",
                     "768", "Aluminum",

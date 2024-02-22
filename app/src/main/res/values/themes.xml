@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
 <!--    <style name="Base.Theme.OrlandoRecycle" parent="Theme.Material3.DayNight.NoActionBar">-->
     <style name="Base.Theme.OrlandoRecycle" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/green</item>
-        <item name="colorPrimaryDark">@color/dark_green</item>
+        <item name="colorPrimary">@color/dark_green</item>
+        <item name="colorPrimaryDark">@color/green</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/black</item>

@@ -1,6 +1,7 @@
 package com.orlando.orlandorecycle;
 
 import android.app.AlertDialog;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -14,6 +15,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import android.Manifest;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -45,6 +52,9 @@ public class ScannerFragment extends BottomSheetDialogFragment {
     private DecoratedBarcodeView barcodeView;
     private BeepManager beepManager;
     private String lastText;
+
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +76,14 @@ public class ScannerFragment extends BottomSheetDialogFragment {
         barcodeView.initializeFromIntent(requireActivity().getIntent());
         barcodeView.decodeContinuous(callback);
 
+//        // Request camera permission
+//        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(getActivity(),
+//                    new String[]{Manifest.permission.CAMERA},
+//                    CAMERA_PERMISSION_REQUEST_CODE);
+//        }
+
         beepManager = new BeepManager(requireActivity());
 
         barcodeView.setStatusText("");
@@ -82,7 +100,14 @@ public class ScannerFragment extends BottomSheetDialogFragment {
     public void onResume() {
         super.onResume();
 
-        barcodeView.resume();
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            requestCameraPermission();
+        } else {
+            // Permission has already been granted
+            barcodeView.resume();
+        }
     }
 
     @Override
@@ -205,6 +230,51 @@ public class ScannerFragment extends BottomSheetDialogFragment {
 
         dialog.show();
 
+    }
+    private void requestCameraPermission() {
+        // Should we show an explanation?
+        if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
+                Manifest.permission.CAMERA)) {
+            // Show an explanation to the user *asynchronously* -- don't block
+            // this thread waiting for the user's response! After the user
+            // sees the explanation, try again to request the permission.
+            new AlertDialog.Builder(requireActivity())
+                    .setTitle("Camera Permission Needed")
+                    .setMessage("This app needs the Camera permission, please accept to use camera functionality")
+                    .setPositiveButton("OK", (dialogInterface, i) -> {
+                        //Prompt the user once explanation has been shown
+                        ActivityCompat.requestPermissions(requireActivity(),
+                                new String[]{Manifest.permission.CAMERA},
+                                CAMERA_PERMISSION_REQUEST_CODE);
+                    })
+                    .create()
+                    .show();
+        } else {
+            // No explanation needed; request the permission
+            ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {// If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission was granted, yay! Do the
+                // camera-related task you need to do.
+                barcodeView.resume();
+            } else {
+                // Permission denied, boo! Disable the
+                // functionality that depends on this permission.
+                Toast.makeText(requireActivity(), "Permission denied to camera", Toast.LENGTH_SHORT).show();
+            }
+            return;
+
+            // Other 'case' lines to check for other
+            // permissions this app might request.
+        }
     }
 
 

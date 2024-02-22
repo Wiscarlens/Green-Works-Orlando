@@ -108,7 +108,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:background="@drawable/button_shape"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="@color/dark_green"
             android:contentDescription="@string/sorting_guide"
             android:scaleType="center"
             android:src="@drawable/baseline_recycling_24"

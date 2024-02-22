@@ -81,7 +81,7 @@
             android:contentDescription="@string/scan_button"
             android:src="@drawable/baseline_document_scanner_24"
             android:scaleType="center"
-            app:backgroundTint="@color/green"
+            app:backgroundTint="@color/dark_green"
             app:elevation="4dp"
             app:layout_anchor="@id/bottomAppBar" />
 

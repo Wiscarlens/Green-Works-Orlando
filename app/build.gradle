@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:3.3.0' //need for maps
 }
 
-//// need for maps
+// need for maps
 //secrets {
 //    // Optionally specify a different file name containing your secrets.
 //    // The plugin defaults to "local.properties"

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.orlando.orlandorecycle'
+    namespace 'com.orlando.greenworks'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.orlando.orlandorecycle"
+        applicationId "com.orlando.greenworks"
         minSdk 24
         targetSdk 34
         versionCode 1

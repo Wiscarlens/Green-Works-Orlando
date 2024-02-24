@@ -1,10 +1,9 @@
-package com.orlando.orlandorecycle;
+package com.orlando.greenworks;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.ImageButton;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
 
@@ -28,16 +26,9 @@ import java.util.Objects;
  * - Jordan Kinlocke
  * */
 
-public class ResetPasswordFragment extends BottomSheetDialogFragment {
+public class ProfileFragment extends BottomSheetDialogFragment {
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
-        FloatingActionButton closeButtonFAB = view.findViewById(R.id.fab);
-
-        closeButtonFAB.setOnClickListener(v -> dismiss());
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +40,15 @@ public class ResetPasswordFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reset_password, container, false);
+        return inflater.inflate(R.layout.fragment_profile, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ImageButton closeButton = view.findViewById(R.id.closeButton);
+        closeButton.setOnClickListener(v -> dismiss());
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.orlando.orlandorecycle;
+package com.orlando.greenworks;
 
 import android.os.Bundle;
 
@@ -8,17 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/*
- * This is a collaborative effort by the following team members:
- * Team members:
- * - Wiscarlens Lucius (Team Leader)
- * - Amanpreet Singh
- * - Alexandra Perez
- * - Eric Klausner
- * - Jordan Kinlocke
- * */
 
-public class WelcomeFragment extends Fragment {
+public class RewardsFragment extends Fragment {
+    /*
+     * This is a collaborative effort by the following team members:
+     * Team members:
+     * - Wiscarlens Lucius (Team Leader)
+     * - Amanpreet Singh
+     * - Alexandra Perez
+     * - Eric Klausner
+     * - Jordan Kinlocke
+     * */
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,6 @@ public class WelcomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_welcome, container, false);
+        return inflater.inflate(R.layout.fragment_rewards, container, false);
     }
 }

@@ -1,4 +1,4 @@
-package com.orlando.orlandorecycle;
+package com.orlando.greenworks;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -23,8 +23,6 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import com.google.android.gms.maps.model.Marker;
-
-import java.util.Objects;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 

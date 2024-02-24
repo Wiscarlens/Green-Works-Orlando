@@ -1,4 +1,4 @@
-package com.orlando.orlandorecycle;
+package com.orlando.greenworks;
 
 /*
  * This is a collaborative effort by the following team members:
@@ -22,7 +22,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 

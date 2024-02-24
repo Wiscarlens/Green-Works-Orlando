@@ -1,4 +1,4 @@
-package com.orlando.orlandorecycle;
+package com.orlando.greenworks;
 
 /*
 * This is a collaborative effort by the following team members:
@@ -13,7 +13,6 @@ package com.orlando.orlandorecycle;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 

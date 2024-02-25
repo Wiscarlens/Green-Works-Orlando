@@ -1,9 +1,141 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".WelcomeFragment">
+    android:layout_height="match_parent">
+    <ScrollView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
-</FrameLayout>
+            <RelativeLayout
+                android:id="@+id/page_welcome_ek1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                tools:ignore="UselessParent">
+
+                <View
+                    android:id="@+id/_bg__welcome_ek2"
+                    android:layout_width="match_parent"
+                    android:layout_height="800dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/_bg__welcome_ek2_shape" />
+
+                <ImageView
+                    android:id="@+id/text_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-11dp"
+                    android:layout_marginTop="115dp"
+                    android:contentDescription="@string/text_logo"
+                    android:src="@drawable/text_logo" />
+
+
+                <RelativeLayout
+                    android:id="@+id/sign_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="66dp"
+                    android:layout_marginTop="479dp">
+
+                    <View
+                        android:id="@+id/rectangle_10"
+                        android:layout_width="229dp"
+                        android:layout_height="47dp"
+                        android:layout_marginStart="-5dp"
+                        android:layout_marginTop="-5dp"
+                        android:background="@drawable/rectangle_10_shape" />
+
+                    <TextView
+                        android:id="@+id/sign_up_ek2"
+                        android:layout_width="88.4dp"
+                        android:layout_height="41.4dp"
+                        android:layout_gravity="center_horizontal|center"
+                        android:layout_marginStart="70dp"
+                        android:layout_marginTop="7dp"
+                        android:gravity="center"
+                        android:text="@string/sign_up_ek2_string"
+                        android:textColor="@color/sign_up_ek2_color"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:ignore="TextSizeCheck" />
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/rectangle_11"
+                    android:layout_width="339dp"
+                    android:layout_height="177dp"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginTop="273dp"
+                    android:alpha="0.81000000238419"
+                    android:background="@drawable/rectangle_11_shape" />
+
+                <ImageView
+                    android:id="@+id/bg_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="239dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="561dp"
+                    android:contentDescription="@string/bg_logo"
+                    android:src="@drawable/bg_logo" />
+
+                <TextView
+                    android:id="@+id/welcome_to_the_city_of_orlando_recycling_and_sustainability_project"
+                    android:layout_width="367.4dp"
+                    android:layout_height="166.4dp"
+                    android:layout_gravity="center_horizontal|center"
+                    android:layout_marginStart="-4dp"
+                    android:layout_marginTop="291dp"
+                    android:gravity="center"
+                    android:text="@string/welcome_to_the_city_of_orlando_recycling_and_sustainability_project_string"
+                    android:textColor="@color/sign_up_ek2_color"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    tools:ignore="TextSizeCheck" />
+
+
+                <RelativeLayout
+                    android:id="@+id/login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="82dp"
+                    android:layout_marginTop="538dp">
+
+                    <ImageView
+                        android:id="@+id/rectangle_12"
+                        android:layout_width="197dp"
+                        android:layout_height="29dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:contentDescription="@string/rectangle_12"
+                        android:src="@drawable/rectangle_12" />
+
+                    <TextView
+                        android:id="@+id/continue_as_guest"
+                        android:layout_width="166dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_horizontal|center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:text="@string/continue_as_guest_string"
+                        android:textColor="@color/sign_up_ek2_color"
+                        android:textSize="20sp"
+                        tools:ignore="TextSizeCheck" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+</HorizontalScrollView>

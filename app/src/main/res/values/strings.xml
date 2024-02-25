@@ -57,4 +57,12 @@
     <string name="sign_up">Sign up</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- welcome strings -->
+    <string name="ek_img_content">ExportKit Image</string>
+    <string name="sign_up_ek2_string">Sign up</string>
+    <string name="welcome_to_the_city_of_orlando_recycling_and_sustainability_project_string">Welcome to the City of Orlando recycling and sustainability project</string>
+    <string name="continue_as_guest_string">Continue as Guest</string>
+    <string name="bg_logo">bg_logo</string>
+    <string name="rectangle_12">rectangle_12</string>
+    <string name="text_logo">text_logo</string>
 </resources>

@@ -1,4 +1,5 @@
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -46,27 +47,19 @@
                     android:layout_marginStart="66dp"
                     android:layout_marginTop="479dp">
 
-                    <View
-                        android:id="@+id/rectangle_10"
-                        android:layout_width="229dp"
-                        android:layout_height="47dp"
-                        android:layout_marginStart="-5dp"
-                        android:layout_marginTop="-5dp"
-                        android:background="@drawable/rectangle_10_shape" />
-
-                    <TextView
-                        android:id="@+id/sign_up_ek2"
-                        android:layout_width="88.4dp"
-                        android:layout_height="41.4dp"
-                        android:layout_gravity="center_horizontal|center"
-                        android:layout_marginStart="70dp"
-                        android:layout_marginTop="7dp"
-                        android:gravity="center"
-                        android:text="@string/sign_up_ek2_string"
-                        android:textColor="@color/sign_up_ek2_color"
-                        android:textSize="24sp"
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="218dp"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="#F6F1DB"
+                        android:onClick="@string/action_sign_in"
+                        android:text="Sign up"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textStyle="bold"
-                        tools:ignore="TextSizeCheck" />
+                        app:iconTint="#035BA4"
+                        app:rippleColor="#F6F1DB"
+                        tools:ignore="HardcodedText" />
 
                 </RelativeLayout>
 

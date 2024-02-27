@@ -65,4 +65,13 @@
     <string name="bg_logo">bg_logo</string>
     <string name="rectangle_12">rectangle_12</string>
     <string name="text_logo">text_logo</string>
+
+    <!-- signup strings -->
+    <string name="password_ek2_string">Password</string>
+    <string name="confirm_password_string">Confirm Password</string>
+    <string name="email_string">Email</string>
+    <string name="submit_string">SUBMIT</string>
+    <string name="address_string">Address</string>
+    <string name="name_string">Name</string>
+    <string name="already_have_account__string">Already have Account?</string>
 </resources>

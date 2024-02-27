@@ -27,4 +27,11 @@
     <color name="rectangle_10_color">#ECE2C7</color>
     <color name="sign_up_ek2_color">#030D4F</color>
     <color name="rectangle_11_color">#FEFAEF</color>
+
+    <!-- signup colors -->
+
+    <color name="_bg__signup_ek2_color">#D7D08E</color>
+    <color name="_bg__password_ek1_color">#000000</color>
+    <color name="password_ek2_color">#030D4F</color>
+    <color name="rectangle_9_ek3_color">#ECE2C7</color>
 </resources>

@@ -1,6 +1,6 @@
 plugins {
     id 'com.android.application'
-    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' // need for maps
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' // NEED FOR MAPS
 }
 
 android {
@@ -29,7 +29,7 @@ android {
     }
     buildFeatures {
         viewBinding true
-        buildConfig = true // need for maps
+        buildConfig = true // NEED FOR MAPS
     }
 }
 
@@ -47,22 +47,22 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0' // For barcode Scanner
-    implementation 'com.google.android.gms:play-services-maps:18.2.0' // Google Maps SDK
-    implementation 'com.google.android.libraries.places:places:3.3.0' //need for maps
+    implementation 'com.google.android.gms:play-services-maps:18.2.0' // Maps SDK for Android - NEED FOR MAPS
+    implementation 'com.google.android.libraries.places:places:3.3.0' // NEED FOR MAPS
 }
 
-// need for maps
-//secrets {
-//    // Optionally specify a different file name containing your secrets.
-//    // The plugin defaults to "local.properties"
-//    propertiesFileName = "secrets.properties"
-//
-//    // A properties file containing default secret values. This file can be
-//    // checked in version control.
-//    defaultPropertiesFileName = "local.defaults.properties"
-//
-//    // Configure which keys should be ignored by the plugin by providing regular expressions.
-//    // "sdk.dir" is ignored by default.
-//    ignoreList.add("keyToIgnore") // Ignore the key "keyToIgnore"
-//    ignoreList.add("sdk.*")       // Ignore all keys matching the regexp "sdk.*"
-//}
+// NEED FOR MAPS
+secrets {
+    // Optionally specify a different file name containing your secrets.
+    // The plugin defaults to "local.properties"
+    propertiesFileName = "secrets.properties"
+
+    // A properties file containing default secret values. This file can be
+    // checked in version control.
+    defaultPropertiesFileName = "local.defaults.properties"
+
+    // Configure which keys should be ignored by the plugin by providing regular expressions.
+    // "sdk.dir" is ignored by default.
+    ignoreList.add("keyToIgnore") // Ignore the key "keyToIgnore"
+    ignoreList.add("sdk.*")       // Ignore all keys matching the regexp "sdk.*"
+}

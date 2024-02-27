@@ -31,10 +31,29 @@
             </intent-filter>
         </activity>
 
-        <!-- need for maps -->
-       <meta-data
-           android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBuuJzCEc0onufgnsWl7y1QLuCZSNZUfMg" />
+        <!--
+         ___________________________________________________________________________________________
+         ___________________________________________________________________________________________
+         || IF MAP DOESN'T LOAD PLEASE MAKE SURE YOUR INDIVIDUAL API KEY IS CORRECTLY CONFIGURED  ||
+         || AND UPDATED WITH NEW PACKAGE NAME AND YOUR SHA-1 FINGERPRINT                          ||
+         || https://console.cloud.google.com/apis/credentials                                     ||
+         || API CONFIG SHOULD LOOK LIKE THIS: https://imgur.com/a/DyQGiz5                         ||
+         || ALSO SEE:                                                                             ||
+         || https://developers.google.com/maps/documentation/android-sdk/start                    ||
+         || https://developers.google.com/maps/documentation/android-sdk/get-api-key              ||
+         || REMEMBER TO UPDATE YOUR secrets.properties FILE WITH YOUR API KEY                     ||
+         ___________________________________________________________________________________________
+         ___________________________________________________________________________________________
+         -->
+
+        <!-- NEED FOR MAPS TO WORK -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}"/>
+            <!-- OPTIONALLY USE IF NOT USING SECRETS PLUGIN:
+            android:value="<INSERT-API-KEY-HERE>"
+            -->
+
 
     </application>
 

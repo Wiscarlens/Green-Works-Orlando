@@ -74,4 +74,13 @@
     <string name="address_string">Address</string>
     <string name="name_string">Name</string>
     <string name="already_have_account__string">Already have Account?</string>
+
+    <string name="terms_conditions">Agree with <b>Terms &amp; Conditions</b></string>
+    <string name="already_have_an_account_login">Already have an account? <b>Login</b></string>
+    <string name="create_account">Create Account</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="full_name">Full Name</string>
+    <string name="first_name">First Name</string>
+    <string name="continue_as_guest">Continue as guest</string>
+    <string name="slogan">Enhance quality of life and wellbeing</string>
 </resources>

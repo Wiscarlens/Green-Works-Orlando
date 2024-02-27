@@ -52,7 +52,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         fab = findViewById(R.id.fab);
 
-        switchFragment(new LoginFragment());
+//        switchFragment(new LoginFragment());
+        switchFragment(new WelcomeFragment());
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".LoginFragment">
 
     <FrameLayout
         android:id="@+id/loginContainerFL"
@@ -36,6 +37,7 @@
             android:layout_marginBottom="5dp"
             android:text="Log in to your account"
             android:textAlignment="center"
+            android:gravity="center"
             android:textColor="@color/black"
             android:textSize="11sp" />
 

@@ -32,13 +32,13 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView forgotPassword = view.findViewById(R.id.forgotPassword);
-        LinearLayout signUp = view.findViewById(R.id.signUpLoginLL);
-        Button loginButton = view.findViewById(R.id.loginButton);
-
         MainActivity mainActivity = (MainActivity) getActivity();
         assert mainActivity != null;
         mainActivity.enableNavigationViews(View.GONE);
+
+        TextView forgotPassword = view.findViewById(R.id.forgotPassword);
+        LinearLayout signUp = view.findViewById(R.id.signUpLoginLL);
+        Button loginButton = view.findViewById(R.id.loginButton);
 
         forgotPassword.setOnClickListener(view1 -> {
             ResetPasswordFragment resetPassword = new ResetPasswordFragment();
@@ -46,7 +46,8 @@ public class LoginFragment extends Fragment {
         });
 
         signUp.setOnClickListener(view1 -> {
-            changeFragment(new RegistrationFragment());
+            RegistrationFragment registrationFragment = new RegistrationFragment();
+            registrationFragment.show(getParentFragmentManager(), registrationFragment.getTag());
         });
 
         loginButton.setOnClickListener(view1 -> {

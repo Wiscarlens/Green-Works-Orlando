@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:paddingTop="200dp"
+    android:gravity="center"
     tools:context=".WelcomeFragment">
 
     <ImageView
@@ -18,23 +17,11 @@
         app:srcCompat="@drawable/logo_full"
         tools:ignore="ImageContrastCheck" />
 
-    <TextView
-        android:id="@+id/loginMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="100dp"
-        android:text="@string/slogan"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:textColor="#ABB0B8"
-        android:textSize="18sp" />
-
-
     <Button
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="55dp"
         android:maxWidth="290dp"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
@@ -61,7 +48,7 @@
         android:id="@+id/continueAsGuest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"

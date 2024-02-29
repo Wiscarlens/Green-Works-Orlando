@@ -25,11 +25,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MaterialViewHolder>{
-    private final ArrayList<Item> itemlList;
+    private final ArrayList<Item> itemList;
     private final Context context;
 
     public ItemAdapter(ArrayList<Item> user_for_display, Context context) {
-        this.itemlList = user_for_display;
+        this.itemList = user_for_display;
         this.context = context;
     }
 
@@ -43,21 +43,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MaterialViewHo
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.MaterialViewHolder holder, int position) {
         //  TODO: Turn this into a method
-        String imageName = itemlList.get(position).getItemImage();
+        String imageName = itemList.get(position).getItemImage();
         int imageResId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
 
-        String materialPoint = itemlList.get(position).getItemPoint() + " points";
+        String materialPoint = itemList.get(position).getItemPoint() + " points";
 
         holder.itemImage.setImageResource(imageResId);
-        holder.itemName.setText(itemlList.get(position).getItemName());
+        holder.itemName.setText(itemList.get(position).getItemName());
         holder.itemPoint.setText(materialPoint);
 
-        holder.itemLayout.setOnClickListener(v -> Toast.makeText(context, "You selected " + itemlList.get(position).getItemName(), Toast.LENGTH_SHORT).show());
+        holder.itemLayout.setOnClickListener(v -> Toast.makeText(context, "You selected " + itemList.get(position).getItemName(), Toast.LENGTH_SHORT).show());
     }
 
     @Override
     public int getItemCount() {
-        return itemlList.size();
+        return itemList.size();
     }
 
     public static class MaterialViewHolder extends RecyclerView.ViewHolder {

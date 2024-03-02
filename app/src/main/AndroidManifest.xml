@@ -31,10 +31,6 @@
             </intent-filter>
         </activity>
 
-        <!-- need for maps -->
-       <meta-data
-           android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBuuJzCEc0onufgnsWl7y1QLuCZSNZUfMg" />
 
     </application>
 

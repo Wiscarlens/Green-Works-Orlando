@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         fab = findViewById(R.id.fab);
 
-        switchFragment(new LoginFragment());
+//        switchFragment(new LoginFragment());
+        switchFragment(new WelcomeFragment());
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
@@ -116,6 +117,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_settings) {
             SettingFragment settingFragment = new SettingFragment();
             settingFragment.show(getSupportFragmentManager(), settingFragment.getTag());
+        } else if (id == R.id.nav_terms) {
+            TermsFragment termsFragment = new TermsFragment();
+            termsFragment.show(getSupportFragmentManager(), termsFragment.getTag());
+
         } else if (id == R.id.nav_logout) {
             // Dialog to confirm log out
 

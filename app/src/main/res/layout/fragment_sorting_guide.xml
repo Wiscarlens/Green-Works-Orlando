@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/snow"
+    android:background="@color/white"
     tools:context=".SortingGuideFragment">
 
     <RelativeLayout
@@ -17,16 +17,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:backgroundTint="@color/snow"
+            android:backgroundTint="@color/white"
             android:contentDescription="@string/close_button"
             android:src="@drawable/baseline_close_24" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/logo"
-            android:src="@drawable/logo" />
+            android:text="@string/sorting_guide"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp"/>
+
 
     </RelativeLayout>
 
@@ -36,7 +41,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Sorting Guide"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="Sorting Guide" />
 
 </FrameLayout>

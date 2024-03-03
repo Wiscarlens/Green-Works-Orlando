@@ -61,5 +61,4 @@
         android:textStyle="bold"
         tools:ignore="TextContrastCheck" />
 
-
 </LinearLayout>

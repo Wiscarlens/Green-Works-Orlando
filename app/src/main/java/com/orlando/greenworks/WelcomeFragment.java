@@ -55,15 +55,12 @@ public class WelcomeFragment extends Fragment {
             registrationFragment.show(getParentFragmentManager(), registrationFragment.getTag());
         });
 
-        continueAsGuest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragment_container, new HomeFragment());
-                transaction.commit();
+        continueAsGuest.setOnClickListener(v -> {
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.fragment_container, new HomeFragment());
+            transaction.commit();
 
-            }
         });
 
 

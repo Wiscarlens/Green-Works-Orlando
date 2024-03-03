@@ -12,6 +12,7 @@ package com.orlando.greenworks;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,6 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawerLayout;
-    NavigationView navigationView;
     private Toolbar toolbar;
     private BottomAppBar bottomAppBar;
     BottomNavigationView bottomNavigationView;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
         bottomAppBar = findViewById(R.id.bottomAppBar);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+            Log.d("MainActivity", "Version name not found");
             versionName = "N/A";
         }
 
@@ -120,6 +120,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             TermsFragment termsFragment = new TermsFragment();
             termsFragment.show(getSupportFragmentManager(), termsFragment.getTag());
 
+        } else if (id == R.id.nav_contact) {
+            ContactFragment contactFragment = new ContactFragment();
+            contactFragment.show(getSupportFragmentManager(), contactFragment.getTag());
         } else if (id == R.id.nav_logout) {
             // Dialog to confirm log out
 

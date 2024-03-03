@@ -4,4 +4,10 @@
         <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
         <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
     </style>
+
+    <style name="CustomButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_border</item>
+        <item name="backgroundTint">@color/green</item>
+        <item name="android:textColor">@color/green</item>
+    </style>
 </resources>

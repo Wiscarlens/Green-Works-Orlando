@@ -209,7 +209,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@color/green"
+            android:background="@color/dark_green"
             android:text="@string/submit"
             android:textColor="@color/white"
             android:textSize="18sp" />

@@ -55,6 +55,13 @@ public class ScannerFragment extends BottomSheetDialogFragment {
 
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
 
+    public ScannerFragment(String s, String date, int cardboard) {
+    }
+
+    public ScannerFragment() {
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -276,6 +283,7 @@ public class ScannerFragment extends BottomSheetDialogFragment {
             // permissions this app might request.
         }
     }
+
 
 
 }

@@ -5,34 +5,38 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ContactFragment"
+    android:background="@color/gray_background"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:padding="10dp">
-
-        <ImageButton
-            android:id="@+id/closeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:backgroundTint="@color/white"
-            android:contentDescription="@string/close_button"
-            android:src="@drawable/baseline_close_24" />
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
-            android:layout_toStartOf="@+id/closeButton"
             android:text="@string/contact"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginEnd="10dp"/>
+
+        <ImageButton
+            android:id="@+id/closeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/close_button"
+            android:src="@drawable/baseline_close_24" />
+
 
     </RelativeLayout>
 
@@ -41,8 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginTop="40dp">
 
         <TextView
@@ -206,13 +210,65 @@
 
         <Button
             android:id="@+id/submitButton"
+            style="@style/CustomButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:background="@color/dark_green"
             android:text="@string/submit"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:background="@color/dark_green" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_phone_24"
+            android:contentDescription="@string/phone_number"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 (407) 276 2314"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_location_pin_24"
+            android:contentDescription="@string/phone_number"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1028 Woods Ave, Orlando, FL 32805"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

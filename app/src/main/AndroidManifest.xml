@@ -31,6 +31,14 @@
             </intent-filter>
         </activity>
 
+        <!-- NEED FOR MAPS TO WORK -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}"/>
+        <!-- OPTIONALLY USE IF NOT USING SECRETS PLUGIN:
+        android:value="<INSERT-API-KEY-HERE>"
+        -->
+
 
     </application>
 

@@ -8,6 +8,7 @@
     <color name="light_green">#c4e9a6</color>
     <color name="dark_green">#397245</color>
     <color name="snow">#FFFAFA</color>
+    <color name="gray_background">#F3F3F5</color>
     <color name="light_gray">#DCDDDF</color>
     <color name="gray">#92969C</color>
     <color name="red">#FF0000</color>

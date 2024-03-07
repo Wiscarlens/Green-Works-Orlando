@@ -1,84 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFFFF"
     tools:context=".CalendarFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <SearchView
-        android:id="@+id/search_view"
-        android:layout_width="336dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp" />
-    <TextView
-        android:id="@+id/Calendar"
-        android:layout_width="194dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/search_view"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="194dp"
-        android:gravity="center"
-        android:text="Calendar"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColorHighlight="#9C27B0"
-        android:textSize="40sp" />
-
-    <CalendarView
-        android:id="@+id/calendarView"
+    <ImageView
+        android:id="@+id/header_image"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_below="@id/Calendar"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="32dp" />
-
-    <EditText
-        android:id="@+id/recenthistory"
-        android:layout_width="wrap_content"
-        android:layout_height="66dp"
-        android:layout_alignParentStart="true"
+        android:layout_height="80dp"
+        android:src="@drawable/gw_orlando_logo_1"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="562dp"
-        android:layout_marginEnd="47dp"
-        android:layout_marginBottom="103dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Feb 23" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="-125dp"
+        android:contentDescription="Green Works Orlando logo"/>
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_image"
+        android:layout_above="@+id/city_of_orlando_image" />
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="52dp"
-        android:layout_height="47dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="6dp"
-        android:background="@drawable/rounded_image"
-        android:src="@drawable/fake_profile_picture" />
-
-    <EditText
-        android:id="@+id/recenthistory1"
+        android:id="@+id/city_of_orlando_image"
         android:layout_width="wrap_content"
-        android:layout_height="66dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        android:layout_height="30dp"
+        android:src="@drawable/city_of_orlando_logo_new_1"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="473dp"
-        android:layout_marginEnd="47dp"
-        android:layout_marginBottom="192dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Feb 19" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="65dp"
+        android:layout_marginStart="-20dp"
+        android:contentDescription="City of Orlando logo"/>
 
+    <TextView
+        android:id="@+id/city_of_orlando_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/city_of_orlando_image"
+        android:layout_alignBottom="@+id/city_of_orlando_image"
+        android:text="© 2024 City of Orlando"
+        android:layout_marginStart="-25dp"
+        android:textColor="#FF000000"/>
 
 </RelativeLayout>

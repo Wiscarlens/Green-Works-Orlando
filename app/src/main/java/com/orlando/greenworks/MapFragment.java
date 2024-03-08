@@ -28,10 +28,9 @@ import android.util.Log;
 /*
 ___________________________________________________________________________________________
 ___________________________________________________________________________________________
-|| IF MAP DOESN'T LOAD PLEASE MAKE SURE YOUR INDIVIDUAL API KEY IS CORRECTLY CONFIGURED  ||
-|| AND UPDATED WITH NEW PACKAGE NAME AND YOUR SHA-1 FINGERPRINT                          ||
+|| IF MAP DOESN'T LOAD PLEASE MAKE SURE API KEY IS CORRECTLY CONFIGURED                  ||
 || https://console.cloud.google.com/apis/credentials                                     ||
-|| API CONFIG SHOULD LOOK LIKE THIS: https://imgur.com/a/DyQGiz5                         ||
+||                                                                                       ||
 || ALSO SEE:                                                                             ||
 || https://developers.google.com/maps/documentation/android-sdk/start                    ||
 || https://developers.google.com/maps/documentation/android-sdk/get-api-key              ||

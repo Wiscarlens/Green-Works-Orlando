@@ -28,10 +28,9 @@ import android.util.Log;
 /*
 ___________________________________________________________________________________________
 ___________________________________________________________________________________________
-|| IF MAP DOESN'T LOAD PLEASE MAKE SURE YOUR INDIVIDUAL API KEY IS CORRECTLY CONFIGURED  ||
-|| AND UPDATED WITH NEW PACKAGE NAME AND YOUR SHA-1 FINGERPRINT                          ||
+|| IF MAP DOESN'T LOAD PLEASE MAKE SURE API KEY IS CORRECTLY CONFIGURED                  ||
 || https://console.cloud.google.com/apis/credentials                                     ||
-|| API CONFIG SHOULD LOOK LIKE THIS: https://imgur.com/a/DyQGiz5                         ||
+||                                                                                       ||
 || ALSO SEE:                                                                             ||
 || https://developers.google.com/maps/documentation/android-sdk/start                    ||
 || https://developers.google.com/maps/documentation/android-sdk/get-api-key              ||
@@ -51,9 +50,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        assert mapFragment != null;
-        mapFragment.getMapAsync(this);
+        // Check if user was granted permission
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Request location permission if it is not granted
+            ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
+        } else {
+            SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+            assert mapFragment != null;
+            mapFragment.getMapAsync(this);
+        }
 
         return view;
     }
@@ -138,10 +146,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             if (permissions.length > 0 &&
                     permissions[0].equals(Manifest.permission.ACCESS_FINE_LOCATION) &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                        == PackageManager.PERMISSION_GRANTED) {
-                    mMap.setMyLocationEnabled(true); // Enable location layer if permission is granted
-                }
+                SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+                assert mapFragment != null;
+                mapFragment.getMapAsync(this);
             } else {
                 // Permission was denied. We can display an error message here.
             }

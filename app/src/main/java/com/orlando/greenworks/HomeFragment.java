@@ -48,11 +48,9 @@ public class HomeFragment extends Fragment {
     private TextView statsTopThreePoints;
     private TextView statsTopThreeMaterial;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -78,7 +76,6 @@ public class HomeFragment extends Fragment {
         yearlyStats = view.findViewById(R.id.yearlyStatsLL);
         yearlyStatsImage = view.findViewById(R.id.yearlyStatsIV);
         yearlyStatsPoints = view.findViewById(R.id.yearlyStatsTV);
-
 
         statsTopOnePoints = view.findViewById(R.id.statsTopOnePointsTV);
         statsTopOneMaterial = view.findViewById(R.id.statsTopOneMaterialTV);
@@ -198,19 +195,47 @@ public class HomeFragment extends Fragment {
                         "batteries"
                 ));
 
-
-
         itemAdapter = new ItemAdapter(itemList, getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(itemAdapter);
-
 
         profileImage.setOnClickListener(v -> {
             ProfileFragment profileFragment = new ProfileFragment();
             profileFragment.show(getParentFragmentManager(), profileFragment.getTag());
         });
 
+        // Added query text listener to the SearchView
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Clear focus from the SearchView so that the keyboard is hidden
+                searchView.clearFocus();
 
+                // Create new instance of ItemInformationFragment
+                ItemInformationFragment itemInformationFragment = new ItemInformationFragment();
+
+                //TODO: Backend - Update this to use Web Team and/or Recollect API
+                //Pass the search query as an argument to the fragment
+                Bundle args = new Bundle();
+                args.putString("search_query", query);
+                itemInformationFragment.setArguments(args);
+
+                // Replace the home fragment with the ItemInformationFragment when user
+                // enters search query
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, itemInformationFragment)
+                        .addToBackStack(null)
+                        .commit();
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // You can put some code here if you want to do something as the user types their search
+                return false;
+            }
+        });
 
         sortingGuideButton.setOnClickListener(v -> {
             SortingGuideFragment sortingGuideFragment = new SortingGuideFragment();

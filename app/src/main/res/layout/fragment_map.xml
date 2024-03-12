@@ -51,6 +51,7 @@
         android:layout_below="@id/map"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
+        android:textSize="12sp"
         />
 
 

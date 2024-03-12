@@ -7,6 +7,8 @@
     tools:context=".MapFragment">
 
 
+    <!--TODO fix footer image in landscape view-->
+
     <ImageView
         android:id="@+id/header_image"
         android:layout_width="wrap_content"

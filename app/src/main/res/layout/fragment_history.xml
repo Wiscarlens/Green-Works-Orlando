@@ -1,26 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".HistoryFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <SearchView
-        android:id="@+id/search_view"
-        android:layout_width="336dp"
+    <ImageView
+        android:id="@+id/header_image"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:src="@drawable/gw_orlando_logo_1"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-125dp"
+        android:contentDescription="Green Works Orlando logo"
+        android:layout_centerHorizontal="true"/>
+        <!-- android:layout_alignParentStart="true"  -->
+
+    <TextView
+        android:id="@+id/tvScannedItemHistory"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp" />
-
+        android:text="Scanned Item History"
+        android:gravity="center_horizontal"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:layout_below="@id/header_image"
+        />
+        <!-- start|center_vertical -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvScannedItemHistory"
+        android:scrollbars="vertical"
+        android:layout_above="@+id/city_of_orlando_image"/>
 
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/city_of_orlando_image"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:src="@drawable/city_of_orlando_logo_new_1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:contentDescription="City of Orlando logo"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="60dp"
+        />
+        <!-- android:layout_centerHorizontal="true"   -->
+        <!-- android:layout_marginStart="-20dp"  -->
+
+    <TextView
+        android:id="@+id/city_of_orlando_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/city_of_orlando_image"
+        android:layout_alignBottom="@+id/city_of_orlando_image"
+        android:text="© 2024 City of Orlando"
+        android:layout_marginStart="-25dp"
+        android:textColor="#FF000000" />
+
+</RelativeLayout>
+
+
+
+
+
+

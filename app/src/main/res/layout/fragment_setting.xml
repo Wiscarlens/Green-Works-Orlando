@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/snow"
     tools:context=".SettingFragment">
 
@@ -22,19 +23,117 @@
             android:src="@drawable/baseline_close_24" />
 
         <ImageView
+            android:id="@+id/logo"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:contentDescription="@string/logo"
             android:src="@drawable/logo" />
 
     </RelativeLayout>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/settings"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textSize="24sp"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About"
+            android:textSize="18sp"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/theme_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Theme"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"/>
+
+
+
+        <LinearLayout
+            android:id="@+id/theme_options"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Change to Dark Mode"
+                android:textSize="16sp" />
+
+            <Switch
+                android:id="@+id/dark_mode_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dark_mode_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This feature is not yet available"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/notification_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notifications"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/notification_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This feature is not yet available"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/language_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Language"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/language_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This feature is not yet available"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

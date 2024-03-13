@@ -23,8 +23,8 @@
             android:src="@drawable/baseline_close_24" />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="80dp"
+            android:layout_height="69dp"
             android:layout_centerInParent="true"
             android:contentDescription="@string/logo"
             android:src="@drawable/logo" />
@@ -40,6 +40,54 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:background="@color/white"
+            android:foregroundTint="@color/gray"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="34dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/button2"
+                style="@style/CustomButton"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/dark_green"
+                android:text="About"
+                android:textColor="@color/white"
+                app:strokeColor="@color/dark_bleu" />
+
+            <Space
+                android:layout_width="68dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/button3"
+                style="@style/CustomButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/dark_green"
+                android:text="Notification"
+                android:textColor="@color/white"
+                app:strokeColor="@color/dark_bleu" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/white"
+            android:foregroundTint="@color/gray"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -57,6 +105,7 @@
                 android:layout_weight="1"
                 android:text="@string/full_name"
                 android:textSize="24sp"
+
                 tools:ignore="DuplicateIds" />
 
         </LinearLayout>
@@ -64,6 +113,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="86dp"
+            android:background="@color/white"
+            android:foregroundTint="@color/gray"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -77,6 +128,7 @@
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 android:text="Address"
                 android:textSize="24sp" />
 
@@ -89,6 +141,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="86dp"
+            android:background="@color/white"
+            android:foregroundTint="@color/gray"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -111,6 +165,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="87dp"
+            android:background="@color/white"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -134,6 +189,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="87dp"
+            android:background="@color/white"
+            android:foregroundTint="@color/gray"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -152,6 +209,10 @@
                 android:text="@string/prompt_password"
                 android:textSize="24sp" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
         <Button
             android:id="@+id/button"

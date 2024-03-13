@@ -15,11 +15,12 @@
         android:layout_height="80dp"
         android:src="@drawable/gw_orlando_logo_1"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="-125dp"
         android:contentDescription="Green Works Orlando logo" />
         <!--android:scaleType="fitXY"-->
         <!--android:adjustViewBounds="true"-->
+    <!-- android:layout_alignParentStart="true"  -->
 
     <TextView
         android:id="@+id/title"
@@ -30,7 +31,9 @@
         android:textStyle="bold"
         android:textColor="#FF000000"
         android:layout_below="@id/header_image"
-        android:layout_marginLeft="10dp"/>
+        android:gravity="center_horizontal"/>
+        <!-- start|center_vertical -->
+        <!-- android:layout_marginLeft="10dp"  -->
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -63,10 +66,13 @@
         android:layout_height="30dp"
         android:src="@drawable/city_of_orlando_logo_new_1"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:contentDescription="City of Orlando logo"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="65dp"
-        android:layout_marginStart="-20dp"
-        android:contentDescription="City of Orlando logo"/>
+        android:layout_marginBottom="60dp"
+        />
+    <!-- android:layout_centerHorizontal="true"   -->
+    <!-- android:layout_marginStart="-20dp"  -->
 
     <TextView
         android:id="@+id/city_of_orlando_text"
@@ -76,7 +82,7 @@
         android:layout_alignBottom="@+id/city_of_orlando_image"
         android:text="© 2024 City of Orlando"
         android:layout_marginStart="-25dp"
-        android:textColor="#FF000000"/>
+        android:textColor="#FF000000" />
 
 </RelativeLayout>
 

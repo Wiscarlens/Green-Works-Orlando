@@ -64,6 +64,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MaterialViewHo
         private final ImageView itemImage;
         private final TextView itemName;
         private final TextView itemPoint;
+
         private final LinearLayout itemLayout;
 
 

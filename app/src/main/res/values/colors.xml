@@ -4,13 +4,13 @@
     <color name="white">#FFFFFFFF</color>
     <color name="dark_bleu">#005399</color>
     <color name="light_blue">#e0fbfc</color>
-    <color name="green">#8dc63f</color>
     <color name="light_green">#c4e9a6</color>
+    <color name="green">#8dc63f</color>
+    <color name="medium_dark_green">#5ea154</color>
     <color name="dark_green">#397245</color>
     <color name="snow">#FFFAFA</color>
-    <color name="gray_background">#F3F3F5</color>
+    <color name="soft_gray">#F3F3F5</color>
     <color name="light_gray">#DCDDDF</color>
     <color name="gray">#92969C</color>
     <color name="red">#FF0000</color>
-    <color name="Lavender">#E6E6FA</color>
 </resources>

@@ -129,18 +129,185 @@
             app:cardCornerRadius="10dp"
             android:elevation="10dp">
 
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:text="Heat Map"-->
-<!--                android:gravity="center"/>-->
-
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/heatmap"
-                android:layout_gravity="center"
-                android:contentDescription="TODO" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:orientation="horizontal"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:gravity="center">
+
+                    <FrameLayout
+                        android:id="@+id/quarter1Button"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_press_background">
+
+                        <TextView
+                            android:id="@+id/quarter1Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Q1"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"/>
+                    </FrameLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <FrameLayout
+                        android:id="@+id/quarter2Button"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_background">
+
+                        <TextView
+                            android:id="@+id/quarter2Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Q2"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark_green"
+                            android:textSize="11sp"/>
+                    </FrameLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <FrameLayout
+                        android:id="@+id/quarter3Button"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_press_background">
+
+                        <TextView
+                            android:id="@+id/quarter3Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Q3"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"/>
+                    </FrameLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <FrameLayout
+                        android:id="@+id/quarter4Button"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_press_background">
+
+                        <TextView
+                            android:id="@+id/quarter4Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Q4"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"/>
+                    </FrameLayout>
+
+                </LinearLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/calendarRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    tools:itemCount="7"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_gravity="center_horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Less"
+                        android:textSize="11sp"
+                        android:layout_marginEnd="5dp" />
+
+                    <View
+                        android:id="@+id/dot1"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@color/soft_gray"
+                        android:layout_gravity="center_vertical"/>
+
+                    <View
+                        android:id="@+id/dot2"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@color/light_green"
+                        android:layout_gravity="center_vertical"/>
+
+                    <View
+                        android:id="@+id/dot3"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@color/green"
+                        android:layout_gravity="center_vertical"/>
+
+                    <View
+                        android:id="@+id/dot4"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@color/medium_dark_green"
+                        android:layout_gravity="center_vertical"/>
+
+                    <View
+                        android:id="@+id/dot5"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@color/dark_green"
+                        android:layout_gravity="center_vertical"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="More"
+                        android:textSize="11sp"
+                        android:layout_marginEnd="5dp"/>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 

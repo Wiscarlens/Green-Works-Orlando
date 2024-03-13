@@ -56,7 +56,8 @@
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign up</string>
 
-    <string name="terms_conditions">Agree with <b>Terms &amp; Conditions</b></string>
+    <string name="agree_with">Agree with </string>
+    <string name="terms_conditions">Terms &amp; Conditions</string>
     <string name="already_have_an_account_login">Already have an account? <b>Login</b></string>
     <string name="create_account">Create Account</string>
     <string name="create_an_account">Create an Account</string>
@@ -76,4 +77,6 @@
     <string name="get_in_touch">Get in Touch</string>
     <string name="last_name">Last Name</string>
     <string name="submit">Submit</string>
+    <string name="address">Address</string>
+    <string name="password">Password</string>
 </resources>

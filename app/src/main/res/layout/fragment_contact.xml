@@ -5,19 +5,19 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ContactFragment"
-    android:background="@color/soft_gray"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:paddingStart="40dp"
-        android:paddingEnd="40dp">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
 
         <TextView
+            android:id="@+id/contactTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -26,19 +26,20 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp" />
 
         <ImageButton
             android:id="@+id/closeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_marginStart="270dp"
+            android:layout_toEndOf="@+id/contactTitle"
             android:backgroundTint="@color/white"
             android:contentDescription="@string/close_button"
             android:src="@drawable/baseline_close_24" />
 
-
     </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"

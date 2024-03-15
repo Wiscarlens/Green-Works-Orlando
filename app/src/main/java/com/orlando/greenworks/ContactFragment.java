@@ -41,12 +41,7 @@ public class ContactFragment extends BottomSheetDialogFragment {
 
         ImageButton closeButton = view.findViewById(R.id.closeButton);
         Button submitButton = view.findViewById(R.id.submitButton);
-        TextView termsAndConditions = view.findViewById(R.id.termsConditions);
 
-        termsAndConditions.setOnClickListener(v -> {
-            TermsFragment termsFragment = new TermsFragment();
-            termsFragment.show(getParentFragmentManager(), termsFragment.getTag());
-        });
 
         closeButton.setOnClickListener(v -> dismiss());
     }

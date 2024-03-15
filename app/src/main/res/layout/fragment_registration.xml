@@ -9,38 +9,37 @@
     android:gravity="center_horizontal"
     tools:context=".RegistrationFragment">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp">
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
 
         <TextView
-            android:id="@+id/contactTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:text="@string/contact"
-            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:text="@string/registration"
+            android:textAllCaps="true"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginEnd="10dp" />
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/closeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="270dp"
-            android:layout_toEndOf="@+id/contactTitle"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:backgroundTint="@color/white"
             android:contentDescription="@string/close_button"
             android:src="@drawable/baseline_close_24" />
 
     </RelativeLayout>
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -234,6 +233,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
+            android:id="@+id/termCheckBoxLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -274,19 +274,40 @@
     </LinearLayout>
 
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:linksClickable="true"
-        android:minHeight="48dp"
-        android:text="@string/already_have_an_account_login"
-        android:textColor="@color/black"
-        android:textSize="11sp"
-        tools:ignore="TextContrastCheck" />
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:linksClickable="true"
+            android:minHeight="48dp"
+            android:text="@string/already_have_an_account_login"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/loginLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:linksClickable="true"
+            android:minHeight="48dp"
+            android:text="@string/login"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginStart="2dp"
+            tools:ignore="TextContrastCheck" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        LinearLayout reward = view.findViewById(R.id.rewards);
+        LinearLayout reward = view.findViewById(R.id.rewardsLayout);
         TextView rewardsPoint = view.findViewById(R.id.rewardsPointsTV);
         ImageView profileImage = view.findViewById(R.id.profileImageIV);
         TextView userFirstName = view.findViewById(R.id.userFirstNameTV);
@@ -224,8 +224,8 @@ public class HomeFragment extends Fragment {
         reward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                RewardsFragment rewardsFragment = new RewardsFragment();
-//                rewardsFragment.show(getParentFragmentManager(), rewardsFragment.getTag());
+                RewardsFragment rewardsFragment = new RewardsFragment();
+                rewardsFragment.show(getParentFragmentManager(), rewardsFragment.getTag());
             }
         });
 

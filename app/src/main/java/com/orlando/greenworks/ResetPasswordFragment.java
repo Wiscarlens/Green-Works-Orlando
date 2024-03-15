@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -32,9 +34,9 @@ public class ResetPasswordFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        FloatingActionButton closeButtonFAB = view.findViewById(R.id.fab);
+        ImageButton closeButton = view.findViewById(R.id.closeButton);
 
-        closeButtonFAB.setOnClickListener(v -> dismiss());
+        closeButton.setOnClickListener(v -> dismiss());
     }
 
     @Override

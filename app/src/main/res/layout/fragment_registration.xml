@@ -6,16 +6,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     tools:context=".RegistrationFragment">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="@string/registration"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/closeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/close_button"
+            android:src="@drawable/baseline_close_24" />
+
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="20dp"
-        android:editable="false"
         android:gravity="center"
         android:text="@string/create_an_account"
         android:textAlignment="center"
@@ -24,49 +54,137 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:baselineAligned="false">
+        android:orientation="vertical"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/first_name"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                android:layout_marginEnd="10dp"
+                app:helperText=""
+                app:helperTextTextColor="@color/red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:placeholderText="John"
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:inputType="text"
+                    android:textColorHint="@color/light_gray"
+                    android:paddingStart="45dp"
+                    android:paddingEnd="0dp"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/last_name"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:helperText=""
+                app:helperTextTextColor="@color/red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:placeholderText="John Doe"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:inputType="text"
+                    android:textColorHint="@color/light_gray"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxWidth="290dp"
-            android:layout_weight="1"
-            android:hint="@string/first_name"
+            android:hint="@string/address"
             app:boxBackgroundColor="@color/white"
             app:boxBackgroundMode="outline"
-            android:layout_marginEnd="10dp"
             app:helperText=""
+            android:layout_marginTop="8dp"
             app:helperTextTextColor="@color/red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:placeholderText="John"
-            app:startIconDrawable="@drawable/baseline_person_24"
+            app:placeholderText="1234 Main St, Orlando, FL 32801"
+            app:startIconDrawable="@drawable/baseline_location_pin_24"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
-                android:inputType="text"
+                android:paddingStart="45dp"
+                android:paddingEnd="0dp"
+                android:textColorHint="@color/light_gray"
+                tools:ignore="TextContrastCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prompt_email"
+            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundMode="outline"
+            app:helperText=""
+            android:layout_marginTop="8dp"
+            app:helperTextTextColor="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:placeholderText="example@email.com"
+            app:startIconDrawable="@drawable/baseline_alternate_email_24"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:inputType="textEmailAddress"
                 android:textColorHint="@color/light_gray"
                 android:paddingStart="45dp"
+                android:paddingEnd="0dp"
                 tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxWidth="290dp"
-            android:layout_weight="1"
-            android:hint="Last Name"
+            android:layout_marginTop="8dp"
+            android:hint="@string/password"
             app:boxBackgroundColor="@color/white"
             app:boxBackgroundMode="outline"
             app:helperText=""
@@ -74,172 +192,122 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:placeholderText="John Doe"
-            app:endIconMode="clear_text">
+            app:startIconDrawable="@drawable/baseline_lock_24"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="45dp"
+                android:paddingEnd="0dp"
+                android:focusable="true"
+                android:inputType="textPassword"
+                tools:ignore="TextContrastCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/password"
+            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundMode="outline"
+            app:helperText=""
+            app:helperTextTextColor="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/baseline_lock_24"
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingStart="45dp"
+                android:paddingEnd="0dp"
                 android:focusable="true"
-                android:inputType="text"
-                android:textColorHint="@color/light_gray"
+                android:inputType="textPassword"
                 tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/termCheckBoxLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/termCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/agree_with"
+                android:textSize="11sp"
+                android:layout_marginEnd="2dp"/>
+
+            <TextView
+                android:id="@+id/termsConditions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:linksClickable="true"
+                android:minHeight="48dp"
+                android:text="@string/terms_conditions"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                tools:ignore="TextContrastCheck" />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
+            android:text="@string/create_account"
+            android:textColor="#FFFFFF"
+            tools:ignore="TextContrastCheck" />
 
     </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:maxWidth="290dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:hint="Address"
-        app:boxBackgroundColor="@color/white"
-        app:boxBackgroundMode="outline"
-        app:helperText=""
-        android:layout_marginTop="8dp"
-        app:helperTextTextColor="@color/red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:placeholderText="1234 Main St, Orlando, FL 32801"
-        app:startIconDrawable="@drawable/baseline_location_pin_24"
-        app:endIconMode="clear_text">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:paddingStart="45dp"
-            android:textColorHint="@color/light_gray"
-            tools:ignore="TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:maxWidth="290dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:hint="@string/prompt_email"
-        app:boxBackgroundColor="@color/white"
-        app:boxBackgroundMode="outline"
-        app:helperText=""
-        android:layout_marginTop="8dp"
-        app:helperTextTextColor="@color/red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:placeholderText="example@email.com"
-        app:startIconDrawable="@drawable/baseline_alternate_email_24"
-        app:endIconMode="clear_text">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:inputType="textEmailAddress"
-            android:textColorHint="@color/light_gray"
-            android:paddingStart="45dp"
-            tools:ignore="TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxWidth="290dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginTop="8dp"
-        android:hint="Password"
-        app:boxBackgroundColor="@color/white"
-        app:boxBackgroundMode="outline"
-        app:helperText=""
-        app:helperTextTextColor="@color/red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/baseline_lock_24"
-        app:endIconMode="password_toggle">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="45dp"
-            android:focusable="true"
-            android:inputType="textPassword"
-            tools:ignore="TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxWidth="290dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginTop="8dp"
-        android:hint="Password"
-        app:boxBackgroundColor="@color/white"
-        app:boxBackgroundMode="outline"
-        app:helperText=""
-        app:helperTextTextColor="@color/red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/baseline_lock_24"
-        app:endIconMode="password_toggle">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="45dp"
-            android:focusable="true"
-            android:inputType="textPassword"
-            tools:ignore="TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/terms_conditions"
-        android:textSize="11sp"
-        android:maxWidth="290dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxWidth="290dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:backgroundTint="@color/green"
-        android:text="@string/create_account"
-        android:textColor="#FFFFFF"
-        tools:ignore="TextContrastCheck" />
-
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:linksClickable="true"
-        android:minHeight="48dp"
-        android:text="@string/already_have_an_account_login"
-        android:textColor="@color/black"
-        android:textSize="11sp"
-        tools:ignore="TextContrastCheck" />
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:linksClickable="true"
+            android:minHeight="48dp"
+            android:text="@string/already_have_an_account_login"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/loginLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:linksClickable="true"
+            android:minHeight="48dp"
+            android:text="@string/login"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginStart="2dp"
+            tools:ignore="TextContrastCheck" />
+
+    </LinearLayout>
 
 </LinearLayout>

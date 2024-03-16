@@ -10,10 +10,15 @@ package com.orlando.greenworks;
  * - Jordan Kinlocke
  * */
 
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,12 +26,16 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
     private LinearLayout weeklyStats;
@@ -48,9 +57,14 @@ public class HomeFragment extends Fragment {
     private TextView statsTopThreePoints;
     private TextView statsTopThreeMaterial;
 
+    private RecyclerView calendarRecyclerView;
+    private LocalDate selectedDate;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -58,12 +72,121 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        LinearLayout reward = view.findViewById(R.id.rewards);
+        LinearLayout reward = view.findViewById(R.id.rewardsLayout);
         TextView rewardsPoint = view.findViewById(R.id.rewardsPointsTV);
         ImageView profileImage = view.findViewById(R.id.profileImageIV);
         TextView userFirstName = view.findViewById(R.id.userFirstNameTV);
         SearchView searchView = view.findViewById(R.id.searchView);
         ImageButton sortingGuideButton = view.findViewById(R.id.sortingGuideIB);
+
+        FrameLayout q1 = view.findViewById(R.id.quarter1Button);
+        TextView q1Text = view.findViewById(R.id.quarter1Text);
+
+        FrameLayout q2 = view.findViewById(R.id.quarter2Button);
+        TextView q2Text = view.findViewById(R.id.quarter2Text);
+
+        FrameLayout q3 = view.findViewById(R.id.quarter3Button);
+        TextView q3Text = view.findViewById(R.id.quarter3Text);
+
+        FrameLayout q4 = view.findViewById(R.id.quarter4Button);
+        TextView q4Text = view.findViewById(R.id.quarter4Text);
+
+        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
+
+        Drawable buttonPressBackground = AppCompatResources.getDrawable(requireContext(), R.drawable.button_press_background);
+        Drawable buttonBackground = AppCompatResources.getDrawable(requireContext(), R.drawable.button_background);
+
+        int whiteColor = ContextCompat.getColor(requireContext(), R.color.white);
+        int darkGreenColor = ContextCompat.getColor(requireContext(), R.color.dark_green);
+
+        int currentYear;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            currentYear = LocalDate.now().getYear();
+        } else {
+            currentYear = 2024;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            selectedDate = LocalDate.now();
+        }
+
+        ArrayList<DayItem> greenDays = new ArrayList<>();
+
+        greenDays.add(new DayItem(23, 1, 2024));
+        greenDays.add(new DayItem(7, 3, 2024, 3));
+        greenDays.add(new DayItem(14, 3, 2024, 2));
+        greenDays.add(new DayItem(12, 3, 2024, 4));
+        greenDays.add(new DayItem(12, 2, 2024, 5));
+
+        setMonthView(greenDays);
+
+        q1.setOnClickListener(v -> {
+            q1.setBackground(buttonBackground);
+            q2.setBackground(buttonPressBackground);
+            q3.setBackground(buttonPressBackground);
+            q4.setBackground(buttonPressBackground);
+
+            q1Text.setTextColor(darkGreenColor);
+            q2Text.setTextColor(whiteColor);
+            q3Text.setTextColor(whiteColor);
+            q4Text.setTextColor(whiteColor);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                selectedDate = LocalDate.of(currentYear, 1, 1);
+            }
+            setMonthView(greenDays);
+        });
+
+        q2.setOnClickListener(v -> {
+            q1.setBackground(buttonPressBackground);
+            q2.setBackground(buttonBackground);
+            q3.setBackground(buttonPressBackground);
+            q4.setBackground(buttonPressBackground);
+
+            q1Text.setTextColor(whiteColor);
+            q2Text.setTextColor(darkGreenColor);
+            q3Text.setTextColor(whiteColor);
+            q4Text.setTextColor(whiteColor);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                selectedDate = LocalDate.of(currentYear, 4, 1);
+            }
+            setMonthView(greenDays);
+        });
+
+        q3.setOnClickListener(v -> {
+            q1.setBackground(buttonPressBackground);
+            q2.setBackground(buttonPressBackground);
+            q3.setBackground(buttonBackground);
+            q4.setBackground(buttonPressBackground);
+
+            q1Text.setTextColor(whiteColor);
+            q2Text.setTextColor(whiteColor);
+            q3Text.setTextColor(darkGreenColor);
+            q4Text.setTextColor(whiteColor);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                selectedDate = LocalDate.of(currentYear, 7, 1);
+            }
+            setMonthView(greenDays);
+        });
+
+        q4.setOnClickListener(v -> {
+            q1.setBackground(buttonPressBackground);
+            q2.setBackground(buttonPressBackground);
+            q3.setBackground(buttonPressBackground);
+            q4.setBackground(buttonBackground);
+
+            q1Text.setTextColor(whiteColor);
+            q2Text.setTextColor(whiteColor);
+            q3Text.setTextColor(whiteColor);
+            q4Text.setTextColor(darkGreenColor);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                selectedDate = LocalDate.of(currentYear, 10, 1);
+            }
+            setMonthView(greenDays);
+        });
 
         weeklyStats = view.findViewById(R.id.weeklyStatsLL);
         weeklyStatsImage = view.findViewById(R.id.weeklyStatsIV);
@@ -101,8 +224,8 @@ public class HomeFragment extends Fragment {
         reward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                RewardsFragment rewardsFragment = new RewardsFragment();
-//                rewardsFragment.show(getParentFragmentManager(), rewardsFragment.getTag());
+                RewardsFragment rewardsFragment = new RewardsFragment();
+                rewardsFragment.show(getParentFragmentManager(), rewardsFragment.getTag());
             }
         });
 
@@ -195,47 +318,19 @@ public class HomeFragment extends Fragment {
                         "batteries"
                 ));
 
+
+
         itemAdapter = new ItemAdapter(itemList, getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(itemAdapter);
+
 
         profileImage.setOnClickListener(v -> {
             ProfileFragment profileFragment = new ProfileFragment();
             profileFragment.show(getParentFragmentManager(), profileFragment.getTag());
         });
 
-        // Added query text listener to the SearchView
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // Clear focus from the SearchView so that the keyboard is hidden
-                searchView.clearFocus();
 
-                // Create new instance of ItemInformationFragment
-                ItemInformationFragment itemInformationFragment = new ItemInformationFragment();
-
-                //TODO: Backend - Update this to use Web Team and/or Recollect API
-                //Pass the search query as an argument to the fragment
-                Bundle args = new Bundle();
-                args.putString("search_query", query);
-                itemInformationFragment.setArguments(args);
-
-                // Replace the home fragment with the ItemInformationFragment when user
-                // enters search query
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, itemInformationFragment)
-                        .addToBackStack(null)
-                        .commit();
-
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // You can put some code here if you want to do something as the user types their search
-                return false;
-            }
-        });
 
         sortingGuideButton.setOnClickListener(v -> {
             SortingGuideFragment sortingGuideFragment = new SortingGuideFragment();
@@ -272,5 +367,41 @@ public class HomeFragment extends Fragment {
 
         statsTopThreePoints.setText(topThreePoints);
         statsTopThreeMaterial.setText(topThreeMaterial);
+    }
+
+
+    private void setMonthView(ArrayList<DayItem> greenDays) {
+//        monthYearText.setText(monthYearFromDate(selectedDate));
+
+        ArrayList<DayItem> daysInMonth = new ArrayList<>();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Calculate the first day of the selected month
+            LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
+
+            // Iterate over the previous 2 months and add their days to the list
+            for (int i = -2; i <= 0; i++) {
+                LocalDate month = firstOfMonth.plusMonths(i);
+                int monthValue = month.getMonthValue();
+                int yearValue = month.getYear();
+                for (int day = 1; day <= month.lengthOfMonth(); day++) {
+                    daysInMonth.add(new DayItem(day, monthValue, yearValue));
+                    Log.i("Day", "Day: " + day + " Month: " + monthValue + " Year: " + yearValue);
+                }
+            }
+        }
+
+
+
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, greenDays, (position, dayText) -> {
+            // Implement onItemClick method if needed
+        });
+
+
+        // Set up GridLayoutManager with horizontal orientation and 7 items per row
+        GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 7, GridLayoutManager.HORIZONTAL, false);
+
+        calendarRecyclerView.setLayoutManager(layoutManager);
+        calendarRecyclerView.setAdapter(calendarAdapter);
     }
 }

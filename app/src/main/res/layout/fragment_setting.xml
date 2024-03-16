@@ -4,31 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/snow"
     tools:context=".SettingFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="10dp">
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="@string/settings"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/closeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:backgroundTint="@color/snow"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/white"
             android:contentDescription="@string/close_button"
             android:src="@drawable/baseline_close_24" />
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/logo"
-            android:src="@drawable/logo" />
 
     </RelativeLayout>
 
@@ -38,13 +43,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Settings"
-            android:textSize="24sp"
-            android:layout_marginTop="15dp"/>
 
         <TextView
             android:id="@+id/about"

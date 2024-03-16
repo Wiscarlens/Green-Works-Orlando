@@ -56,8 +56,9 @@
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign up</string>
 
-    <string name="terms_conditions">Agree with <b>Terms &amp; Conditions</b></string>
-    <string name="already_have_an_account_login">Already have an account? <b>Login</b></string>
+    <string name="agree_with">Agree with </string>
+    <string name="terms_conditions">Terms &amp; Conditions</string>
+    <string name="already_have_an_account_login">Already have an account?</string>
     <string name="create_account">Create Account</string>
     <string name="create_an_account">Create an Account</string>
     <string name="full_name">Full Name</string>
@@ -76,6 +77,14 @@
     <string name="get_in_touch">Get in Touch</string>
     <string name="last_name">Last Name</string>
     <string name="submit">Submit</string>
+<<<<<<< HEAD
     <string name="search_the_name_of_a_waste_item_and_we_ll_tell_you_how_to_recycle_or_dispose_of_it">Search the name of a waste item and we\'ll tell you how to recycle or dispose of it.</string>
     <string name="most_frequent_searches">Most Frequent Searches</string>
+=======
+    <string name="address">Address</string>
+    <string name="password">Password</string>
+    <string name="made_with_by_valencia_ctsd">Made with ❤️ by Valencia College CTSD</string>
+    <string name="registration">Registration</string>
+    <string name="profile">Profile</string>
+>>>>>>> refs/remotes/origin/master
 </resources>

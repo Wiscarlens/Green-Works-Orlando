@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -40,6 +41,7 @@ public class ContactFragment extends BottomSheetDialogFragment {
 
         ImageButton closeButton = view.findViewById(R.id.closeButton);
         Button submitButton = view.findViewById(R.id.submitButton);
+
 
         closeButton.setOnClickListener(v -> dismiss());
     }

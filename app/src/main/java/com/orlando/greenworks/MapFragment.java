@@ -18,11 +18,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import com.google.android.gms.maps.model.Marker;
 import android.util.Log;
+import android.widget.Toast;
 
 
 /*
@@ -92,8 +95,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             int scaledSize = 90; // adjust this size as needed, default is 60
 
             // Create a scaled bitmap from the original drawable resource
-            BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.recycle_bin_1);
-            Bitmap b = bitmapdraw.getBitmap();
+            BitmapDrawable binImage = (BitmapDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.recycle_bin_1, null);
+            assert binImage != null;
+            Bitmap b = binImage.getBitmap();
             Bitmap smallMarker = Bitmap.createScaledBitmap(b, scaledSize, scaledSize, false);
 
             // Define the recycling center locations
@@ -125,11 +129,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                 @Override
                 public void onInfoWindowClick(@NonNull Marker marker) {
+                    // TODO: Test the InfoWindow click listener
+                    Log.d("MapFragment", "InfoWindow clicked: " + marker.getTitle());
+
+                    Toast.makeText(requireContext(), "Recycle bin selected: " + marker.getTitle(), Toast.LENGTH_SHORT).show();
+
+
                     // When the InfoWindow is clicked, start an intent to open Google Maps for navigation
                     Uri gmmIntentUri = Uri.parse("google.navigation:q=" + Uri.encode(marker.getTitle()));
                     Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                     mapIntent.setPackage("com.google.android.apps.maps");
                     startActivity(mapIntent);
+
+
                 }
             });
 

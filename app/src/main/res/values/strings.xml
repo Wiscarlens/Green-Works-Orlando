@@ -76,4 +76,6 @@
     <string name="get_in_touch">Get in Touch</string>
     <string name="last_name">Last Name</string>
     <string name="submit">Submit</string>
+    <string name="search_the_name_of_a_waste_item_and_we_ll_tell_you_how_to_recycle_or_dispose_of_it">Search the name of a waste item and we\'ll tell you how to recycle or dispose of it.</string>
+    <string name="most_frequent_searches">Most Frequent Searches</string>
 </resources>

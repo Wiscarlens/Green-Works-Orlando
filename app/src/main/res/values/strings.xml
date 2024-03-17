@@ -77,14 +77,14 @@
     <string name="get_in_touch">Get in Touch</string>
     <string name="last_name">Last Name</string>
     <string name="submit">Submit</string>
-<<<<<<< HEAD
-    <string name="search_the_name_of_a_waste_item_and_we_ll_tell_you_how_to_recycle_or_dispose_of_it">Search the name of a waste item and we\'ll tell you how to recycle or dispose of it.</string>
-    <string name="most_frequent_searches">Most Frequent Searches</string>
-=======
-    <string name="address">Address</string>
-    <string name="password">Password</string>
-    <string name="made_with_by_valencia_ctsd">Made with ❤️ by Valencia College CTSD</string>
-    <string name="registration">Registration</string>
-    <string name="profile">Profile</string>
->>>>>>> refs/remotes/origin/master
-</resources>
+    <!-- <<<<<<< HEAD -->
+        <string name="search_the_name_of_a_waste_item_and_we_ll_tell_you_how_to_recycle_or_dispose_of_it">Search the name of a waste item and we\'ll tell you how to recycle or dispose of it.</string>
+        <string name="most_frequent_searches">Most Frequent Searches</string>
+    =======
+        <string name="address">Address</string>
+        <string name="password">Password</string>
+        <string name="made_with_by_valencia_ctsd">Made with ❤️ by Valencia College CTSD</string>
+        <string name="registration">Registration</string>
+        <string name="profile">Profile</string>
+    >>>>>>> refs/remotes/origin/master
+    </resources>

@@ -11,7 +11,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="920dp">
+        android:layout_height="840dp">
 
         <!-- Header Image -->
         <ImageView
@@ -53,20 +53,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FF000000"
-            android:text="If you live in an apartment complex or condo community and don't have access to\nrecycling, bring your materials to one of\nour convenient drop-off locations:\n\n• Dover Shore Community Center\n  1400 Gaston Foster Road\n\n• Engelwood Neighborhood Center\n  6123 Lacosta Drive\n\n• Northwest Community Center\n  3955 WD Judge Road\n\n• Solid Waste Management Division\n  1028 South Woods Avenue\n  (Front of the building)"
+            android:text="If you live in an apartment complex or condo community and don't have access to recycling, bring\nyour materials to one of our convenient drop-off locations:\n\n• Dover Shore Community Center\n  1400 Gaston Foster Road\n\n• Engelwood Neighborhood Center\n  6123 Lacosta Drive\n\n• Northwest Community Center\n  3955 WD Judge Road\n\n• Solid Waste Management Division\n  1028 South Woods Avenue\n  (Front of the building)"
             android:layout_below="@id/map"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:textSize="18sp" />
 
         <!-- City of Orlando Image -->
-
         <ImageView
             android:id="@+id/city_of_orlando_image"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:src="@drawable/city_of_orlando_logo_new_1"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="225dp"
             android:contentDescription="City of Orlando logo"
             android:layout_below="@id/recycle_locations"
             android:layout_marginTop="30dp"/>

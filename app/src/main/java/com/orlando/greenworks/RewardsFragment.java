@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -40,6 +41,12 @@ public class RewardsFragment extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.fragment_rewards, container, false);
 
         ImageButton closeButton = view.findViewById(R.id.closeButton);
+
+        ProgressBar progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setMax(100);
+        progressBar.setProgress(50);
+
+
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override

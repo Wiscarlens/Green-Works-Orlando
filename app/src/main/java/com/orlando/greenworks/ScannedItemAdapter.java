@@ -8,8 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.journeyapps.barcodescanner.BarcodeCallback;
-
 import java.util.List;
 
 public class ScannedItemAdapter extends RecyclerView.Adapter<ScannedItemAdapter.ViewHolder> {
@@ -42,7 +40,7 @@ public class ScannedItemAdapter extends RecyclerView.Adapter<ScannedItemAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.scanned_item_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.scanned_item_design, parent, false);
         return new ViewHolder(view);
     }
 

@@ -31,6 +31,8 @@ public class CalendarFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
+        MainActivity.fragmentTitle.setText(R.string.calendar); // Set the title of the fragment in the toolbar.
+
         CalendarView calendarView = view.findViewById(R.id.calendarView);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -42,6 +44,14 @@ public class CalendarFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        MainActivity.fragmentTitle.setText(""); // Clear the title of the fragment in the toolbar.
+
     }
 }
 

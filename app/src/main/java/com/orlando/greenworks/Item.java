@@ -13,8 +13,10 @@ package com.orlando.greenworks;
 public class Item {
     private String itemName;
     private String itemDescription;
+    private String itemMaterial;
     private Integer itemPoint;
     private String itemImage;
+    private String itemDate;
 
     public Item(String itemName, String itemDescription, Integer itemPoint, String itemImage) {
         this.itemName = itemName;
@@ -53,5 +55,21 @@ public class Item {
 
     public void setItemImage(String itemImage) {
         this.itemImage = itemImage;
+    }
+
+    public String getItemDate() {
+        return itemDate;
+    }
+
+    public void setItemDate(String itemDate) {
+        this.itemDate = itemDate;
+    }
+
+    public String getItemMaterial() {
+        return itemMaterial;
+    }
+
+    public void setItemMaterial(String itemMaterial) {
+        this.itemMaterial = itemMaterial;
     }
 }

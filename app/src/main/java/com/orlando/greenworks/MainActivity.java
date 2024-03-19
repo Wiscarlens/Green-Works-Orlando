@@ -11,6 +11,7 @@ package com.orlando.greenworks;
  * */
 
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -29,20 +31,22 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.orlando.greenworks.R;
 
+import java.time.Year;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
+    static TextView fragmentTitle;
     private BottomAppBar bottomAppBar;
     BottomNavigationView bottomNavigationView;
     FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // Disable dark mode
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -52,8 +56,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout = findViewById(R.id.drawer_layout);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         fab = findViewById(R.id.fab);
+        TextView versionTV = navigationView.findViewById(R.id.version);
+        TextView yearTV = navigationView.findViewById(R.id.copyRightYear);
+        fragmentTitle = toolbar.findViewById(R.id.fragmentTitle);
 
-//        switchFragment(new LoginFragment());
         switchFragment(new WelcomeFragment());
 
         setSupportActionBar(toolbar);
@@ -75,10 +81,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             versionName = "N/A";
         }
 
-        TextView versionTV = navigationView.findViewById(R.id.version);
         String version = getString(R.string.version) + versionName;
         versionTV.setText(version);
 
+        // Set year in the navigation drawer
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            yearTV.setText(String.valueOf(Year.now()));
+        }
 
 
         // TODO: Disable placeholder item button
@@ -98,8 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             return true;
         });
-
-
 
         fab.setOnClickListener(v -> {
             ScannerFragment scannerFragment = new ScannerFragment();

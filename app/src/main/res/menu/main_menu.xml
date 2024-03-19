@@ -21,7 +21,6 @@
                     android:id="@+id/nav_contact"
                     android:icon="@drawable/baseline_contact_support_24"
                     android:title="@string/contact_us"/>
-                    />
 
             </group>
         </menu>

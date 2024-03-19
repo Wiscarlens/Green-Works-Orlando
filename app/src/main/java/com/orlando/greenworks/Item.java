@@ -25,6 +25,15 @@ public class Item {
         this.itemImage = itemImage;
     }
 
+    // History constructor
+    public Item(String itemImage, String itemName, String itemMaterial, Integer itemPoint, String itemDate) {
+        this.itemImage = itemImage;
+        this.itemName = itemName;
+        this.itemMaterial = itemMaterial;
+        this.itemPoint = itemPoint;
+        this.itemDate = itemDate;
+    }
+
     public String getItemName() {
         return itemName;
     }

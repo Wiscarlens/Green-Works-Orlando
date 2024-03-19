@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.net.Uri;
 import com.google.android.gms.maps.model.Marker;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -42,16 +43,17 @@ ________________________________________________________________________________
 ___________________________________________________________________________________________
 */
 
-public class MapFragment extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1; // Added constant for location permission request code
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
+
+        MainActivity.fragmentTitle.setText(R.string.map); // Set the title of the fragment in the toolbar.
 
         // Check if user was granted permission
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -129,12 +131,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                 @Override
                 public void onInfoWindowClick(@NonNull Marker marker) {
-                    // TODO: Test the InfoWindow click listener
-                    Log.d("MapFragment", "InfoWindow clicked: " + marker.getTitle());
-
-                    Toast.makeText(requireContext(), "Recycle bin selected: " + marker.getTitle(), Toast.LENGTH_SHORT).show();
-
-
                     // When the InfoWindow is clicked, start an intent to open Google Maps for navigation
                     Uri gmmIntentUri = Uri.parse("google.navigation:q=" + Uri.encode(marker.getTitle()));
                     Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
@@ -166,4 +162,25 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         }
     }
+
+    @Override
+    public boolean onMarkerClick(@NonNull Marker marker) {
+        Log.i("MapFragment", "onMarkerClick" + marker.getPosition());
+
+        // Display a toast message
+        Toast.makeText(getContext(), "You clicked on: " + marker.getTitle(), Toast.LENGTH_SHORT).show();
+
+//        textView.setText("Recycling Locations" + marker.getTitle());
+
+        return false;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        MainActivity.fragmentTitle.setText(""); // Clear the title of the fragment in the toolbar.
+
+    }
+
 }

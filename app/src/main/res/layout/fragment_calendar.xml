@@ -1,84 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:orientation="vertical"
     tools:context=".CalendarFragment">
 
-    <SearchView
-        android:id="@+id/search_view"
-        android:layout_width="336dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp" />
-
     <TextView
-        android:id="@+id/Calendar"
-        android:layout_width="194dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/search_view"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="194dp"
-        android:gravity="center"
-        android:text="Calendar"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColorHighlight="#9C27B0"
-        android:textSize="40sp" />
+        android:text="Schedule"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"/>
 
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_below="@id/Calendar"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="32dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/recenthistory"
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="66dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:text="Next Collection"
+        android:textSize="12sp"
+        android:textColor="@color/gray"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="562dp"
-        android:layout_marginEnd="47dp"
-        android:layout_marginBottom="103dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Feb 23" />
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="15dp"/>
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="52dp"
-        android:layout_height="47dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="6dp"
-        android:background="@drawable/rounded_image"
-        android:src="@drawable/fake_profile_picture" />
-
-    <EditText
-        android:id="@+id/recenthistory1"
-        android:layout_width="wrap_content"
-        android:layout_height="66dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+    <LinearLayout
+        android:id="@+id/scheduleList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="473dp"
-        android:layout_marginEnd="47dp"
-        android:layout_marginBottom="192dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Feb 19" />
+        android:layout_marginEnd="25dp">
 
-</RelativeLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

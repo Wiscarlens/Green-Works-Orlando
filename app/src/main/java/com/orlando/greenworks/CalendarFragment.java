@@ -22,16 +22,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 
 public class CalendarFragment extends Fragment {
     private LayoutInflater inflater;
     private ViewGroup container;
     private LinearLayout scheduleList;
+    TextView noSchedule;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflater = inflater;
@@ -43,10 +46,11 @@ public class CalendarFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
         CalendarView calendarView = view.findViewById(R.id.calendarView);
         scheduleList = view.findViewById(R.id.scheduleList);
+        noSchedule = view.findViewById(R.id.noScheduleTV);
+
 
         calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
-            // Clear the layout
-            scheduleList.removeAllViews();
+            scheduleList.removeAllViews();  // Clear the layout before adding new schedule
 
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, month, dayOfMonth);
@@ -61,6 +65,14 @@ public class CalendarFragment extends Fragment {
                 case Calendar.THURSDAY:
                     showSchedule("Thursday, " + monthName + " " + dayOfMonth, "Recycling");
                     showSchedule("Thursday, " + monthName + " " + dayOfMonth, "Yard Waste");
+                    break;
+                case Calendar.TUESDAY:
+                case Calendar.WEDNESDAY:
+                case Calendar.FRIDAY:
+                case Calendar.SATURDAY:
+                case Calendar.SUNDAY:
+                    noSchedule.setVisibility(View.VISIBLE);
+                    scheduleList.addView(noSchedule); // Add the noSchedule TextView back to the layout
                     break;
                 default:
                     Log.i("Day of week", "Invalid day");
@@ -84,29 +96,30 @@ public class CalendarFragment extends Fragment {
         TextView scheduleRecyclingType = scheduleView.findViewById(R.id.recyclingTypeTV);
         TextView scheduleTime = scheduleView.findViewById(R.id.timeTV);
 
+        noSchedule.setVisibility(View.GONE);
+
         // Set the properties of the views with the custom information
         scheduleDate.setText(date);
         scheduleRecyclingType.setText(recyclingType);
-        scheduleTime.setText("6:00 AM");
+        scheduleTime.setText("6:00 AM"); // TODO: Pick up time add to admin settings
 
         switch (recyclingType) {
             case "Garbage":
                 scheduleRecyclingIcon.setImageResource(R.drawable.garbage);
-                scheduleCard.setBackgroundTintList(getResources().getColorStateList(R.color.medium_dark_green));
+                scheduleCard.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.medium_dark_green));
                 break;
             case "Recycling":
                 scheduleRecyclingIcon.setImageResource(R.drawable.recycling);
-                scheduleCard.setBackgroundTintList(getResources().getColorStateList(R.color.green));
+                scheduleCard.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.green));
                 break;
             case "Yard Waste":
                 scheduleRecyclingIcon.setImageResource(R.drawable.yard_waste);
-                scheduleCard.setBackgroundTintList(getResources().getColorStateList(R.color.dark_green));
+                scheduleCard.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.dark_green));
                 break;
 
                 // TODO: add default case show nothing is schedule for that day
         }
 
-//        scheduleRecyclingIcon.setImageResource(recyclingIcon);
 
         // Add the schedule view to the scheduleList
         scheduleList.addView(scheduleView);

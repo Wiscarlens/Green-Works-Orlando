@@ -72,6 +72,8 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        MainActivity.fragmentTitle.setText(""); // Set the title of the fragment in the toolbar.
+
         LinearLayout reward = view.findViewById(R.id.rewardsLayout);
         TextView rewardsPoint = view.findViewById(R.id.rewardsPointsTV);
         ImageView profileImage = view.findViewById(R.id.profileImageIV);
@@ -386,7 +388,6 @@ public class HomeFragment extends Fragment {
                 int yearValue = month.getYear();
                 for (int day = 1; day <= month.lengthOfMonth(); day++) {
                     daysInMonth.add(new DayItem(day, monthValue, yearValue));
-                    Log.i("Day", "Day: " + day + " Month: " + monthValue + " Year: " + yearValue);
                 }
             }
         }
@@ -404,4 +405,5 @@ public class HomeFragment extends Fragment {
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
+
 }

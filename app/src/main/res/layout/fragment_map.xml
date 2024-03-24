@@ -9,23 +9,11 @@
     android:scrollbarAlwaysDrawVerticalTrack="true"
     android:fadeScrollbars="false">
 
-    <!-- 3/23/2024 -->
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="920dp">
-        <!-- -->
+        android:layout_height="800dp">
 
-        <!-- Header Image -->
-        <ImageView
-            android:id="@+id/header_image"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:src="@drawable/gw_orlando_logo_1"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="-125dp"
-            android:contentDescription="Green Works Orlando logo" />
 
         <!-- Title -->
         <TextView
@@ -36,8 +24,9 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="#FF000000"
-            android:layout_below="@id/header_image"
-            android:gravity="center_horizontal"/>
+            android:layout_marginLeft="10dp"
+            />
+
 
         <!-- Map Fragment -->
         <androidx.fragment.app.FragmentContainerView
@@ -61,32 +50,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:textSize="18sp" />
-
-        <!-- City of Orlando Image -->
-
-        <ImageView
-            android:id="@+id/city_of_orlando_image"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:src="@drawable/city_of_orlando_logo_new_1"
-            android:layout_marginStart="20dp"
-            android:contentDescription="City of Orlando logo"
-            android:layout_below="@id/recycle_locations"
-            android:layout_marginTop="30dp"/>
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_marginBottom="60dp" /> -->
-            <!--android:layout_alignParentBottom="true"       -->
-
-        <!-- City of Orlando Text -->
-        <TextView
-            android:id="@+id/city_of_orlando_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/city_of_orlando_image"
-            android:layout_alignBottom="@+id/city_of_orlando_image"
-            android:text="© 2024 City of Orlando"
-            android:layout_marginStart="-25dp"
-            android:textColor="#FF000000" />
 
 
     </RelativeLayout>

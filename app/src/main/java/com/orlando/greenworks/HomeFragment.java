@@ -13,11 +13,9 @@ package com.orlando.greenworks;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,7 +33,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class HomeFragment extends Fragment {
     private LinearLayout weeklyStats;
@@ -112,13 +109,13 @@ public class HomeFragment extends Fragment {
             selectedDate = LocalDate.now();
         }
 
-        ArrayList<DayItem> greenDays = new ArrayList<>();
+        ArrayList<EventDay> greenDays = new ArrayList<>();
 
-        greenDays.add(new DayItem(23, 1, 2024));
-        greenDays.add(new DayItem(7, 3, 2024, 3));
-        greenDays.add(new DayItem(14, 3, 2024, 2));
-        greenDays.add(new DayItem(12, 3, 2024, 4));
-        greenDays.add(new DayItem(12, 2, 2024, 5));
+        greenDays.add(new EventDay(23, 1, 2024));
+        greenDays.add(new EventDay(7, 3, 2024, 3));
+        greenDays.add(new EventDay(14, 3, 2024, 2));
+        greenDays.add(new EventDay(12, 3, 2024, 4));
+        greenDays.add(new EventDay(12, 2, 2024, 5));
 
         setMonthView(greenDays);
 
@@ -372,10 +369,10 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void setMonthView(ArrayList<DayItem> greenDays) {
+    private void setMonthView(ArrayList<EventDay> greenDays) {
 //        monthYearText.setText(monthYearFromDate(selectedDate));
 
-        ArrayList<DayItem> daysInMonth = new ArrayList<>();
+        ArrayList<EventDay> daysInMonth = new ArrayList<>();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Calculate the first day of the selected month
@@ -387,14 +384,14 @@ public class HomeFragment extends Fragment {
                 int monthValue = month.getMonthValue();
                 int yearValue = month.getYear();
                 for (int day = 1; day <= month.lengthOfMonth(); day++) {
-                    daysInMonth.add(new DayItem(day, monthValue, yearValue));
+                    daysInMonth.add(new EventDay(day, monthValue, yearValue));
                 }
             }
         }
 
 
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, greenDays, (position, dayText) -> {
+        HeatmapAdapter calendarAdapter = new HeatmapAdapter(daysInMonth, greenDays, (position, dayText) -> {
             // Implement onItemClick method if needed
         });
 

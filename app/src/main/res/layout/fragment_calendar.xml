@@ -16,10 +16,126 @@
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"/>
 
-    <CalendarView
-        android:id="@+id/calendarView"
+<!--    <CalendarView-->
+<!--        android:id="@+id/calendarView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content" />-->
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/previousMonthBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:src="@drawable/baseline_arrow_back_ios_new_24"
+                android:layout_margin="15dp" />
+
+            <TextView
+                android:id="@+id/monthYearTV"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="March 2024"
+                android:textSize="14sp"
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:id="@+id/nextMonthBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:src="@drawable/baseline_arrow_forward_ios_24"
+                android:layout_margin="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="S"
+                android:textColor="@color/gray"
+                android:textAlignment="center"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="M"
+                android:textColor="@color/gray"
+                android:textAlignment="center"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="T"
+                android:textColor="@color/gray"
+                android:textAlignment="center"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="W"
+                android:textColor="@color/gray"
+                android:textAlignment="center"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="T"
+                android:textColor="@color/gray"
+                android:textAlignment="center"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="F"
+                android:textColor="@color/gray"
+                android:textAlignment="center"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="S"
+                android:textColor="@color/gray"
+                android:textAlignment="center"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/calendarRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"/>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"

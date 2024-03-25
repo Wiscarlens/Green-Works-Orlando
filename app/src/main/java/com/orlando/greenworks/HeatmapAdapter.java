@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
+class HeatmapAdapter extends RecyclerView.Adapter<HeatmapViewHolder>
 {
-    private final ArrayList<DayItem> daysOfMonth;
-    private final ArrayList<DayItem> greenDays;
+    private final ArrayList<EventDay> daysOfMonth;
+    private final ArrayList<EventDay> greenDays;
     private final OnItemListener onItemListener;
 
-    public CalendarAdapter(ArrayList<DayItem> daysOfMonth, ArrayList<DayItem> greenDays, OnItemListener onItemListener)
+    public HeatmapAdapter(ArrayList<EventDay> daysOfMonth, ArrayList<EventDay> greenDays, OnItemListener onItemListener)
     {
         this.daysOfMonth = daysOfMonth;
         this.greenDays = greenDays;
@@ -25,19 +25,18 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 
     @NonNull
     @Override
-    public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-    {
+    public HeatmapViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (int) (parent.getHeight() * 0.166666666);
 
 
-        return new CalendarViewHolder(view, onItemListener);
+        return new HeatmapViewHolder(view, onItemListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull HeatmapViewHolder holder, int position)
     {
 
         int gray = ContextCompat.getColor(holder.calendarCellLL.getContext(), R.color.gray);

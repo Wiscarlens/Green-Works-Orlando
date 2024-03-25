@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     BottomNavigationView bottomNavigationView;
     FloatingActionButton fab;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // Disable dark mode
@@ -61,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTitle = toolbar.findViewById(R.id.fragmentTitle);
 
         switchFragment(new WelcomeFragment());
+
+
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);

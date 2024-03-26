@@ -49,8 +49,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0' // For barcode Scanner
     implementation 'com.google.android.gms:play-services-maps:18.2.0' // Maps SDK for Android - NEED FOR MAPS
-    implementation 'com.google.android.libraries.places:places:3.3.0' // NEED FOR MAPS
+    implementation 'com.google.android.libraries.places:places:3.4.0' // NEED FOR MAPS
     implementation 'androidx.fragment:fragment:1.6.2'
+    implementation 'com.airbnb.android:lottie:6.1.0'
 }
 
 // NEED FOR MAPS

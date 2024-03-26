@@ -10,6 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.util.Log;
+
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import android.widget.Button;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.os.Handler;
+import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -50,12 +53,21 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.fragment_item_information, container, false);
 
         ImageButton closeBtn = view.findViewById(R.id.closeButton);
-
+        Button exitButton = view.findViewById(R.id.btnReturnToSortingGuide);
+        Button disposeButton = view.findViewById(R.id.disposeButton);
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Close the bottom sheet
                 dismiss();
+            }
+        });
+
+        disposeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(requireContext(), "Dispose", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -67,9 +79,7 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         itemInformationTextView.setVisibility(View.INVISIBLE);
         itemImage.setVisibility(View.INVISIBLE);
 
-        Button btnReturnToSortingGuide = view.findViewById(R.id.btnReturnToSortingGuide);
-
-        btnReturnToSortingGuide.setOnClickListener(v -> {
+        exitButton.setOnClickListener(v -> {
             SortingGuideFragment sortingGuideFragment = new SortingGuideFragment();
             sortingGuideFragment.show(getParentFragmentManager(), sortingGuideFragment.getTag());
         });

@@ -42,24 +42,32 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/title2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:text="@string/search_the_name_of_a_waste_item_and_we_ll_tell_you_how_to_recycle_or_dispose_of_it"
-        android:textAlignment="center"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.344"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="NotSibling" />
-
     <android.widget.SearchView
         android:id="@+id/search"
+        style="@style/Base.CardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:backgroundTint="@color/soft_gray"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search for an item" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_speed="1"
+           app:lottie_rawRes="@raw/search_animation"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/title"
@@ -75,7 +83,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         tools:listitem="@layout/item_design"
-        android:layout_weight="1" />
+        android:paddingStart="15dp"
+        android:paddingEnd="10dp"
+        android:layout_weight="2" />
 
     <GridLayout
         android:id="@+id/gridLayout"

@@ -89,4 +89,5 @@
     <string name="search_the_name_of_a_waste_item_and_we_ll_tell_you_how_to_recycle_or_dispose_of_it">Search the name of a waste item and we\'ll tell you how to recycle or dispose of it</string>
     <string name="no_schedule">No schedule</string>
     <string name="default_collection_time">6:00 AM</string>
+    <string name="item_information">Item Information</string>
 </resources>

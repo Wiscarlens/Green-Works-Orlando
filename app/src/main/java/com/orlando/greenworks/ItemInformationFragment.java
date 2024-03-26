@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,7 +18,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.os.Handler;
 
-public class ItemInformationFragment extends Fragment {
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.util.Objects;
+
+public class ItemInformationFragment extends BottomSheetDialogFragment {
 
     private TextView itemInformationTextView;
 
@@ -28,6 +35,7 @@ public class ItemInformationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // Handle the argument passed to this fragment
         Bundle arguments = getArguments();
         if (arguments != null && arguments.containsKey("searchQuery")) {
@@ -41,14 +49,15 @@ public class ItemInformationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_information, container, false);
 
-        // ADD TOOLBAR TITLE
-        if (isAdded() && getActivity() != null) {
-            // Find the TextView in the toolbar by its ID
-            TextView toolbarTitle = getActivity().findViewById(R.id.fragmentTitle);
-            // Set the title on the TextView
-            toolbarTitle.setText("Item Information");
-        }
+        ImageButton closeBtn = view.findViewById(R.id.closeButton);
 
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Close the bottom sheet
+                dismiss();
+            }
+        });
 
         itemInformationTextView = view.findViewById(R.id.item_information);
         itemImage = view.findViewById(R.id.item_image);
@@ -59,18 +68,10 @@ public class ItemInformationFragment extends Fragment {
         itemImage.setVisibility(View.INVISIBLE);
 
         Button btnReturnToSortingGuide = view.findViewById(R.id.btnReturnToSortingGuide);
-        btnReturnToSortingGuide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate back to the SortingGuideFragment
-                if (getActivity() != null) {
-                    SortingGuideFragment sortingGuideFragment = new SortingGuideFragment();
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, sortingGuideFragment)
-                            .addToBackStack(null) // Optional, based on your navigation needs
-                            .commit();
-                }
-            }
+
+        btnReturnToSortingGuide.setOnClickListener(v -> {
+            SortingGuideFragment sortingGuideFragment = new SortingGuideFragment();
+            sortingGuideFragment.show(getParentFragmentManager(), sortingGuideFragment.getTag());
         });
 
         return view;
@@ -127,6 +128,7 @@ public class ItemInformationFragment extends Fragment {
             // Extract and format recycling information
             JSONArray tags = itemDetails.optJSONArray("tags");
             StringBuilder tagInfo = new StringBuilder();
+
             if (tags != null) {
                 for (int j = 0; j < tags.length(); j++) {
                     JSONObject tag = tags.getJSONObject(j);
@@ -188,6 +190,30 @@ public class ItemInformationFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
             itemInformationTextView.setText("No items found for '" + searchQuery + "'.");
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
+
+        if (dialog != null) {
+            ViewGroup bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setSkipCollapsed(true);
+                behavior.setHideable(true);
+
+                ViewGroup.LayoutParams layoutParams = bottomSheet.getLayoutParams();
+                if (layoutParams != null) {
+                    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                    bottomSheet.setLayoutParams(layoutParams);
+                }
+            }
+
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
         }
     }
 }

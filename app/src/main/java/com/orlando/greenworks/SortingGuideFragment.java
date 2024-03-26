@@ -5,16 +5,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import java.util.Objects;
-import android.widget.ImageButton;
 
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class SortingGuideFragment extends BottomSheetDialogFragment {
 
@@ -25,55 +30,104 @@ public class SortingGuideFragment extends BottomSheetDialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sorting_guide, container, false);
 
+        ImageButton closeBtn = view.findViewById(R.id.closeButton);
+
         SearchView searchView = view.findViewById(R.id.search);
+
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+
+        int numberOfColumns = 3;
+
+
+        ItemAdapter itemAdapter;
+        ArrayList<Item> itemList = new ArrayList<>();
+
+        itemList.add(
+                new Item(
+                        "Dasani",
+                        "Plastic bottle",
+                        7,
+                        "dasani"
+                ));
+        itemList.add(
+                new Item(
+                        "Cardboard",
+                        "Cardboard",
+                        13,
+                        "cardboard"
+                ));
+        itemList.add(
+                new Item(
+                        "Spindrift",
+                        "Aluminum can",
+                        16,
+                        "spindrift"
+                ));
+
+        itemList.add(
+                new Item(
+                        "Paper",
+                        "Paper",
+                        9,
+                        "paper"
+                ));
+
+        itemList.add(
+                new Item(
+                        "Glass",
+                        "Glass",
+                        14,
+                        "glass"
+                ));
+        itemList.add(
+                new Item(
+                        "Textile",
+                        "Textile",
+                        20,
+                        "textile"
+                ));
+
+        itemAdapter = new ItemAdapter(itemList, getContext());
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
+        recyclerView.setAdapter(itemAdapter);
+
+        closeBtn.setOnClickListener(v -> dismiss());
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.d("SortingGuideFragment", "Search query submitted: " + query);
 
-                // Create a new instance of ItemInformationFragment
-                ItemInformationFragment itemInformationFragment = new ItemInformationFragment();
+                // Check if an instance of ItemInformationFragment is already displayed
+                ItemInformationFragment itemInformationFragment = (ItemInformationFragment) getParentFragmentManager().findFragmentByTag("ItemInformationFragment");
 
-                // Bundle to pass the search query to ItemInformationFragment
+                // Update the search query of the ItemInformationFragment
                 Bundle args = new Bundle();
-                args.putString("searchQuery", query); // Use the same key when retrieving the value in ItemInformationFragment
-                itemInformationFragment.setArguments(args);
+                args.putString("searchQuery", query);
 
-                // Replace SortingGuideFragment with ItemInformationFragment in the fragment container
-                if (getFragmentManager() != null) {
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fragment_container, itemInformationFragment);
-                    transaction.addToBackStack(null); // Optional, allows users to navigate back to the previous fragment
-                    transaction.commit();
+                if (itemInformationFragment != null && itemInformationFragment.isAdded()) {
+                    // If it's already added, update the arguments and refresh the fragment
+                    itemInformationFragment.setArguments(args);
+                    getParentFragmentManager().beginTransaction().detach(itemInformationFragment).attach(itemInformationFragment).commit();
+                } else {
+                    // If not, create a new instance and show it
+                    itemInformationFragment = new ItemInformationFragment();
+                    itemInformationFragment.setArguments(args);
+                    itemInformationFragment.show(getParentFragmentManager(), "ItemInformationFragment");
                 }
-
-                // Dismiss the SortingGuideFragment when user enters search query. This will
-                // remove the bottom sheet from the screen so the user can see item information screen.
-                // Added since bottom sheet layout is now fullscreen and search query results were not obvious to user.
-                dismiss();
 
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                // Implement if necessary for dynamic search/filtering
                 return false;
             }
         });
 
-        // Make close button work
-        ImageButton closeButton = view.findViewById(R.id.closeButton);
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss(); // This will dismiss the BottomSheetDialogFragment
-            }
-        });
-
         return view;
-
     }
-
 
     @Override
     public void onStart() {
@@ -96,5 +150,6 @@ public class SortingGuideFragment extends BottomSheetDialogFragment {
             }
 
             Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-
-}}}
+        }
+    }
+}

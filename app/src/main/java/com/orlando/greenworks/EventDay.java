@@ -1,19 +1,19 @@
 package com.orlando.greenworks;
 
-public class DayItem {
+public class EventDay {
     private final int day;
     private final int month;
     private final int year;
     private int frequency = 1;
 
-    public DayItem(int day, int month, int year, int frequency) {
+    public EventDay(int day, int month, int year, int frequency) {
         this.day = day;
         this.month = month;
         this.year = year;
         this.frequency = frequency;
     }
 
-    public DayItem(int day, int month, int year) {
+    public EventDay(int day, int month, int year) {
         this.day = day;
         this.month = month;
         this.year = year;

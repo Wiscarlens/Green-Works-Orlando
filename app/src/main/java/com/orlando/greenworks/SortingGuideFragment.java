@@ -1,57 +1,75 @@
 package com.orlando.greenworks;
 
 import android.os.Bundle;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import android.widget.ImageButton;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.util.Objects;
+
+/*
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
 
 public class SortingGuideFragment extends BottomSheetDialogFragment {
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    //TODO: Add real data to "Most Frequent"
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sorting_guide, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_sorting_guide, container, false);
+    }
 
-        SearchView searchView = view.findViewById(R.id.search);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Log.d("SortingGuideFragment", "Search query submitted: " + query);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-                // Create a new instance of ItemInformationFragment
-                ItemInformationFragment itemInformationFragment = new ItemInformationFragment();
+        ImageButton closeButton = view.findViewById(R.id.closeButton);
+        closeButton.setOnClickListener(v -> dismiss());
+    }
 
-                // Bundle to pass the search query to ItemInformationFragment
-                Bundle args = new Bundle();
-                args.putString("searchQuery", query); // Use the same key when retrieving the value in ItemInformationFragment
-                itemInformationFragment.setArguments(args);
+    @Override
+    public void onStart() {
+        super.onStart();
+        BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
 
-                // Replace SortingGuideFragment with ItemInformationFragment in the fragment container
-                if (getFragmentManager() != null) {
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fragment_container, itemInformationFragment);
-                    transaction.addToBackStack(null); // Optional, allows users to navigate back to the previous fragment
-                    transaction.commit();
+        if (dialog != null) {
+            ViewGroup bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setSkipCollapsed(true);
+                behavior.setHideable(true);
+
+                ViewGroup.LayoutParams layoutParams = bottomSheet.getLayoutParams();
+                if (layoutParams != null) {
+                    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                    bottomSheet.setLayoutParams(layoutParams);
                 }
-
-                return true;
             }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // Implement if necessary for dynamic search/filtering
-                return false;
-            }
-        });
-
-        return view;
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
+        }
     }
 }

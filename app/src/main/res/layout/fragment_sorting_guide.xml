@@ -13,7 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
-        android:paddingBottom="20dp">
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,7 +55,7 @@
 
     <GridLayout
         android:id="@+id/gridLayout"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="476dp"
         android:layout_marginTop="50dp"
         android:columnCount="2"

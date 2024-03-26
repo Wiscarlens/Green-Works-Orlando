@@ -152,7 +152,7 @@ public class ScannerFragment extends BottomSheetDialogFragment {
             lastText = result.getText();
 
 
-            if (result.getText().equals("856478581")) {
+            if (result.getText().equals("078742040370")) {
                 Drawable image = getResources().getDrawable(R.drawable.water_bottle, null);
 
                 showItemDialog(image, "Water Bottle", "This is a water bottle");

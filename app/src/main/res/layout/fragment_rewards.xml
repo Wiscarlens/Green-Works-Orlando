@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="25dp"
+    android:paddingEnd="25dp"
     tools:context=".RewardsFragment">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="409dp"
-        android:layout_height="85dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
@@ -52,6 +54,7 @@
         android:layout_height="wrap_content"
         android:text="Achievements"
         android:textSize="24sp"
+        android:layout_gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -62,9 +65,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="300dp"
         android:text="In Progress"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
@@ -220,11 +221,11 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="300dp"
         android:text="My Badges"
         android:textAlignment="center"
         android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/cardView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -251,8 +252,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:layout_margin="6dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -445,4 +444,4 @@
         </LinearLayout>
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

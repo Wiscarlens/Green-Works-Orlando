@@ -98,16 +98,23 @@ public class SortingGuideFragment extends BottomSheetDialogFragment {
             public boolean onQueryTextSubmit(String query) {
                 Log.d("SortingGuideFragment", "Search query submitted: " + query);
 
-                // Create a new instance of ItemInformationFragment
-                ItemInformationFragment itemInformationFragment = new ItemInformationFragment();
+                // Check if an instance of ItemInformationFragment is already displayed
+                ItemInformationFragment itemInformationFragment = (ItemInformationFragment) getParentFragmentManager().findFragmentByTag("ItemInformationFragment");
 
-                // Bundle to pass the search query to ItemInformationFragment
+                // Update the search query of the ItemInformationFragment
                 Bundle args = new Bundle();
-                args.putString("searchQuery", query); // Use the same key when retrieving the value in ItemInformationFragment
-                itemInformationFragment.setArguments(args);
+                args.putString("searchQuery", query);
 
-                // Show the ItemInformationFragment
-                itemInformationFragment.show(getParentFragmentManager(), itemInformationFragment.getTag());
+                if (itemInformationFragment != null && itemInformationFragment.isAdded()) {
+                    // If it's already added, update the arguments and refresh the fragment
+                    itemInformationFragment.setArguments(args);
+                    getParentFragmentManager().beginTransaction().detach(itemInformationFragment).attach(itemInformationFragment).commit();
+                } else {
+                    // If not, create a new instance and show it
+                    itemInformationFragment = new ItemInformationFragment();
+                    itemInformationFragment.setArguments(args);
+                    itemInformationFragment.show(getParentFragmentManager(), "ItemInformationFragment");
+                }
 
                 return true;
             }

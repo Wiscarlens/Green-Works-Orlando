@@ -92,4 +92,5 @@
     <string name="item_information">Item Information</string>
     <string name="exit">Exit</string>
     <string name="dispose">Dispose</string>
+    <string name="badge_title">Badge Title</string>
 </resources>

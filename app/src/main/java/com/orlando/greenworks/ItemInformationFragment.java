@@ -80,8 +80,11 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         itemImage.setVisibility(View.INVISIBLE);
 
         exitButton.setOnClickListener(v -> {
-            SortingGuideFragment sortingGuideFragment = new SortingGuideFragment();
-            sortingGuideFragment.show(getParentFragmentManager(), sortingGuideFragment.getTag());
+            // REMOVE THESE 2 LINES to fix multiple instances issue in SortingGuideFragment and ItemInformationFragment
+            //SortingGuideFragment sortingGuideFragment = new SortingGuideFragment();
+            //sortingGuideFragment.show(getParentFragmentManager(), sortingGuideFragment.getTag());
+
+            dismiss(); // ADD to close the bottom sheet and fix multiple instances issue in SortingGuideFragment and ItemInformationFragment
         });
 
         return view;

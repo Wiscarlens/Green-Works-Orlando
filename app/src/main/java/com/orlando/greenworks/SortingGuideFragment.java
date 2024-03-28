@@ -13,18 +13,20 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-
 import java.util.ArrayList;
 import java.util.Objects;
+import android.os.Handler; // ADDED to fix multiple instances issue in SortingGuideFragment and ItemInformationFragment
 
 public class SortingGuideFragment extends BottomSheetDialogFragment {
 
 
-    //TODO: Add real data to "Most Frequent"
+    private boolean isSearchInProgress = false; // ADDED to fix multiple instances issue in SortingGuideFragment and ItemInformationFragment
+
+
+    //TODO: Add real data to Search Hisory ("Most Frequent")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -98,6 +100,14 @@ public class SortingGuideFragment extends BottomSheetDialogFragment {
             public boolean onQueryTextSubmit(String query) {
                 Log.d("SortingGuideFragment", "Search query submitted: " + query);
 
+                // ADDED to fix multiple instances issue in SortingGuideFragment and ItemInformationFragment
+                // If a search is already in progress, ignore this search request
+                if (isSearchInProgress) {
+                    return true;
+                }
+                // Set the flag to indicate that a search is in progress
+                isSearchInProgress = true;
+
                 // Check if an instance of ItemInformationFragment is already displayed
                 ItemInformationFragment itemInformationFragment = (ItemInformationFragment) getParentFragmentManager().findFragmentByTag("ItemInformationFragment");
 
@@ -106,15 +116,19 @@ public class SortingGuideFragment extends BottomSheetDialogFragment {
                 args.putString("searchQuery", query);
 
                 if (itemInformationFragment != null && itemInformationFragment.isAdded()) {
-                    // If it's already added, update the arguments and refresh the fragment
+                    // If it's already added, replace the fragment with a new one with updated arguments
+                    //itemInformationFragment = new ItemInformationFragment(); REMOVE THIS LINE to fix multiple instances issue in SortingGuideFragment and ItemInformationFragment
                     itemInformationFragment.setArguments(args);
-                    getParentFragmentManager().beginTransaction().detach(itemInformationFragment).attach(itemInformationFragment).commit();
+                    getParentFragmentManager().beginTransaction().replace(R.id.fragment_container, itemInformationFragment, "ItemInformationFragment").commit();
                 } else {
                     // If not, create a new instance and show it
                     itemInformationFragment = new ItemInformationFragment();
                     itemInformationFragment.setArguments(args);
                     itemInformationFragment.show(getParentFragmentManager(), "ItemInformationFragment");
                 }
+
+                // Re-enable the search button after a delay to prevent multiple rapid searches and multiple instances of ItemInformationFragment
+                new Handler().postDelayed(() -> isSearchInProgress = false, 1000);
 
                 return true;
             }

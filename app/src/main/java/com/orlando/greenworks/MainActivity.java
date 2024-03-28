@@ -35,6 +35,10 @@ import com.google.android.material.navigation.NavigationView;
 import java.time.Year;
 import java.util.Objects;
 
+// CREATE LOCAL DATABASE FOR BACKEND FEATURES
+import android.database.sqlite.SQLiteDatabase;
+import com.orlando.greenworks.DatabaseHelper;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawerLayout;
@@ -44,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     BottomNavigationView bottomNavigationView;
     FloatingActionButton fab;
 
+    private DatabaseHelper dbHelper; // CREATE LOCAL DATABASE FOR BACKEND FEATURES
+
+
 
 
     @Override
@@ -51,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // Disable dark mode
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // CREATE LOCAL DATABASE FOR BACKEND FEATURES
+        dbHelper = new DatabaseHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);

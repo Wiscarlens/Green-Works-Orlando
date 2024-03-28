@@ -26,7 +26,7 @@ public class SortingGuideFragment extends BottomSheetDialogFragment {
     private boolean isSearchInProgress = false; // ADDED to fix multiple instances issue in SortingGuideFragment and ItemInformationFragment
 
 
-    //TODO: Add real data to Search Hisory ("Most Frequent")
+    //TODO: Add real data to Search History ("Most Frequent")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

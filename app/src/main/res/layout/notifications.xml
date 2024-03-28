@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <ImageView
+            android:id="@+id/app_logo"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/city_of_orlando_logo_new_1"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/app_logo"
+            android:text="Title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/medium_dark_green"
+            android:layout_marginRight="@id/app_logo"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/app_logo"
+            android:text="This is the description of the notification."
+            android:textSize="20sp"
+            android:textColor="@color/medium_dark_green"
+            android:layout_below="@id/title"
+            android:layout_marginRight="@id/app_logo"
+            android:layout_marginLeft="10dp"/>
+
+        </RelativeLayout>
+
+</RelativeLayout>

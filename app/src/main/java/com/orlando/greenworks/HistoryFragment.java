@@ -37,6 +37,7 @@ public class HistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.historyRecyclerView);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         HistoryAdapter adapter = new HistoryAdapter(itemsList, getContext()); // Pass the list to the adapter.
         recyclerView.setAdapter(adapter);

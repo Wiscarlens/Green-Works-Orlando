@@ -340,11 +340,11 @@
         android:paddingBottom="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lastScannedRV"
+            android:id="@+id/myBadgesRV"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_design"
-            tools:listitemcount="5"/>
+            tools:listitemcount="10"/>
 
     </HorizontalScrollView>
 

@@ -85,13 +85,14 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/regFirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="true"
                     android:inputType="text"
-                    android:textColorHint="@color/light_gray"
                     android:paddingStart="45dp"
                     android:paddingEnd="0dp"
+                    android:textColorHint="@color/light_gray"
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,6 +113,7 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/regLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="true"
@@ -140,6 +142,7 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/regAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
@@ -168,13 +171,14 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/regEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
                 android:inputType="textEmailAddress"
-                android:textColorHint="@color/light_gray"
                 android:paddingStart="45dp"
                 android:paddingEnd="0dp"
+                android:textColorHint="@color/light_gray"
                 tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -226,7 +230,7 @@
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordText"
+                android:id="@+id/logPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="45dp"
@@ -253,12 +257,13 @@
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/regConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="45dp"
-                android:paddingEnd="0dp"
                 android:focusable="true"
                 android:inputType="textPassword"
+                android:paddingStart="45dp"
+                android:paddingEnd="0dp"
                 tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -294,6 +299,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/regAccountBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green"

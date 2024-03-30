@@ -3,6 +3,7 @@ package com.orlando.greenworks;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,8 +28,8 @@ import com.google.android.gms.maps.model.Marker;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+//import android.widget.LinearLayout;
 
-// 3/23/2024
 
 /*
 ___________________________________________________________________________________________
@@ -122,11 +123,47 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             for (int i = 0; i < locations.length; i++) {
                 LatLng location = locations[i];
                 String address = addresses[i];
+                String snippet = "Click Here To Navigate To This Location";
                 mMap.addMarker(new MarkerOptions()
                         .position(location)
                         .title(address) // Set the title of the marker to the address
+                        .snippet(snippet) // Set the snippet of the marker to the additional text
                         .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
             }
+
+            /*
+            // Set a custom info window adapter to change snippet text color (optional)
+            mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                @Override
+                public View getInfoWindow(Marker marker) {
+                    return null;
+                }
+
+                @Override
+                public View getInfoContents(Marker marker) {
+                    // Create a LinearLayout to hold the title and snippet
+                    LinearLayout info = new LinearLayout(getContext());
+                    info.setOrientation(LinearLayout.VERTICAL);
+
+                    // Create a TextView for the title
+                    TextView title = new TextView(getContext());
+                    title.setText(marker.getTitle());
+
+                    // Create a TextView for the snippet
+                    TextView snippet = new TextView(getContext());
+                    snippet.setTextColor(Color.BLACK);
+                    snippet.setText(marker.getSnippet());
+
+                    // Add the TextViews to the LinearLayout
+                    info.addView(title);
+                    info.addView(snippet);
+
+                    return info;
+                }
+            });
+               */
+
+
 
             // Set an InfoWindow click listener
             mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {

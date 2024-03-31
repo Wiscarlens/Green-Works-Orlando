@@ -1,10 +1,14 @@
 package com.orlando.greenworks;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,29 +29,29 @@ import android.content.Intent;
 import android.net.Uri;
 import com.google.android.gms.maps.model.Marker;
 import android.util.Log;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// 3/23/2024
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 /*
-___________________________________________________________________________________________
-___________________________________________________________________________________________
-|| IF MAP DOESN'T LOAD PLEASE MAKE SURE API KEY IS CORRECTLY CONFIGURED                  ||
-|| https://console.cloud.google.com/apis/credentials                                     ||
-||                                                                                       ||
-|| ALSO SEE:                                                                             ||
-|| https://developers.google.com/maps/documentation/android-sdk/start                    ||
-|| https://developers.google.com/maps/documentation/android-sdk/get-api-key              ||
-|| REMEMBER TO UPDATE YOUR secrets.properties FILE WITH YOUR API KEY                     ||
-___________________________________________________________________________________________
-___________________________________________________________________________________________
-*/
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback{
 
     private GoogleMap mMap;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1; // Added constant for location permission request code
+    private final ArrayList<RecyclingCenter> recyclingCenterList = new ArrayList<>();
 
 
     @Override
@@ -55,6 +59,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
         MainActivity.fragmentTitle.setText(R.string.map); // Set the title of the fragment in the toolbar.
+
+        loadData();
+
 
         // Check if user was granted permission
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -69,6 +76,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             mapFragment.getMapAsync(this);
         }
 
+
         return view;
     }
 
@@ -78,7 +86,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             mMap = googleMap;
 
             LatLng orlando = new LatLng(28.5383, -81.3792); // Orlando, FL Map
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(orlando, 10)); // adjust default map zoom level
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(orlando, 11)); // adjust default map zoom level
 
             // Enable zoom controls
             mMap.getUiSettings().setZoomControlsEnabled(true);
@@ -103,29 +111,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             Bitmap b = binImage.getBitmap();
             Bitmap smallMarker = Bitmap.createScaledBitmap(b, scaledSize, scaledSize, false);
 
-            // Define the recycling center locations
-            LatLng[] locations = {
-                    new LatLng(28.52551, -81.32586), // Dover Shore Community Center
-                    new LatLng(28.52894, -81.30075), // Engelwood Neighborhood Center
-                    new LatLng(28.56112, -81.42777), // Northwest Community Center
-                    new LatLng(28.52933, -81.39580)  // Solid Waste Management Division
-            };
-
-            String[] addresses = {
-                    "1400 Gaston Foster Road",
-                    "6123 Lacosta Drive",
-                    "3955 WD Judge Road",
-                    "1028 South Woods Avenue"
-            };
+            // Create a HashMap to store the association between markers and recycling centers
+            HashMap<Marker, RecyclingCenter> markerRecyclingCenterMap = new HashMap<>();
 
             // Add a marker for each location
-            for (int i = 0; i < locations.length; i++) {
-                LatLng location = locations[i];
-                String address = addresses[i];
-                mMap.addMarker(new MarkerOptions()
-                        .position(location)
-                        .title(address) // Set the title of the marker to the address
+            for (RecyclingCenter center : recyclingCenterList) {
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(center.getLatLng()) // Set the position of the marker
+                        .title(center.getAddress()) // Set the title of the marker to the address
                         .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+
+                // Store the association between the marker and the recycling center
+                markerRecyclingCenterMap.put(marker, center);
             }
 
             // Set an InfoWindow click listener
@@ -137,9 +134,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                     Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                     mapIntent.setPackage("com.google.android.apps.maps");
                     startActivity(mapIntent);
-
-
                 }
+            });
+
+
+            mMap.setOnMarkerClickListener(marker -> {
+                // Get the recycling center associated with the clicked marker
+                RecyclingCenter clickedCenter = markerRecyclingCenterMap.get(marker);
+                // Show the bottom sheet dialog for the clicked recycling center
+                assert clickedCenter != null;
+                showBottomSheetDialog(clickedCenter);
+
+                return false;
             });
 
         } catch (Exception e) {
@@ -164,16 +170,36 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         }
     }
 
-    @Override
-    public boolean onMarkerClick(@NonNull Marker marker) {
-        Log.i("MapFragment", "onMarkerClick" + marker.getPosition());
+    public void showBottomSheetDialog(RecyclingCenter recyclingCenter) {
+        final Dialog bottomSheetDialog = new Dialog(requireContext());
 
-        // Display a toast message
-        Toast.makeText(getContext(), "You clicked on: " + marker.getTitle(), Toast.LENGTH_SHORT).show();
+        bottomSheetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        bottomSheetDialog.setContentView(R.layout.map_bottom_dialog);
 
-//        textView.setText("Recycling Locations" + marker.getTitle());
+        TextView recyclingCenterName = bottomSheetDialog.findViewById(R.id.recyclingCenterName);
+        TextView recyclingCenterAddress = bottomSheetDialog.findViewById(R.id.recyclingCenterAddress);
+        TextView recyclingCenterHours = bottomSheetDialog.findViewById(R.id.recyclingCenterHours);
+        TextView recyclingCenterPhone = bottomSheetDialog.findViewById(R.id.recyclingCenterPhone);
 
-        return false;
+        recyclingCenterName.setText(recyclingCenter.getName());
+        recyclingCenterAddress.setText(recyclingCenter.getAddress());
+        recyclingCenterHours.setText(recyclingCenter.getHours());
+        recyclingCenterPhone.setText(recyclingCenter.getPhone());
+
+        bottomSheetDialog.show();
+
+        Objects.requireNonNull(bottomSheetDialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        bottomSheetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        bottomSheetDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        bottomSheetDialog.getWindow().setGravity(Gravity.BOTTOM);
+
+    }
+
+    void loadData() {
+        recyclingCenterList.add(new RecyclingCenter("Dover Shore Community Center", "1400 Gaston Foster Road", "8:00 AM - 5:00 PM", "407-836-6601", 28.52551, -81.32586));
+        recyclingCenterList.add(new RecyclingCenter("Engelwood Neighborhood Center", "6123 Lacosta Drive", "8:00 AM - 5:00 PM", "407-246-4453", 28.52894, -81.30075));
+        recyclingCenterList.add(new RecyclingCenter("Northwest Community Center", "3955 WD Judge Road", "8:00 AM - 5:00 PM", "407-836-6601", 28.56112, -81.42777));
+        recyclingCenterList.add(new RecyclingCenter("Solid Waste Management Division", "1028 South Woods Avenue", "8:00 AM - 5:00 PM", "407-836-6601", 28.52933, -81.39580));
     }
 
     @Override

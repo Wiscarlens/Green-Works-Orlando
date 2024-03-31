@@ -317,8 +317,6 @@ public class HomeFragment extends Fragment {
                         "batteries"
                 ));
 
-
-
         itemAdapter = new ItemAdapter(itemList, getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(itemAdapter);

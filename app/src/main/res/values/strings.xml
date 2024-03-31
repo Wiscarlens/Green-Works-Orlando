@@ -94,4 +94,9 @@
     <string name="exit">Exit</string>
     <string name="dispose">Dispose</string>
     <string name="badge_title">Badge Title</string>
+    <string name="recycling_center_name">Recycling Center Name</string>
+    <string name="location_icon">Location Icon</string>
+    <string name="hours_of_operation">Hours of Operation</string>
+    <string name="clock_icon">Clock Icon</string>
+    <string name="phone_icon">Phone Icon</string>
 </resources>

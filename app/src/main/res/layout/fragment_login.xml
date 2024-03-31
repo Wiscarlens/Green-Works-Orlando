@@ -62,7 +62,7 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email"
+                android:id="@+id/logEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
@@ -93,7 +93,7 @@
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordText"
+                android:id="@+id/logPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="45dp"

@@ -11,63 +11,6 @@
     tools:context=".MapFragment"/>
 
 
-<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:background="#FFFFFF"-->
-<!--    tools:context=".MapFragment"-->
-<!--    android:scrollbars="vertical"-->
-<!--    android:scrollbarAlwaysDrawVerticalTrack="true"-->
-<!--    android:fadeScrollbars="false">-->
-
-
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="800dp">-->
-
-
-<!--        &lt;!&ndash; Title &ndash;&gt;-->
-<!--        <TextView-->
-<!--            android:id="@+id/title"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Recycling Center Drop-off Locations"-->
-<!--            android:textSize="30sp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textColor="#FF000000"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            />-->
-
-
-<!--        &lt;!&ndash; Map Fragment &ndash;&gt;-->
-<!--        <androidx.fragment.app.FragmentContainerView-->
-<!--            android:id="@+id/map"-->
-<!--            android:name="com.google.android.gms.maps.SupportMapFragment"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="250dp"-->
-<!--            android:layout_below="@id/title"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:layout_marginRight="10dp"-->
-<!--            android:layout_marginTop="15dp" />-->
-
-<!--        &lt;!&ndash; Recycling Locations Text &ndash;&gt;-->
-<!--        <TextView-->
-<!--            android:id="@+id/recycle_locations"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="#FF000000"-->
-<!--            android:text="If you live in an apartment complex or condo community and don't have access to\nrecycling, bring your materials to one of\nour convenient drop-off locations:\n\n• Dover Shore Community Center\n  1400 Gaston Foster Road\n\n• Engelwood Neighborhood Center\n  6123 Lacosta Drive\n\n• Northwest Community Center\n  3955 WD Judge Road\n\n• Solid Waste Management Division\n  1028 South Woods Avenue\n  (Front of the building)"-->
-<!--            android:layout_below="@id/map"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:layout_marginTop="15dp"-->
-<!--            android:textSize="18sp" />-->
-
-
-<!--    </RelativeLayout>-->
-<!--</ScrollView>-->
-
-
 
 
 

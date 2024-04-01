@@ -54,166 +54,32 @@
         android:layout_height="wrap_content"
         android:text="Achievements"
         android:textSize="24sp"
-        android:layout_gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="In Progress"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView4"
-        app:layout_constraintVertical_bias="0.5" />
+        android:text="My Badges"
+        android:textSize="18sp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        android:layout_marginEnd="5dp"
+        app:cardCornerRadius="10dp">
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myBadgesRV"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_gravity="center">
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="130dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="100dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:orientation="vertical"
-                            android:layout_margin="5dp">
-
-                            <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:src="@drawable/badge1" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Badge Title"
-                                android:textColor="@color/black" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="100dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:orientation="vertical"
-                            android:layout_margin="5dp">
-
-                            <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:src="@drawable/badge2" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Badge Title"
-                                android:textColor="@color/black" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="100dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:orientation="vertical"
-                            android:layout_margin="5dp">
-
-                            <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:src="@drawable/badge3" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Badge Title"
-                                android:textColor="@color/black" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="100dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:orientation="vertical"
-                            android:layout_margin="5dp">
-
-                            <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:src="@drawable/badge2" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Badge Title"
-                                android:textColor="@color/black" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="100dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:src="@drawable/badge1" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Badge Title"
-                                android:textColor="@color/black" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </HorizontalScrollView>
-        </LinearLayout>
+            android:layout_gravity="center_vertical"
+            tools:listitem="@layout/badge_design"
+            tools:listitemcount="5" />
 
     </androidx.cardview.widget.CardView>
 
@@ -221,227 +87,17 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Badges"
+        android:text="In Progress"
         android:textAlignment="center"
         android:textSize="18sp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.5" />
+        android:layout_marginBottom="5dp" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="409dp"
-        android:layout_height="343dp"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_margin="6dp"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center">
-
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
-                        android:layout_margin="5dp">
-
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/badge1" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Badge Title"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:orientation="vertical">
-
-                        <ProgressBar
-                            android:id="@+id/progressBar"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="270dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="5" />
-
-                        <TextView
-                            android:id="@+id/progressBarPoints"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="20/100 pts"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="18dp"/>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_margin="6dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center">
-
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
-                        android:layout_margin="5dp">
-
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/badge2" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Badge Title"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:orientation="vertical">
-
-                        <ProgressBar
-                            android:id="@+id/progressBar2"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="270dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="5" />
-
-                        <TextView
-                            android:id="@+id/progressBarPoints2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="20/100 pts"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="18dp"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_margin="6dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center">
-
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
-                        android:layout_margin="5dp">
-
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/badge3" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Badge Title"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:orientation="vertical">
-
-                        <ProgressBar
-                            android:id="@+id/progressBar3"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="270dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="5" />
-
-                        <TextView
-                            android:id="@+id/progressBarPoints3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="20/100 pts"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="18dp"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-    </ScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myBadgesProgressRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/badge_progress_design"
+        android:layout_gravity="center_vertical" />
 
 </LinearLayout>

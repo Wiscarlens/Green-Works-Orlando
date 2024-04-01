@@ -332,21 +332,12 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"/>
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myBadgesRV"
+        android:layout_width="wrap_content"
         android:layout_height="145dp"
-        android:gravity="center"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lastScannedRV"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_design"
-            tools:listitemcount="5"/>
-
-    </HorizontalScrollView>
+        tools:listitem="@layout/item_design"
+        tools:listitemcount="10"/>
 
     <TextView
         android:layout_width="wrap_content"

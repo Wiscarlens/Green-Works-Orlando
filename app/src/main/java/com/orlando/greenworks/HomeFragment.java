@@ -206,7 +206,7 @@ public class HomeFragment extends Fragment {
         statsTopThreePoints = view.findViewById(R.id.statsTopThreePointsTV);
         statsTopThreeMaterial = view.findViewById(R.id.statsTopThreeMaterialTV);
 
-        RecyclerView recyclerView = view.findViewById(R.id.lastScannedRV);
+        RecyclerView recyclerView = view.findViewById(R.id.myBadgesRV);
 
         ItemAdapter itemAdapter;
         ArrayList<Item> itemList = new ArrayList<>();
@@ -317,12 +317,9 @@ public class HomeFragment extends Fragment {
                         "batteries"
                 ));
 
-
-
         itemAdapter = new ItemAdapter(itemList, getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(itemAdapter);
-
 
         profileImage.setOnClickListener(v -> {
             ProfileFragment profileFragment = new ProfileFragment();

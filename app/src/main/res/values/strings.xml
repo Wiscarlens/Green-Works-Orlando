@@ -79,6 +79,7 @@
     <string name="submit">Submit</string>
     <string name="address">Address</string>
     <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="made_with_by_valencia_ctsd">Made with ❤️ by Valencia College CTSD</string>
     <string name="registration">Registration</string>
     <string name="profile">Profile</string>
@@ -92,4 +93,10 @@
     <string name="item_information">Item Information</string>
     <string name="exit">Exit</string>
     <string name="dispose">Dispose</string>
+    <string name="badge_title">Badge Title</string>
+    <string name="recycling_center_name">Recycling Center Name</string>
+    <string name="location_icon">Location Icon</string>
+    <string name="hours_of_operation">Hours of Operation</string>
+    <string name="clock_icon">Clock Icon</string>
+    <string name="phone_icon">Phone Icon</string>
 </resources>

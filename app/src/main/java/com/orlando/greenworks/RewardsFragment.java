@@ -2,7 +2,8 @@ package com.orlando.greenworks;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -36,16 +38,38 @@ public class RewardsFragment extends BottomSheetDialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rewards, container, false);
+
+        ArrayList<Badge> badgeList = new ArrayList<>();
+        ArrayList<Badge> badgeProgressList = new ArrayList<>();
+
+        RecyclerView badgeRecyclerView = view.findViewById(R.id.myBadgesRV);
+        RecyclerView badgeProgressRecyclerView = view.findViewById(R.id.myBadgesProgressRV);
+
+        BadgeAdapter badgeAdapter;
+        BadgeProgressAdapter badgeProgressAdapter;
 
         ImageButton closeButton = view.findViewById(R.id.closeButton);
 
-        ProgressBar progressBar = view.findViewById(R.id.progressBar);
-        progressBar.setMax(100);
-        progressBar.setProgress(50);
 
+        badgeList.add(new Badge("Recycling Badge", "badge1"));
+        badgeList.add(new Badge("Composting Badge", "badge2"));
+        badgeList.add(new Badge("Water Conservation", "badge3"));
+        badgeList.add(new Badge("Energy Conservation", "badge1"));
+
+        badgeAdapter = new BadgeAdapter(badgeList, getContext());
+        badgeRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        badgeRecyclerView.setAdapter(badgeAdapter);
+
+        badgeProgressList.add(new Badge("Recycling", "badge1", 100, 50));
+        badgeProgressList.add(new Badge("Composting", "badge2", 100, 75));
+        badgeProgressList.add(new Badge("Water Conservation", "badge3", 100, 25));
+        badgeProgressList.add(new Badge("Energy Conservation", "badge1", 100, 100));
+
+        badgeProgressAdapter = new BadgeProgressAdapter(badgeProgressList, getContext());
+        badgeProgressRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        badgeProgressRecyclerView.setAdapter(badgeProgressAdapter);
 
 
         closeButton.setOnClickListener(new View.OnClickListener() {

@@ -28,8 +28,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MaterialViewHo
     private final ArrayList<Item> itemList;
     private final Context context;
 
-    public ItemAdapter(ArrayList<Item> user_for_display, Context context) {
-        this.itemList = user_for_display;
+    public ItemAdapter(ArrayList<Item> itemList, Context context) {
+        this.itemList = itemList;
         this.context = context;
     }
 

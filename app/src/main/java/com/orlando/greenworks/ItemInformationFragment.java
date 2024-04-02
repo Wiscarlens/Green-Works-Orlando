@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -24,9 +26,13 @@ import java.util.Objects;
 
 public class ItemInformationFragment extends BottomSheetDialogFragment {
 
-    private TextView itemInformationTextView;
-
+    private ScrollView scrollView;
     private ImageView itemImage;
+    private TextView itemName;
+    private TextView itemInformation;
+    private TextView itemRecyclingInfo;
+    private Button disposeButton;
+    private LottieAnimationView loaderAnimation;
     private JSONObject itemDetailsToDisplay;
     private String searchQuery; // Added to store the search query
 
@@ -48,38 +54,30 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.fragment_item_information, container, false);
 
         ImageButton closeBtn = view.findViewById(R.id.closeButton);
-        Button exitButton = view.findViewById(R.id.btnReturnToSortingGuide);
-        Button disposeButton = view.findViewById(R.id.disposeButton);
-        closeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Close the bottom sheet
-                dismiss();
-            }
-        });
-
-        disposeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(requireContext(), "Dispose", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        itemInformationTextView = view.findViewById(R.id.item_information);
+        loaderAnimation = view.findViewById(R.id.loaderAnimation);
+        scrollView = view.findViewById(R.id.item_information_scroll_view);
         itemImage = view.findViewById(R.id.item_image);
+        itemName = view.findViewById(R.id.item_name);
+        itemInformation = view.findViewById(R.id.item_details);
+        itemRecyclingInfo = view.findViewById(R.id.itemRecyclingInfo);
+        disposeButton = view.findViewById(R.id.disposeButton);
+        Button exitButton = view.findViewById(R.id.btnReturnToSortingGuide);
 
+        scrollView.setVisibility(View.INVISIBLE);
+        loaderAnimation.setVisibility(View.VISIBLE);
+        disposeButton.setVisibility(View.VISIBLE);
 
-        // Initially set the visibility to invisible
-        itemInformationTextView.setVisibility(View.INVISIBLE);
-        itemImage.setVisibility(View.INVISIBLE);
+        closeBtn.setOnClickListener(v -> {
+            dismiss();
+        });
+
+        disposeButton.setOnClickListener(v -> {
+            dismiss();
+            Toast.makeText(requireContext(), "Dispose", Toast.LENGTH_SHORT).show();
+        });
 
         exitButton.setOnClickListener(v -> {
-            // REMOVE THESE 2 LINES to fix multiple instances issue in SortingGuideFragment and ItemInformationFragment
-            //SortingGuideFragment sortingGuideFragment = new SortingGuideFragment();
-            //sortingGuideFragment.show(getParentFragmentManager(), sortingGuideFragment.getTag());
-
-            dismiss(); // ADD to close the bottom sheet and fix multiple instances issue in SortingGuideFragment and ItemInformationFragment
+            dismiss();
         });
 
         return view;
@@ -93,30 +91,39 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (itemInformationTextView != null && itemImage != null) {
-                    itemInformationTextView.setVisibility(View.VISIBLE);
-                    itemImage.setVisibility(View.VISIBLE);
+                if (itemInformation != null && itemImage != null) {
+                    scrollView.setVisibility(View.VISIBLE);
+                    loaderAnimation.setVisibility(View.GONE);
                 }
             }
         }, 2000); // Delay of 2 seconds to let api call finish
 
 
-
         if (itemDetailsToDisplay != null) {
             displayItemInformation(itemDetailsToDisplay);
+            disposeButton.setVisibility(View.VISIBLE);
         } else {
+            disposeButton.setVisibility(View.GONE);
+
+            itemImage.setImageResource(R.drawable.not_found);
+
             // Display custom message when no item details are available
-            itemInformationTextView.setText("No items found for \"" + searchQuery + "\".");
+            String message = "No items found for \"" + searchQuery + "\".";
+            itemName.setText("");
+            itemRecyclingInfo.setText("");
+            itemInformation.setText(message);
         }
     }
 
+    @Deprecated
     public void receiveItemInformation(JSONObject itemDetails) {
         itemDetailsToDisplay = itemDetails;
         if (isVisible()) {
             displayItemInformation(itemDetailsToDisplay);
         } else {
+
             // This else part is unlikely to be needed but added for consistency
-            itemInformationTextView.setText("No items found for '" + searchQuery + "'.");
+            itemInformation.setText("No items found for '" + searchQuery + "'.");
         }
     }
 
@@ -124,9 +131,10 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         Log.d("ItemInformationFragment", "Displaying item information: " + itemDetails.toString());
         Log.d("ItemInformationFragment", "Is attached to activity: " + (getActivity() != null));
         Log.d("ItemInformationFragment", "Is visible: " + isVisible());
+
         try {
             if (itemDetails == null) {
-                itemInformationTextView.setText("No items found for '" + searchQuery + "'.");
+                itemInformation.setText("No items found for '" + searchQuery + "'.");
                 return;
             }
 
@@ -153,15 +161,19 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
                 }
             }
 
-            String itemInformation = (name.isEmpty() ? "" : name + "\n") +
-                    (description.isEmpty() ? "No description available\n" : description + "\n") +
-                    tagInfo.toString().trim();
-            itemInformationTextView.setText(itemInformation);
+            String itemNameString = (name.isEmpty() ? "" : name);
+            String itemInformationString = (description.isEmpty() ? "No description available\n" : description + "\n");
+            String itemRecyclingInfoString = tagInfo.toString().trim();
 
+            itemName.setText(itemNameString);
+            itemInformation.setText(itemInformationString);
+            itemRecyclingInfo.setText(itemRecyclingInfoString);
 
+            disposeButton.setVisibility(View.VISIBLE);
 
             // ADDED CODE TO DISPLAY IMAGE BASED ON API ITEM NAME
             View view = getView();
+
             if (view != null) {
                 ImageView itemImage = view.findViewById(R.id.item_image);
                 String itemName = itemDetails.optString("name", "");
@@ -196,8 +208,9 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
 
 
         } catch (JSONException e) {
-            e.printStackTrace();
-            itemInformationTextView.setText("No items found for '" + searchQuery + "'.");
+            Log.d("Item Information Fragment", e.toString());
+
+            itemInformation.setText("No items found for '" + searchQuery + "'.");
         }
     }
 

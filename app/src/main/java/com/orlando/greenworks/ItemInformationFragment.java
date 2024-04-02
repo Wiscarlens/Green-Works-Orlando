@@ -181,27 +181,29 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
                 if ("Soda Can".equals(itemName)) {
                     itemImage.setImageResource(R.drawable.item_id_1_soda_can);
                 } else if ("Plastic Grocery Bag".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_02_plastic_bag);
+                    itemImage.setImageResource(R.drawable.item_id_2_plastic_bag);
                 } else if ("Laptop".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_03_laptop);
+                    itemImage.setImageResource(R.drawable.item_id_3_laptop);
                 } else if ("Desktop Computer".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_04_desktop_computer);
+                    itemImage.setImageResource(R.drawable.item_id_4_desktop_computer);
                 } else if ("Face Mask".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_05_face_mask);
+                    itemImage.setImageResource(R.drawable.item_id_5_face_mask);
                 } else if ("Food".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_06_food);
+                    itemImage.setImageResource(R.drawable.item_id_6_food);
                 } else if ("Broken Glass".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_07_broken_glass);
+                    itemImage.setImageResource(R.drawable.item_id_7_broken_glass);
                 } else if ("Pet Food Bags".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_08_pet_food_bags);
+                    itemImage.setImageResource(R.drawable.item_id_8_pet_food_bags);
                 } else if ("Clothes".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_09_clothes);
+                    itemImage.setImageResource(R.drawable.item_id_9_clothes);
                 } else if ("Paper".equals(itemName)) {
                     itemImage.setImageResource(R.drawable.item_id_10_paper);
                 } else if ("Cardboard Box".equals(itemName)) {
                     itemImage.setImageResource(R.drawable.item_id_11_cardboard_box);
+                } else if ("Disposable Battery".equals(itemName)) {
+                    itemImage.setImageResource(R.drawable.item_id_12_disposable_battery);
                 } else {
-                    itemImage.setImageResource(R.drawable.no_image_available);
+                    itemImage.setImageResource(R.drawable.not_found);
                 }
             }
 

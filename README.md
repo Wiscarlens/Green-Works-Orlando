@@ -13,6 +13,5 @@ Green Works Orlando is a mobile application designed to raise awareness about re
 
 1. **Clone the repository:**
 
-   ```bash
    git clone https://github.com/Wiscarlens/Green-Works-Orlando.git
 

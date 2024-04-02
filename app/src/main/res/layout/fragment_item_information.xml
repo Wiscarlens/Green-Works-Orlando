@@ -38,9 +38,23 @@
             android:contentDescription="@string/close_button"
             android:src="@drawable/baseline_close_24" />
 
+
     </RelativeLayout>
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loaderAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_speed="1"
+        app:lottie_rawRes="@raw/loader_animation"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
     <ScrollView
+        android:id="@+id/item_information_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -57,18 +71,43 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/no_image_available" />
+                android:orientation="vertical"
+                android:src="@drawable/no_image_available"
+                android:contentDescription="@string/item_image" />
 
             <TextView
-                android:id="@+id/item_information"
+                android:id="@+id/item_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No items found."
+                android:text="@string/item_name"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_below="@+id/item_image"/>
+
+            <TextView
+                android:id="@+id/item_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_items_found"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/item_name"/>
+
+            <TextView
+                android:id="@+id/itemRecyclingInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="How to Recycle?"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/item_details"/>
 
         </RelativeLayout>
     </ScrollView>
@@ -80,7 +119,7 @@
         android:layout_height="wrap_content"
         android:text="@string/dispose"
         android:textColor="@color/white"
-        android:background="@drawable/button_press_background"/>
+        android:background="@drawable/button_press_background" />
 
     <Button
         style="@style/CustomButton"
@@ -91,7 +130,7 @@
         android:textColor="@color/green"
         android:background="@drawable/button_background"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp" />
 
 </LinearLayout>
 

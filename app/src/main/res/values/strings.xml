@@ -99,4 +99,7 @@
     <string name="hours_of_operation">Hours of Operation</string>
     <string name="clock_icon">Clock Icon</string>
     <string name="phone_icon">Phone Icon</string>
+    <string name="no_items_found">No items found.</string>
+    <string name="item_image">item image</string>
+    <string name="item_name">Item Name</string>
 </resources>

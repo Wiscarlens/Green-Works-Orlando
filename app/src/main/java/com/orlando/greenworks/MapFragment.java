@@ -86,6 +86,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
         try {
             mMap = googleMap;
 
+            // Log the API key
+            Log.d("API_KEY", BuildConfig.MAPS_API_KEY);
+
             LatLng orlando = new LatLng(28.5383, -81.3792); // Orlando, FL Map
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(orlando, 11)); // adjust default map zoom level
 

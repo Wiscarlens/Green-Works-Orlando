@@ -11,13 +11,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.util.Log;
 
-import androidx.core.content.res.ResourcesCompat;
-import androidx.fragment.app.Fragment;
 import android.widget.Button;
-import android.view.View;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.os.Handler;
 import android.widget.Toast;
 
@@ -172,7 +167,7 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
                 String itemName = itemDetails.optString("name", "");
 
                 if ("Soda Can".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_01_soda_can);
+                    itemImage.setImageResource(R.drawable.item_id_1_soda_can);
                 } else if ("Plastic Grocery Bag".equals(itemName)) {
                     itemImage.setImageResource(R.drawable.item_id_02_plastic_bag);
                 } else if ("Laptop".equals(itemName)) {

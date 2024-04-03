@@ -35,9 +35,7 @@
         </activity>
 
         <!-- NEED FOR MAPS TO WORK -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBuuJzCEc0onufgnsWl7y1QLuCZSNZUfMg"/>
+
         <!-- OPTIONALLY USE IF NOT USING SECRETS PLUGIN:
         android:value="<INSERT-API-KEY-HERE>"
         -->

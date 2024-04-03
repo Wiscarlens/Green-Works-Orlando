@@ -34,12 +34,9 @@
             </intent-filter>
         </activity>
 
-        <!-- NEED FOR MAPS TO WORK -->
-
-        <!-- OPTIONALLY USE IF NOT USING SECRETS PLUGIN:
-        android:value="<INSERT-API-KEY-HERE>"
-        -->
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${GMP_KEY}"/>
 
     </application>
 

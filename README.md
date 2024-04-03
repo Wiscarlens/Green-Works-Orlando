@@ -6,6 +6,7 @@ Green Works Orlando is a mobile application designed to raise awareness about re
 
 - Android Studio installed on your machine.
 - An Android device or emulator for testing.
+- Google Maps API key.
 
 ## Getting Started
 

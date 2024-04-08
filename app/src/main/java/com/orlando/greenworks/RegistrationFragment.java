@@ -63,8 +63,6 @@ import android.widget.FrameLayout;
 
 
 // TODO: More thorough email address validation
-// TODO: address field do not allow manual address entry, only select from dropdown, but how to handle apartments and suites?
-// TODO: Security Audit
 
 public class RegistrationFragment extends BottomSheetDialogFragment {
     // Initialize the AutoCompleteTextView for address

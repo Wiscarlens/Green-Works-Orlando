@@ -21,6 +21,15 @@
         android:orientation="vertical"
         android:gravity="center">
 
+        <TextView
+            android:id="@+id/accountSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:text="@string/account_success" />
+
         <ImageView
             android:id="@+id/logo"
             android:layout_width="150dp"
@@ -117,6 +126,14 @@
             tools:ignore="TextContrastCheck" />
 
         <TextView
+            android:id="@+id/loginFailure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:visibility="gone"
+            android:text="@string/login_failure" />
+
+        <TextView
             android:id="@+id/forgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -160,6 +177,22 @@
                 tools:ignore="TextContrastCheck" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/continueAsGuestLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:linksClickable="true"
+            android:text="@string/continue_as_guest"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
+
+
 
     </LinearLayout>
 

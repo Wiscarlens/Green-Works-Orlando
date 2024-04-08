@@ -102,4 +102,18 @@
     <string name="no_items_found">No items found.</string>
     <string name="item_image">item image</string>
     <string name="item_name">Item Name</string>
+    <string name="account_success">Account creation successful.\nPlease log in to your account.</string>
+    <string name="login_failure">Incorrect email and/or password. Please try again.</string>
+    <string name="registration_errors">Please correct the highlighted errors and try again.</string>
+    <string name="empty_field">One or more fields are empty. Please try again.</string>
+    <string name="account_exists">Account already exists. Please try again.</string>
+    <string name="email_error">Not a valid email address. Please try again.</string>
+    <string name="phone_error">Not a valid phone number. Please try again.</string>
+    <string name="first_name_error">First name can only contain letters and must not exceed 30 characters.</string>
+    <string name="last_name_error">Last name can only contain letters and must not exceed 30 characters.</string>
+    <string name="address_error">Manual address entry not allowed. Please select your address from the drop-down list.</string>
+    <string name="weak_password">Password must be 8-12 characters long, contain at least 1 uppercase and 1 lowercase character, at least 1 number, and at least 1 special character (@, #, $, %, ^, &amp;, +, =, !).</string>
+    <string name="match_password">Passwords do not match. Please try again.</string>
+    <string name="terms_agree">You must read and agree to the terms and conditions.</string>
+
 </resources>

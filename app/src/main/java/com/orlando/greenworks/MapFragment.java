@@ -48,6 +48,10 @@ import java.util.Objects;
  * - Jordan Kinlocke
  * */
 
+// If map does not load:
+// If your API key is restricted, make sure the restrictions are correctly configured in Google Cloud Console,
+// and that it can call the Maps SDK for Android.
+
 public class MapFragment extends Fragment implements OnMapReadyCallback{
 
     private GoogleMap mMap;

@@ -127,12 +127,22 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
         }).start();
     }
 
-    // Check if the account / email address already exists in the database
+    // Check if the account / email address / phone number already exists in the database. If yes, flag as duplicate account.
     private boolean emailExistsInDatabase(String emailAddress) {
         DatabaseHelper db = new DatabaseHelper(getContext());
         String[] columns = {"email_address"};
         String selection = "email_address=?";
         String[] selectionArgs = {emailAddress};
+        Cursor cursor = db.getReadableDatabase().query("User", columns, selection, selectionArgs, null, null, null);
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
+        return exists;
+    }
+    private boolean phoneNumberExistsInDatabase(String phoneNumber) {
+        DatabaseHelper db = new DatabaseHelper(getContext());
+        String[] columns = {"phone_number"};
+        String selection = "phone_number=?";
+        String[] selectionArgs = {phoneNumber};
         Cursor cursor = db.getReadableDatabase().query("User", columns, selection, selectionArgs, null, null, null);
         boolean exists = (cursor.getCount() > 0);
         cursor.close();
@@ -310,6 +320,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
                 String password = ((TextInputLayout) view.findViewById(R.id.passwordLayout)).getEditText().getText().toString();
                 String confirm_password = ((TextInputLayout) view.findViewById(R.id.passwordConfirmLayout)).getEditText().getText().toString();
                 String address = ((AutoCompleteTextView) view.findViewById(R.id.addressAutoComplete)).getText().toString();
+                String aptSuite = ((EditText) view.findViewById(R.id.aptSuiteText)).getText().toString();
                 String phoneNumber = ((TextInputLayout) view.findViewById(R.id.phoneNumberLayout)).getEditText().getText().toString();
                 CheckBox termCheckBox = view.findViewById(R.id.termCheckBox);
 
@@ -366,6 +377,11 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
                     phoneErrorTextView.setVisibility(View.VISIBLE);
                     errorOccurred = true;
                     return;
+                } else if (phoneNumberExistsInDatabase(phoneNumber)) {
+                    errorTextView.setVisibility(View.VISIBLE);
+                    accountExistsErrorTextView.setVisibility(View.VISIBLE);
+                    errorOccurred = true;
+                    return;
                 } else if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,12}$")) {
                     errorTextView.setVisibility(View.VISIBLE);
                     weakPasswordErrorTextView.setVisibility(View.VISIBLE);
@@ -409,6 +425,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
                     values.put("email_address", emailAddress);
                     values.put("password", hashedPassword);
                     values.put("address", address);
+                    values.put("apt_suite", aptSuite);
                     values.put("phone_number", phoneNumber);
 
                     long result = db.getWritableDatabase().insert("User", null, values);

@@ -437,7 +437,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
 
                     LoginFragment loginFragment = new LoginFragment();
 
-                    // Pass a message to the LoginFragment
+                    // Pass a message to the LoginFragment (Successful account creation)
                     Bundle bundle = new Bundle();
                     bundle.putString("message", getString(R.string.account_success));
                     loginFragment.setArguments(bundle);

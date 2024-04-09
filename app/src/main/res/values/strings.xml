@@ -115,5 +115,11 @@
     <string name="weak_password">Password must be 8-12 characters long, contain at least 1 uppercase and 1 lowercase character, at least 1 number, and at least 1 special character (@, #, $, %, ^, &amp;, +, =, !).</string>
     <string name="match_password">Passwords do not match. Please try again.</string>
     <string name="terms_agree">You must read and agree to the terms and conditions.</string>
+    <string name="feature_not_available">This feature is not yet available.</string>
+    <string name="about">About</string>
+    <string name="theme">Theme</string>
+    <string name="toggle_dark_mode">Change to Dark Mode</string>
+    <string name="notifications">Notifications</string>
+    <string name="language">Language</string>
 
 </resources>

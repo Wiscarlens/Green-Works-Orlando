@@ -25,6 +25,7 @@ import java.lang.Exception;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    // Store images in the database as BLOBs
     public byte[] getBitmapAsByteArray(int drawableId) {
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), drawableId);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -34,9 +35,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "greenworks_orlando_db";
-    // Increment the database version to trigger onUpgrade
-    private static final int DATABASE_VERSION = 4;
 
+    // Increment the database version to trigger onUpgrade when the schema changes
+    private static final int DATABASE_VERSION = 5;
+
+
+    // Create Tables
     // SQL statement to create the User table
     private static final String CREATE_TABLE_USER = "CREATE TABLE User (" +
             "user_id INTEGER PRIMARY KEY AUTOINCREMENT, " +

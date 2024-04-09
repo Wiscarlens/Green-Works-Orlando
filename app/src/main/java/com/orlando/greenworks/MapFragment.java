@@ -48,6 +48,10 @@ import java.util.Objects;
  * - Jordan Kinlocke
  * */
 
+// If map does not load:
+// If your API key is restricted, make sure the restrictions are correctly configured in Google Cloud Console,
+// and that it can call the Maps SDK for Android.
+
 public class MapFragment extends Fragment implements OnMapReadyCallback{
 
     private GoogleMap mMap;
@@ -85,6 +89,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
     public void onMapReady(@NonNull GoogleMap googleMap) {
         try {
             mMap = googleMap;
+
+            // Log the API key
+            Log.d("API_KEY", BuildConfig.MAPS_API_KEY);
 
             LatLng orlando = new LatLng(28.5383, -81.3792); // Orlando, FL Map
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(orlando, 11)); // adjust default map zoom level
@@ -198,7 +205,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
 
     void loadData() {
         recyclingCenterList.add(new RecyclingCenter("Dover Shore Community Center", "1400 Gaston Foster Road", "Monday - Saturday\n9:00 AM - 9:00 PM\nSunday\n1:00 PM - 6:00PM", "407-246-4451", 28.52551, -81.32586));
-        recyclingCenterList.add(new RecyclingCenter("Engelwood Neighborhood Center", "6123 Lacosta Drive", "Monday - Friday\n8:00 AM - 9:00 PM\nSaturday\n9:00 AM - 9:00 PM\nSunday\n1:00 PM - 6:00PM", "407-246-4453", 28.52894, -81.30075));
+        recyclingCenterList.add(new RecyclingCenter("Engelwood Neighborhood Center", "6123 Lacosta Drive", "Monday - Friday\n8:00 AM - 9:00 PM\nSaturday 9:00 AM - 9:00 PM\nSunday 1:00 PM - 6:00PM", "407-246-4453", 28.52894, -81.30075));
         recyclingCenterList.add(new RecyclingCenter("Northwest Community Center", "3955 WD Judge Road", "Monday - Saturday\n9:00 AM - 9:00 PM\nSunday\n1:00 PM - 9:00 PM", "407-246-4465", 28.56112, -81.42777));
         recyclingCenterList.add(new RecyclingCenter("Solid Waste Management Division", "1028 South Woods Avenue", "Monday - Friday\n8:00 AM - 5:00 PM\nSaturday and Sunday\nCLOSED", "407-246-2314", 28.52933, -81.39580));
     }

@@ -98,8 +98,6 @@
             android:textSize="16sp"
             android:visibility="gone" />
 
-       <!-- ... other views ... -->
-
         <TextView
             android:id="@+id/notification_settings"
             android:layout_width="wrap_content"
@@ -108,14 +106,13 @@
             android:textSize="18sp"
             android:layout_marginTop="5dp"/>
 
-        <Button
+        <TextView
             android:id="@+id/notification_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enable Notifications"
-            android:textSize="16sp" />
-
-<!-- ... other views ... -->
+            android:text="This feature is not yet available"
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/language_settings"

@@ -30,6 +30,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
 import com.google.android.material.textfield.TextInputLayout;
+import android.util.Log;
 
 public class LoginFragment extends Fragment {
 
@@ -70,23 +71,51 @@ public class LoginFragment extends Fragment {
             TextInputLayout passwordLayout = view.findViewById(R.id.passwordLayout);
             String email = emailLayout.getEditText().getText().toString();
             String password = passwordLayout.getEditText().getText().toString();
+
+            // FOR DEBUGGING PURPOSES ONLY:
+            // Log the email and password entered by the user
+            Log.d("LoginFragment", "Email entered: " + email);
+            Log.d("LoginFragment", "Password entered: " + password);
+
+
             // Hash the password
             String hashedPassword = null;
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA-256");
                 byte[] hash = md.digest(password.getBytes(StandardCharsets.UTF_8));
-                hashedPassword = Base64.encodeToString(hash, Base64.DEFAULT);
+                hashedPassword = Base64.encodeToString(hash, Base64.DEFAULT).trim();
+                Log.d("LoginFragment", "Hashed password: " + hashedPassword);
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
-            // Check if the email and matching password exist in the database
-            String[] columns = {"email_address", "password"};
-            String selection = "email_address=? AND password=?";
-            String[] selectionArgs = {email, hashedPassword};
+
+            // Check if the email exists in the database
+            String[] columns = {"email_address"};
+            String selection = "email_address=?";
+            String[] selectionArgs = {email};
             Cursor cursor = db.getReadableDatabase().query("User", columns, selection, selectionArgs, null, null, null);
-            boolean exists = (cursor.getCount() > 0);
+            boolean emailExists = (cursor.getCount() > 0);
+
+            // Log the result of the email check
+            Log.d("LoginFragment", "Email exists in database: " + emailExists);
+
+            if (!emailExists) {
+                loginErrorTextView.setVisibility(View.VISIBLE);
+                return;
+            }
+
+            // Check if the password matches the email in the database
+            columns = new String[]{"password"};
+            selection = "email_address=? AND password=?";
+            selectionArgs = new String[]{email, hashedPassword};
+            cursor = db.getReadableDatabase().query("User", columns, selection, selectionArgs, null, null, null);
+            boolean passwordMatches = (cursor.getCount() > 0);
+
+            // Log the result of the password check
+            Log.d("LoginFragment", "Password matches email in database: " + passwordMatches);
+
             cursor.close();
-            if (!exists) {
+            if (!passwordMatches) {
                 loginErrorTextView.setVisibility(View.VISIBLE);
                 return;
             }

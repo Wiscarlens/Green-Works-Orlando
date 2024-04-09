@@ -408,7 +408,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
                         Log.d("RegistrationFragment", "Starting password hashing process");
                         MessageDigest md = MessageDigest.getInstance("SHA-256");
                         byte[] hash = md.digest(password.getBytes(StandardCharsets.UTF_8));
-                        hashedPassword = Base64.encodeToString(hash, Base64.DEFAULT);
+                        hashedPassword = Base64.encodeToString(hash, Base64.DEFAULT).trim();
                         Log.d("RegistrationFragment", "Password hashed successfully");
                     } catch (NoSuchAlgorithmException e) {
                         Log.e("RegistrationFragment", "Error occurred during password hashing", e);

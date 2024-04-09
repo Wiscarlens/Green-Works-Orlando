@@ -37,7 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "greenworks_orlando_db";
 
     // Increment the database version to trigger onUpgrade when the schema changes
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 7;
 
 
     // Create Tables

@@ -52,13 +52,14 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:3.4.0' // NEED FOR MAPS
     implementation 'androidx.fragment:fragment:1.6.2'
     implementation 'com.airbnb.android:lottie:6.1.0'
+    implementation 'com.google.firebase:firebase-messaging:23.4.1'
 }
 
 // NEED FOR MAPS
 secrets {
     // Optionally specify a different file name containing your secrets.
     // The plugin defaults to "local.properties"
-    propertiesFileName = "secrets.properties"
+    propertiesFileName = "local.properties"
 
     // A properties file containing default secret values. This file can be
     // checked in version control.

@@ -1,12 +1,11 @@
 package com.orlando.greenworks;
 
-import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -14,20 +13,36 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Objects;
+import android.content.Intent;
+
+/*
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
 
 public class SettingFragment extends BottomSheetDialogFragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_setting, container, false);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        return view;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_setting, container, false);
     }
 
     @Override
@@ -57,6 +72,7 @@ public class SettingFragment extends BottomSheetDialogFragment {
             }
         });
 
+
         // Add the click listener for the 'Theme' TextView
         TextView themeSettings = view.findViewById(R.id.theme_settings);
         LinearLayout themeOptions = view.findViewById(R.id.theme_options);
@@ -68,6 +84,7 @@ public class SettingFragment extends BottomSheetDialogFragment {
                 themeOptions.setVisibility(View.GONE);
             }
         });
+
 
         // Add the change listener for the 'Change to Dark Mode' Switch
         Switch darkModeSwitch = view.findViewById(R.id.dark_mode_switch);
@@ -81,34 +98,15 @@ public class SettingFragment extends BottomSheetDialogFragment {
             }
         });
 
-        // Add the click listener for 'Language' TextView
-        TextView languageSettings = view.findViewById(R.id.language_settings);
-        TextView languageStatus = view.findViewById(R.id.language_status);
 
-        languageSettings.setOnClickListener(v -> {
-            if (languageStatus.getVisibility() == View.GONE) {
-                languageStatus.setVisibility(View.VISIBLE);
-            } else {
-                languageStatus.setVisibility(View.GONE);
-            }
-        });
 
-        // Add the click listener for 'Notifications' TextView
+
+
+        // Add the click listener for the 'Notification' TextView
         TextView notificationSettings = view.findViewById(R.id.notification_settings);
-        Button notificationStatus = view.findViewById(R.id.notification_status);
-
-        // Initially hide the 'Enable Notifications' button
-        notificationStatus.setVisibility(View.GONE);
+        TextView notificationStatus = view.findViewById(R.id.notification_status);
 
         notificationSettings.setOnClickListener(v -> {
-            // Show the 'Enable Notifications' button when 'Notifications' text box is clicked
-
-            notificationStatus.setVisibility(View.VISIBLE);
-        });
-
-        notificationStatus.setOnClickListener(v -> {
-
-
             // Code to enable notifications goes here
             // For now, just change the button text
 
@@ -130,9 +128,26 @@ public class SettingFragment extends BottomSheetDialogFragment {
             startActivity(intent);
         });
 
+
+
+
+
+
+
+        // Add the click listener for 'Language' TextView
+        TextView languageSettings = view.findViewById(R.id.language_settings);
+        TextView languageStatus = view.findViewById(R.id.language_status);
+
+        languageSettings.setOnClickListener(v -> {
+            if (languageStatus.getVisibility() == View.GONE) {
+                languageStatus.setVisibility(View.VISIBLE);
+            } else {
+                languageStatus.setVisibility(View.GONE);
+            }
+        });
+
+
     }
-
-
 
     @Override
     public void onStart() {

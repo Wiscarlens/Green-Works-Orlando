@@ -107,14 +107,12 @@
             android:textSize="18sp"
             android:layout_marginTop="5dp"/>
 
-        <TextView
+        <Button
             android:id="@+id/notification_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/red"
-            android:text="@string/feature_not_available"
-            android:textSize="16sp"
-            android:visibility="gone" />
+            android:text="@string/enable_notifications"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/language_settings"

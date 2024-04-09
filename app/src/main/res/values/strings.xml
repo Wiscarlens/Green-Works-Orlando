@@ -57,6 +57,7 @@
     <string name="sign_up">Sign up</string>
     <string name="channel_id">Send Notification</string>
     <string name="channel_description">This button sends a notification</string>
+    <string name="enable_notifications">Enable Notifications</string>
     <string name="agree_with">Agree with </string>
     <string name="terms_conditions">Terms &amp; Conditions</string>
     <string name="already_have_an_account_login">Already have an account?</string>

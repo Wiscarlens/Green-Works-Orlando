@@ -20,6 +20,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Objects;
 import android.content.Intent;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Button;
 
 /*
  * This is a collaborative effort by the following team members:
@@ -104,9 +109,20 @@ public class SettingFragment extends BottomSheetDialogFragment {
 
         // Add the click listener for the 'Notification' TextView
         TextView notificationSettings = view.findViewById(R.id.notification_settings);
-        TextView notificationStatus = view.findViewById(R.id.notification_status);
+        Button notificationStatus = view.findViewById(R.id.notification_status);
+
+        // Initially hide the 'Enable Notifications' button
+        notificationStatus.setVisibility(View.GONE);
 
         notificationSettings.setOnClickListener(v -> {
+            // Show the 'Enable Notifications' button when 'Notifications' text box is clicked
+
+            notificationStatus.setVisibility(View.VISIBLE);
+        });
+
+        notificationStatus.setOnClickListener(v -> {
+
+
             // Code to enable notifications goes here
             // For now, just change the button text
 

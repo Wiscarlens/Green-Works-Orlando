@@ -39,6 +39,8 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        NotificationHelper.createNotificationChannel(getContext());
+
         // Handle the argument passed to this fragment
         Bundle arguments = getArguments();
         if (arguments != null && arguments.containsKey("searchQuery")) {

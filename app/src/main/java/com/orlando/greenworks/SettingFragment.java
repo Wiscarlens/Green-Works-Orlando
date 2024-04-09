@@ -1,11 +1,12 @@
 package com.orlando.greenworks;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -20,28 +22,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Objects;
 
-/*
- * This is a collaborative effort by the following team members:
- * Team members:
- * - Wiscarlens Lucius (Team Leader)
- * - Amanpreet Singh
- * - Alexandra Perez
- * - Eric Klausner
- * - Jordan Kinlocke
- * */
-
 public class SettingFragment extends BottomSheetDialogFragment {
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_setting, container, false);
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting, container, false);
+        return view;
     }
 
     @Override
@@ -71,7 +57,6 @@ public class SettingFragment extends BottomSheetDialogFragment {
             }
         });
 
-
         // Add the click listener for the 'Theme' TextView
         TextView themeSettings = view.findViewById(R.id.theme_settings);
         LinearLayout themeOptions = view.findViewById(R.id.theme_options);
@@ -84,7 +69,6 @@ public class SettingFragment extends BottomSheetDialogFragment {
             }
         });
 
-
         // Add the change listener for the 'Change to Dark Mode' Switch
         Switch darkModeSwitch = view.findViewById(R.id.dark_mode_switch);
         TextView darkModeStatus = view.findViewById(R.id.dark_mode_status);
@@ -94,18 +78,6 @@ public class SettingFragment extends BottomSheetDialogFragment {
                 darkModeStatus.setVisibility(View.VISIBLE);
             } else {
                 darkModeStatus.setVisibility(View.GONE);
-            }
-        });
-
-        // Add the click listener for the 'Notification' TextView
-        TextView notificationSettings = view.findViewById(R.id.notification_settings);
-        TextView notificationStatus = view.findViewById(R.id.notification_status);
-
-        notificationSettings.setOnClickListener(v -> {
-            if (notificationStatus.getVisibility() == View.GONE) {
-                notificationStatus.setVisibility(View.VISIBLE);
-            } else {
-                notificationStatus.setVisibility(View.GONE);
             }
         });
 
@@ -121,8 +93,46 @@ public class SettingFragment extends BottomSheetDialogFragment {
             }
         });
 
+        // Add the click listener for 'Notifications' TextView
+        TextView notificationSettings = view.findViewById(R.id.notification_settings);
+        Button notificationStatus = view.findViewById(R.id.notification_status);
+
+        // Initially hide the 'Enable Notifications' button
+        notificationStatus.setVisibility(View.GONE);
+
+        notificationSettings.setOnClickListener(v -> {
+            // Show the 'Enable Notifications' button when 'Notifications' text box is clicked
+
+            notificationStatus.setVisibility(View.VISIBLE);
+        });
+
+        notificationStatus.setOnClickListener(v -> {
+
+
+            // Code to enable notifications goes here
+            // For now, just change the button text
+
+            NotificationHelper.createNotificationChannel(getContext());
+            NotificationHelper.displayNotification(getContext(), "Trash Pickup Day", "Your next trash pickup day is May 15th");
+            notificationStatus.setText("Notifications Enabled");
+
+            // Add the code to open the system settings for the app
+            Intent intent = new Intent();
+            intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+
+            //for Android 5-7
+            intent.putExtra("app_package", getContext().getPackageName());
+            intent.putExtra("app_uid", getContext().getApplicationInfo().uid);
+
+            // for Android 8 and above
+            intent.putExtra("android.provider.extra.APP_PACKAGE", getContext().getPackageName());
+
+            startActivity(intent);
+        });
 
     }
+
+
 
     @Override
     public void onStart() {

@@ -27,6 +27,8 @@ public class WelcomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        NotificationHelper.createNotificationChannel(getContext());
+
     }
 
     @Override

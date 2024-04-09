@@ -115,9 +115,12 @@ public class SettingFragment extends BottomSheetDialogFragment {
         notificationStatus.setVisibility(View.GONE);
 
         notificationSettings.setOnClickListener(v -> {
-            // Show the 'Enable Notifications' button when 'Notifications' text box is clicked
-
-            notificationStatus.setVisibility(View.VISIBLE);
+            // Toggle the visibility of the 'Enable Notifications' button when 'Notifications' text box is clicked
+            if (notificationStatus.getVisibility() == View.GONE) {
+                notificationStatus.setVisibility(View.VISIBLE);
+            } else {
+                notificationStatus.setVisibility(View.GONE);
+            }
         });
 
         notificationStatus.setOnClickListener(v -> {

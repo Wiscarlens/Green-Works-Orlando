@@ -31,6 +31,8 @@ import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
 import com.google.android.material.textfield.TextInputLayout;
 import android.util.Log;
+import android.content.SharedPreferences;
+import android.content.Context;
 
 public class LoginFragment extends Fragment {
 
@@ -119,6 +121,16 @@ public class LoginFragment extends Fragment {
                 loginErrorTextView.setVisibility(View.VISIBLE);
                 return;
             }
+
+            // User successfully logged in
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isLoggedIn", true);
+            editor.putString("email", email);
+            editor.apply();
+            Log.d("LoginFragment", "User logged in as " +email);
+
+
             changeFragment(new HomeFragment());
         });
 
@@ -127,6 +139,12 @@ public class LoginFragment extends Fragment {
         TextView continueAsGuestLogin = view.findViewById(R.id.continueAsGuestLogin);
 
         continueAsGuestLogin.setOnClickListener(v -> {
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isLoggedIn", false);
+            editor.apply();
+            Log.d("LoginFragment", "User logged in as guest");
+
             FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.fragment_container, new HomeFragment());

@@ -105,8 +105,6 @@ public class SettingFragment extends BottomSheetDialogFragment {
 
 
 
-
-
         // Add the click listener for the 'Notification' TextView
         TextView notificationSettings = view.findViewById(R.id.notification_settings);
         Button notificationStatus = view.findViewById(R.id.notification_status);

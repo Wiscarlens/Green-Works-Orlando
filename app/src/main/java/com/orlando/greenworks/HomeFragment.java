@@ -10,6 +10,9 @@ package com.orlando.greenworks;
  * - Jordan Kinlocke
  * */
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import android.util.Log;
 
 public class HomeFragment extends Fragment {
     private LinearLayout weeklyStats;
@@ -57,6 +61,9 @@ public class HomeFragment extends Fragment {
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
 
+    private DatabaseHelper db;
+    private TextView userFirstNameTV;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,12 +78,40 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        userFirstNameTV = view.findViewById(R.id.userFirstNameTV);
+        db = new DatabaseHelper(getContext()); // Initialize the DatabaseHelper
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            String email = sharedPreferences.getString("email", "");
+            Log.d("HomeFragment", "Email: " + email);
+            String[] columns = {"first_name"};
+            String selection = "email_address=?";
+            String[] selectionArgs = {email};
+            Cursor cursor = db.getReadableDatabase().query("User", columns, selection, selectionArgs, null, null, null);
+            int columnIndex = cursor.getColumnIndex("first_name");
+            Log.d("HomeFragment", "First name column index: " + columnIndex);
+            if (columnIndex != -1 && cursor.moveToFirst()) {
+                String firstName = cursor.getString(columnIndex);
+                Log.d("HomeFragment", "First name: " + firstName);
+                userFirstNameTV.setText(firstName);
+            } else {
+                Log.d("HomeFragment", "No user found with email: " + email);
+            }
+            Log.d("HomeFragment", "Cursor count: " + cursor.getCount());
+            cursor.close();
+        } else {
+            Log.d("HomeFragment", "Is logged in: false");
+        }
+
+
         MainActivity.fragmentTitle.setText(""); // Set the title of the fragment in the toolbar.
 
         LinearLayout reward = view.findViewById(R.id.rewardsLayout);
         TextView rewardsPoint = view.findViewById(R.id.rewardsPointsTV);
         ImageView profileImage = view.findViewById(R.id.profileImageIV);
-        TextView userFirstName = view.findViewById(R.id.userFirstNameTV);
+        //TextView userFirstName = view.findViewById(R.id.userFirstNameTV);
         SearchView searchView = view.findViewById(R.id.searchView);
         ImageButton sortingGuideButton = view.findViewById(R.id.sortingGuideIB);
 

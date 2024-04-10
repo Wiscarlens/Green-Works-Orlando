@@ -1,5 +1,8 @@
 package com.orlando.greenworks;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -28,13 +32,15 @@ import java.util.Objects;
 
 public class ProfileFragment extends BottomSheetDialogFragment {
 
-
+    private DatabaseHelper db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         NotificationHelper.createNotificationChannel(getContext());
+
+        db = new DatabaseHelper(getContext()); // Initialize the DatabaseHelper
 
     }
 
@@ -51,7 +57,31 @@ public class ProfileFragment extends BottomSheetDialogFragment {
 
         ImageButton closeButton = view.findViewById(R.id.closeButton);
         closeButton.setOnClickListener(v -> dismiss());
+
+        TextView profileName = view.findViewById(R.id.profileName);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            String email = sharedPreferences.getString("email", "");
+            String[] columns = {"first_name", "last_name"};
+            String selection = "email_address=?";
+            String[] selectionArgs = {email};
+            Cursor cursor = db.getReadableDatabase().query("User", columns, selection, selectionArgs, null, null, null);
+            if (cursor.moveToFirst()) {
+                int firstNameIndex = cursor.getColumnIndex("first_name");
+                int lastNameIndex = cursor.getColumnIndex("last_name");
+                if (firstNameIndex != -1 && lastNameIndex != -1) {
+                    String firstName = cursor.getString(firstNameIndex);
+                    String lastName = cursor.getString(lastNameIndex);
+                    profileName.setText(firstName + " " + lastName);
+                }
+            }
+            cursor.close();
+        }
     }
+
 
     @Override
     public void onStart() {

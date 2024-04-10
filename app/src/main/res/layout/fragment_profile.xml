@@ -55,7 +55,7 @@
                 android:id="@+id/profileImageIV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/fake_profile_picture"
+                android:src="@drawable/baseline_person_24"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/profile_image"
                 android:layout_margin="5dp"
@@ -64,9 +64,10 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/profileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Joe Doe"
+            android:text="@string/default_name"
             android:textSize="25sp"
             android:textStyle="bold"
             android:layout_gravity="center"

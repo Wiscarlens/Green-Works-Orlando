@@ -59,23 +59,37 @@ public class ProfileFragment extends BottomSheetDialogFragment {
         closeButton.setOnClickListener(v -> dismiss());
 
         TextView profileName = view.findViewById(R.id.profileName);
+        TextView profilePhoneNumber = view.findViewById(R.id.phone_number_change_textView); // Updated ID
+        TextView profileAddress = view.findViewById(R.id.address_change_textView); // Updated ID
+        TextView profileEmail = view.findViewById(R.id.email_change_textView); // Updated ID
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
 
         if (isLoggedIn) {
             String email = sharedPreferences.getString("email", "");
-            String[] columns = {"first_name", "last_name"};
+            String[] columns = {"first_name", "last_name", "phone_number", "address", "email_address"}; // Added phone_number, address, and email_address
             String selection = "email_address=?";
             String[] selectionArgs = {email};
             Cursor cursor = db.getReadableDatabase().query("User", columns, selection, selectionArgs, null, null, null);
             if (cursor.moveToFirst()) {
                 int firstNameIndex = cursor.getColumnIndex("first_name");
                 int lastNameIndex = cursor.getColumnIndex("last_name");
-                if (firstNameIndex != -1 && lastNameIndex != -1) {
+                int phoneNumberIndex = cursor.getColumnIndex("phone_number"); // Added
+                int addressIndex = cursor.getColumnIndex("address"); // Added
+                int emailAddressIndex = cursor.getColumnIndex("email_address"); // Added
+
+                if (firstNameIndex != -1 && lastNameIndex != -1 && phoneNumberIndex != -1 && addressIndex != -1 && emailAddressIndex != -1) {
                     String firstName = cursor.getString(firstNameIndex);
                     String lastName = cursor.getString(lastNameIndex);
+                    String phoneNumber = cursor.getString(phoneNumberIndex); // Added
+                    String address = cursor.getString(addressIndex); // Added
+                    String emailAddress = cursor.getString(emailAddressIndex); // Added
+
                     profileName.setText(firstName + " " + lastName);
+                    profilePhoneNumber.setText(phoneNumber); // Added
+                    profileAddress.setText(address); // Added
+                    profileEmail.setText(emailAddress); // Added
                 }
             }
             cursor.close();

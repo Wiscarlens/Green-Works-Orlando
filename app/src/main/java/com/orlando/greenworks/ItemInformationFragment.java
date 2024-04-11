@@ -178,7 +178,7 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         } catch (JSONException e) {
             Log.d("Item Information Fragment", e.toString());
 
-            String message = getString(R.string.no_item, searchQuery);
+            String message = getString(R.string.no_items_found);
 
             itemInformation.setText(message);
         }

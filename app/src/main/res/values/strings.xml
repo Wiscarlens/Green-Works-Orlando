@@ -102,4 +102,26 @@
     <string name="no_items_found">No items found.</string>
     <string name="item_image">item image</string>
     <string name="item_name">Item Name</string>
+
+    <string name="account_success">Account created successfully</string>
+    <string name="login_failure">Login failed</string>
+    <string name="empty_field">This field cannot be empty</string>
+    <string name="first_name_error">Invalid first name</string>
+    <string name="last_name_error">Invalid last name</string>
+    <string name="address_error">Invalid address</string>
+    <string name="weak_password">Password is too weak</string>
+    <string name="match_password">Passwords do not match</string>
+    <string name="email_error">Invalid email address</string>
+    <string name="phone_error">Invalid phone number</string>
+    <string name="account_exists">Account already exists</string>
+    <string name="terms_agree">You must agree to the terms and conditions</string>
+    <string name="registration_errors">There were errors in your registration</string>
+    <string name="feature_not_available">This feature is not available</string>
+    <string name="about">About</string>
+    <string name="theme">Theme</string>
+    <string name="toggle_dark_mode">Toggle Dark Mode</string>
+    <string name="notifications">Notifications</string>
+
+    <string name="enable_notifications">Enable Notifications</string>
+    <string name="language">Language</string>
 </resources>

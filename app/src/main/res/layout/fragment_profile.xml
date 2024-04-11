@@ -55,7 +55,7 @@
                 android:id="@+id/profileImageIV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/fake_profile_picture"
+                android:src="@drawable/baseline_person_24"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/profile_image"
                 android:layout_margin="5dp"
@@ -64,9 +64,10 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/profileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Joe Doe"
+            android:text="@string/default_name"
             android:textSize="25sp"
             android:textStyle="bold"
             android:layout_gravity="center"
@@ -76,63 +77,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:foregroundTint="@color/gray"
+            android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:layout_marginBottom="10dp">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/baseline_location_pin_24" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Address"
-                android:textSize="20sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:foregroundTint="@color/gray"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/baseline_phone_24" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/phone_number"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
+                android:id="@+id/email_change_imageView"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="10dp"
                 android:src="@drawable/baseline_alternate_email_24" />
 
             <TextView
+                android:id="@+id/email_change_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/prompt_email"
@@ -142,26 +100,128 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="87dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
-            android:foregroundTint="@color/gray"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
             android:visibility="gone">
 
             <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:id="@+id/first_name_change_imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/baseline_person_24" />
+
+            <TextView
+                android:id="@+id/first_name_change_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/first_name"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/last_name_change_imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/baseline_person_24" />
+
+            <TextView
+                android:id="@+id/last_name_change_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/last_name"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundTint="@color/gray"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/address_change_imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/baseline_location_pin_24" />
+
+            <TextView
+                android:id="@+id/address_change_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:foregroundTint="@color/gray"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/phone_number_change_imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/baseline_phone_24" />
+
+            <TextView
+                android:id="@+id/phone_number_change_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_number"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:foregroundTint="@color/gray"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/password_change_imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="10dp"
                 android:src="@drawable/baseline_lock_24" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/password_change_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/prompt_password"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <Button

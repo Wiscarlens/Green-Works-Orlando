@@ -19,6 +19,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Objects;
+import android.content.Intent;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Button;
 
 /*
  * This is a collaborative effort by the following team members:
@@ -97,17 +103,53 @@ public class SettingFragment extends BottomSheetDialogFragment {
             }
         });
 
+
+
         // Add the click listener for the 'Notification' TextView
         TextView notificationSettings = view.findViewById(R.id.notification_settings);
-        TextView notificationStatus = view.findViewById(R.id.notification_status);
+        Button notificationStatus = view.findViewById(R.id.notification_status);
+
+        // Initially hide the 'Enable Notifications' button
+        notificationStatus.setVisibility(View.GONE);
 
         notificationSettings.setOnClickListener(v -> {
+            // Toggle the visibility of the 'Enable Notifications' button when 'Notifications' text box is clicked
             if (notificationStatus.getVisibility() == View.GONE) {
                 notificationStatus.setVisibility(View.VISIBLE);
             } else {
                 notificationStatus.setVisibility(View.GONE);
             }
         });
+
+        notificationStatus.setOnClickListener(v -> {
+
+
+            // Code to enable notifications goes here
+            // For now, just change the button text
+
+            NotificationHelper.createNotificationChannel(getContext());
+            NotificationHelper.displayNotification(getContext(), "Trash Pickup Day", "Your next trash pickup day is May 15th");
+            notificationStatus.setText("Notifications Enabled");
+
+            // Add the code to open the system settings for the app
+            Intent intent = new Intent();
+            intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+
+            //for Android 5-7
+            intent.putExtra("app_package", getContext().getPackageName());
+            intent.putExtra("app_uid", getContext().getApplicationInfo().uid);
+
+            // for Android 8 and above
+            intent.putExtra("android.provider.extra.APP_PACKAGE", getContext().getPackageName());
+
+            startActivity(intent);
+        });
+
+
+
+
+
+
 
         // Add the click listener for 'Language' TextView
         TextView languageSettings = view.findViewById(R.id.language_settings);

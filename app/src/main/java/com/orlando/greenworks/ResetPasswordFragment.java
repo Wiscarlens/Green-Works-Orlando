@@ -17,6 +17,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 /*
  * This is a collaborative effort by the following team members:
@@ -43,13 +46,30 @@ public class ResetPasswordFragment extends BottomSheetDialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        NotificationHelper.createNotificationChannel(getContext());
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reset_password, container, false);
+        View view = inflater.inflate(R.layout.fragment_reset_password, container, false);
+
+        // Get the TextView and Button from the layout
+        TextView resetNotAvailableErrorTextView = view.findViewById(R.id.reset_not_available_errorTextView);
+        Button resetPasswordButton = view.findViewById(R.id.resetPasswordButton);
+
+        // Set the OnClickListener for the button
+        resetPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // When the button is clicked, make the TextView visible
+                resetNotAvailableErrorTextView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        return view;
     }
 
     @Override

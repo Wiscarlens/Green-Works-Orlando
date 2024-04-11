@@ -35,6 +35,8 @@ public class RewardsFragment extends BottomSheetDialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        NotificationHelper.createNotificationChannel(getContext());
+
     }
 
     @Override

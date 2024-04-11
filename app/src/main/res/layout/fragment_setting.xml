@@ -48,7 +48,7 @@
             android:id="@+id/about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="About"
+            android:text="@string/about"
             android:textSize="18sp"
             android:layout_marginTop="15dp"/>
 
@@ -64,7 +64,7 @@
             android:id="@+id/theme_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Theme"
+            android:text="@string/theme"
             android:textSize="18sp"
             android:layout_marginTop="5dp"/>
 
@@ -81,7 +81,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Change to Dark Mode"
+                android:text="@string/toggle_dark_mode"
                 android:textSize="16sp" />
 
             <Switch
@@ -94,7 +94,8 @@
             android:id="@+id/dark_mode_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This feature is not yet available"
+            android:textColor="@color/red"
+            android:text="@string/feature_not_available"
             android:textSize="16sp"
             android:visibility="gone" />
 
@@ -102,23 +103,22 @@
             android:id="@+id/notification_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Notifications"
+            android:text="@string/notifications"
             android:textSize="18sp"
             android:layout_marginTop="5dp"/>
 
-        <TextView
+        <Button
             android:id="@+id/notification_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This feature is not yet available"
-            android:textSize="16sp"
-            android:visibility="gone" />
+            android:text="@string/enable_notifications"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/language_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Language"
+            android:text="@string/language"
             android:textSize="18sp"
             android:layout_marginTop="5dp"/>
 
@@ -126,7 +126,8 @@
             android:id="@+id/language_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This feature is not yet available"
+            android:textColor="@color/red"
+            android:text="@string/feature_not_available"
             android:textSize="16sp"
             android:visibility="gone" />
 

@@ -25,6 +25,7 @@ import java.lang.Exception;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    // Store images in the database as BLOBs
     public byte[] getBitmapAsByteArray(int drawableId) {
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), drawableId);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -33,11 +34,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
     private static final String DATABASE_NAME = "greenworks_orlando_db";
-    // Increment the database version to trigger onUpgrade
-    private static final int DATABASE_VERSION = 1;
 
+    // Increment the database version to trigger onUpgrade when the schema changes
+    private static final int DATABASE_VERSION = 7;
+
+
+    // Create Tables
     // SQL statement to create the User table
     private static final String CREATE_TABLE_USER = "CREATE TABLE User (" +
             "user_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -46,7 +49,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "first_name TEXT, " +
             "last_name TEXT, " +
             "phone_number INTEGER, " +
+            "apt_suite TEXT, " +
             "address TEXT)";
+
+    // SQL statement to create Items table
+    private static final String CREATE_TABLE_ITEMS = "CREATE TABLE Items (" +
+            "item_id INTEGER PRIMARY KEY, " +
+            "item_title TEXT, " +
+            "item_description TEXT, " +
+            "recycle_tag TEXT, " +
+            "item_points INTEGER, " +
+            "item_image BLOB)";
+
+    // SQL statement to create the User_Items table
+    private static final String CREATE_TABLE_USER_ITEMS = "CREATE TABLE User_Items (" +
+            "user_item_id INTEGER PRIMARY KEY, " +
+            "item_id INTEGER, " +
+            "item_title TEXT, " +
+            "item_description TEXT, " +
+            "current_points INTEGER, " +
+            "item_image BLOB)";
+
 
     // SQL statement to create the Badge table
     private static final String CREATE_TABLE_BADGE = "CREATE TABLE Badge (" +
@@ -64,23 +87,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "date_earned TEXT, " +
             "progress INTEGER)";
 
-    // SQL statement to create the User table
-    private static final String CREATE_TABLE_ITEMS = "CREATE TABLE Items (" +
-            "item_id INTEGER PRIMARY KEY, " +
-            "item_title TEXT, " +
-            "item_description TEXT, " +
-            "recycle_tag TEXT, " +
-            "item_points INTEGER, " +
-            "item_image BLOB)";
-
-    // SQL statement to create the User_Items table
-    private static final String CREATE_TABLE_USER_ITEMS = "CREATE TABLE User_Items (" +
-            "user_item_id INTEGER PRIMARY KEY, " +
-            "item_id INTEGER, " +
-            "item_title TEXT, " +
-            "item_description TEXT, " +
-            "current_points INTEGER, " +
-            "item_image BLOB)";
 
     private Context context;
 

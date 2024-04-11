@@ -27,10 +27,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.orlando.greenworks" />
+                  <option name="mobileSdkAppId" value="1:574718652490:android:3a222a0311bd81eb1036b3" />
+                  <option name="projectId" value="green-works-eb1f5" />
+                  <option name="projectNumber" value="574718652490" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

@@ -37,7 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "greenworks_orlando_db";
 
     // Increment the database version to trigger onUpgrade when the schema changes
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 9;
 
 
     // Create Tables
@@ -46,6 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "user_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "email_address TEXT, " +
             "password TEXT, " +
+            "user_points INTEGER, " +
             "first_name TEXT, " +
             "last_name TEXT, " +
             "phone_number INTEGER, " +
@@ -80,12 +81,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "badge_image BLOB)";
 
     // SQL statement to create the User_Badge table
-    private static final String CREATE_TABLE_USER_BADGE = "CREATE TABLE User_Badge (" +
-            "user_badge_id INTEGER PRIMARY KEY AUTOINCREMENT , " +
-            "badge_id INTEGER, " +
-            "user_id INTEGER, " +
-            "date_earned TEXT, " +
-            "progress INTEGER)";
+    //private static final String CREATE_TABLE_USER_BADGE = "CREATE TABLE User_Badge (" +
+    //"user_badge_id INTEGER PRIMARY KEY AUTOINCREMENT , " +
+    //"badge_id INTEGER, " +
+    //"user_id INTEGER, " +
+    //"date_earned TEXT, " +
+    //"progress INTEGER)";
 
 
     private Context context;
@@ -99,7 +100,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_USER);
         db.execSQL(CREATE_TABLE_BADGE);
-        db.execSQL(CREATE_TABLE_USER_BADGE);
+        //db.execSQL(CREATE_TABLE_USER_BADGE);
         db.execSQL(CREATE_TABLE_ITEMS);
         db.execSQL(CREATE_TABLE_USER_ITEMS);
 

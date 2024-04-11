@@ -29,7 +29,8 @@
                 android:orientation="vertical"
                 android:clickable="true"
                 tools:ignore="UselessParent"
-                android:focusable="true">
+                android:focusable="true"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -62,12 +63,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/profileLayout"
             android:layout_width="65dp"
             android:layout_height="60dp"
             android:orientation="horizontal"
             android:layout_gravity="end"
             android:gravity="center_vertical|end"
-            android:background="@drawable/border">
+            android:background="@drawable/border"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/profileImageIV"
@@ -80,6 +83,16 @@
                 android:background="@drawable/rounded_image"/>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/guest_login_registration_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/guest_login_registration_link"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/dark_green"
+            android:visibility="visible"/>
 
     </LinearLayout>
 

@@ -17,9 +17,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -52,7 +52,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MaterialViewHo
         holder.itemName.setText(itemList.get(position).getItemName());
         holder.itemPoint.setText(materialPoint);
 
-        holder.itemLayout.setOnClickListener(v -> Toast.makeText(context, "You selected " + itemList.get(position).getItemName(), Toast.LENGTH_SHORT).show());
+        holder.itemLayout.setOnClickListener(v -> {
+                    Item item = itemList.get(position);  // Get the item that was clicked
+
+                    // Create a new instance of ItemInformationFragment with the item
+                    ItemInformationFragment itemInformationFragment = ItemInformationFragment.newInstance(item, false);
+
+                    // Show the fragment
+                    itemInformationFragment.show(((AppCompatActivity) context)
+                            .getSupportFragmentManager(), itemInformationFragment.getTag());
+
+                }
+        );
     }
 
     @Override

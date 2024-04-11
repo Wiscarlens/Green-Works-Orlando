@@ -1,26 +1,26 @@
 package com.orlando.greenworks;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import android.util.Log;
-
-import android.widget.Button;
-import android.widget.ImageView;
-import android.os.Handler;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -33,20 +33,61 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
     private TextView itemRecyclingInfo;
     private Button disposeButton;
     private LottieAnimationView loaderAnimation;
+
     private JSONObject itemDetailsToDisplay;
     private String searchQuery; // Added to store the search query
+
+    private Item item;
+
+    private static final String ARG_ITEM = "item";
+
+    private static boolean isDataFetching = true;
+
+    public ItemInformationFragment() {
+
+    }
+
+
+    public static ItemInformationFragment newInstance(Item item, boolean isDataFetching) {
+        ItemInformationFragment fragment = new ItemInformationFragment();
+
+        ItemInformationFragment.isDataFetching = isDataFetching;
+
+        // Update the Item object in the newInstance method
+        fragment.item = item;
+
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_ITEM, item);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Handle the argument passed to this fragment
-        Bundle arguments = getArguments();
-        if (arguments != null && arguments.containsKey("searchQuery")) {
-            searchQuery = arguments.getString("searchQuery"); // Store the search query
-            FetchItems fetchItems = new FetchItems(this);
-            fetchItems.fetchItems(searchQuery);
+        if (getArguments() != null) {
+            item = (Item) getArguments().getSerializable(ARG_ITEM);
         }
+
+
+//        if (item != null) {
+//            isDataFetching = true; // Set isDataFetching back to true if an item was passed as a new instance
+//        }
+
+        if (isDataFetching){
+            // Handle the argument passed to this fragment
+            Bundle arguments = getArguments();
+
+            if (arguments != null && arguments.containsKey("searchQuery")) {
+                searchQuery = arguments.getString("searchQuery"); // Store the search query
+                FetchItems fetchItems = new FetchItems(this);
+                fetchItems.fetchItems(searchQuery);
+            }
+        }
+
     }
 
     @Override
@@ -56,6 +97,7 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         ImageButton closeBtn = view.findViewById(R.id.closeButton);
         loaderAnimation = view.findViewById(R.id.loaderAnimation);
         scrollView = view.findViewById(R.id.item_information_scroll_view);
+
         itemImage = view.findViewById(R.id.item_image);
         itemName = view.findViewById(R.id.item_name);
         itemInformation = view.findViewById(R.id.item_details);
@@ -67,18 +109,48 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         loaderAnimation.setVisibility(View.VISIBLE);
         disposeButton.setVisibility(View.VISIBLE);
 
-        closeBtn.setOnClickListener(v -> {
-            dismiss();
-        });
+        closeBtn.setOnClickListener(v -> dismiss());
 
         disposeButton.setOnClickListener(v -> {
             dismiss();
             Toast.makeText(requireContext(), "Dispose", Toast.LENGTH_SHORT).show();
         });
 
-        exitButton.setOnClickListener(v -> {
-            dismiss();
-        });
+        exitButton.setOnClickListener(v -> dismiss());
+
+
+
+        if (itemDetailsToDisplay != null) {
+            displayItemInformation(itemDetailsToDisplay);
+
+            disposeButton.setVisibility(View.VISIBLE);
+        } else {
+            if (!isDataFetching && item != null) {
+                String imageName = item.getItemImage();
+                int imageResId = requireContext().getResources().getIdentifier(imageName, "drawable", requireContext().getPackageName());
+
+                itemImage.setImageResource(imageResId);
+                itemName.setText(item.getItemName());
+                itemRecyclingInfo.setText(item.getItemMaterial());
+                itemInformation.setText(item.getItemDescription());
+
+                disposeButton.setVisibility(View.GONE);
+
+                isDataFetching = true;
+            } else {
+                disposeButton.setVisibility(View.GONE);
+
+                itemImage.setImageResource(R.drawable.not_found);
+
+                // Display custom message when no item details are available
+                String message = "No items found for \"" + searchQuery + "\".";
+
+                itemName.setText("");
+                itemRecyclingInfo.setText("");
+                itemInformation.setText(message);
+            }
+
+        }
 
         return view;
     }
@@ -88,133 +160,130 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         super.onResume();
 
         // Add a delay of 2 seconds before setting the visibility of ui elements
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (itemInformation != null && itemImage != null) {
-                    scrollView.setVisibility(View.VISIBLE);
-                    loaderAnimation.setVisibility(View.GONE);
-                }
+        new Handler().postDelayed(() -> {
+            if (itemName != null) {
+                scrollView.setVisibility(View.VISIBLE);
+                loaderAnimation.setVisibility(View.GONE);
             }
         }, 2000); // Delay of 2 seconds to let api call finish
 
 
-        if (itemDetailsToDisplay != null) {
-            displayItemInformation(itemDetailsToDisplay);
-            disposeButton.setVisibility(View.VISIBLE);
-        } else {
-            disposeButton.setVisibility(View.GONE);
 
-            itemImage.setImageResource(R.drawable.not_found);
+    }
 
-            // Display custom message when no item details are available
-            String message = "No items found for \"" + searchQuery + "\".";
-            itemName.setText("");
-            itemRecyclingInfo.setText("");
+    public void displayItemInformation(JSONObject itemDetails) {
+        try {
+            updateItemDetails(itemDetails);
+            updateItemInformationViews();
+        } catch (JSONException e) {
+            Log.d("Item Information Fragment", e.toString());
+
+            String message = getString(R.string.no_item, searchQuery);
+
             itemInformation.setText(message);
         }
     }
 
-    @Deprecated
-    public void receiveItemInformation(JSONObject itemDetails) {
-        itemDetailsToDisplay = itemDetails;
-        if (isVisible()) {
-            displayItemInformation(itemDetailsToDisplay);
-        } else {
+    private void updateItemDetails(JSONObject itemDetails) throws JSONException {
+        String name = itemDetails.optString("name", "");
+        String description = itemDetails.optString("description", "No description available");
+        String tagInfo = extractTagInfo(itemDetails.optJSONArray("tags"));
 
-            // This else part is unlikely to be needed but added for consistency
-            itemInformation.setText("No items found for '" + searchQuery + "'.");
-        }
+        Log.i("ItemInformationFragment", "updateItemDetails: " + name + " " + description + " " + tagInfo);
+
+        this.item = new Item();
+
+        item.setItemName(name.isEmpty() ? "" : name);
+        item.setItemDescription(description.isEmpty() ? "No description available\n" : description + "\n");
+        item.setItemMaterial(tagInfo);
     }
 
-    public void displayItemInformation(JSONObject itemDetails) {
-        Log.d("ItemInformationFragment", "Displaying item information: " + itemDetails.toString());
-        Log.d("ItemInformationFragment", "Is attached to activity: " + (getActivity() != null));
-        Log.d("ItemInformationFragment", "Is visible: " + isVisible());
+    private String extractTagInfo(JSONArray tags) throws JSONException {
+        StringBuilder tagInfo = new StringBuilder();
+        if (tags != null) {
+            for (int j = 0; j < tags.length(); j++) {
+                JSONObject tag = tags.getJSONObject(j);
+                String tagName = tag.optString("name", "");
+                String tagDescription = tag.optString("description", "");
 
-        try {
-            if (itemDetails == null) {
-                itemInformation.setText("No items found for '" + searchQuery + "'.");
-                return;
-            }
-
-            String name = itemDetails.optString("name", "");
-            String description = itemDetails.optString("description", "No description available");
-
-            // Extract and format recycling information
-            JSONArray tags = itemDetails.optJSONArray("tags");
-            StringBuilder tagInfo = new StringBuilder();
-
-            if (tags != null) {
-                for (int j = 0; j < tags.length(); j++) {
-                    JSONObject tag = tags.getJSONObject(j);
-                    String tagName = tag.optString("name", "");
-                    String tagDescription = tag.optString("description", "");
-
-                    if (!tagName.isEmpty()) {
-                        tagInfo.append(tagName);
-                        if (!tagDescription.isEmpty()) {
-                            tagInfo.append(" - ").append(tagDescription);
-                        }
-                        tagInfo.append("\n");
+                if (!tagName.isEmpty()) {
+                    tagInfo.append(tagName);
+                    if (!tagDescription.isEmpty()) {
+                        tagInfo.append(" - ").append(tagDescription);
                     }
+                    tagInfo.append("\n");
                 }
             }
+        }
+        return tagInfo.toString().trim();
+    }
 
-            String itemNameString = (name.isEmpty() ? "" : name);
-            String itemInformationString = (description.isEmpty() ? "No description available\n" : description + "\n");
-            String itemRecyclingInfoString = tagInfo.toString().trim();
+//    private void updateItemInformationViews() {
+//        itemName.setText(item.getItemName());
+//        itemInformation.setText(item.getItemDescription());
+//        itemRecyclingInfo.setText(item.getItemMaterial());
+//
+//        View view = getView();
+//        if (view != null) {
+//            int imageResId = getImageResIdBasedOnItemName(item.getItemName());
+//            itemImage.setImageResource(imageResId);
+//        }
+//
+//        disposeButton.setVisibility(View.VISIBLE);
+//    }
 
-            itemName.setText(itemNameString);
-            itemInformation.setText(itemInformationString);
-            itemRecyclingInfo.setText(itemRecyclingInfoString);
+    private void updateItemInformationViews() {
+        if (itemName != null) {
+            itemName.setText(item.getItemName());
+        }
+        if (itemInformation != null) {
+            itemInformation.setText(item.getItemDescription());
+        }
+        if (itemRecyclingInfo != null) {
+            itemRecyclingInfo.setText(item.getItemMaterial());
+        }
 
-            disposeButton.setVisibility(View.VISIBLE);
+        View view = getView();
+        if (view != null) {
+            int imageResId = getImageResIdBasedOnItemName(item.getItemName());
+            itemImage.setImageResource(imageResId);
+        }
 
-            // ADDED CODE TO DISPLAY IMAGE BASED ON API ITEM NAME
-            View view = getView();
-
-            if (view != null) {
-                ImageView itemImage = view.findViewById(R.id.item_image);
-                String itemName = itemDetails.optString("name", "");
-
-                if ("Soda Can".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_1_soda_can);
-                } else if ("Plastic Grocery Bag".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_2_plastic_bag);
-                } else if ("Laptop".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_3_laptop);
-                } else if ("Desktop Computer".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_4_desktop_computer);
-                } else if ("Face Mask".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_5_face_mask);
-                } else if ("Food".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_6_food);
-                } else if ("Broken Glass".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_7_broken_glass);
-                } else if ("Pet Food Bags".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_8_pet_food_bags);
-                } else if ("Clothes".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_9_clothes);
-                } else if ("Paper".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_10_paper);
-                } else if ("Cardboard Box".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_11_cardboard_box);
-                } else if ("Disposable Battery".equals(itemName)) {
-                    itemImage.setImageResource(R.drawable.item_id_12_disposable_battery);
-                } else {
-                    itemImage.setImageResource(R.drawable.not_found);
-                }
-            }
+        disposeButton.setVisibility(View.VISIBLE);
+    }
 
 
-
-        } catch (JSONException e) {
-            Log.d("Item Information Fragment", e.toString());
-
-            itemInformation.setText("No items found for '" + searchQuery + "'.");
+    private int getImageResIdBasedOnItemName(String itemName) {
+        switch (itemName) {
+            case "Soda Can":
+                return R.drawable.item_id_1_soda_can;
+            case "Plastic Grocery Bag":
+                return R.drawable.item_id_2_plastic_bag;
+            case "Laptop":
+                return R.drawable.item_id_3_laptop;
+            case "Desktop Computer":
+                return R.drawable.item_id_4_desktop_computer;
+            case "Face Mask":
+                return R.drawable.item_id_5_face_mask;
+            case "Food":
+                return R.drawable.item_id_6_food;
+            case "Broken Glass":
+                return R.drawable.item_id_7_broken_glass;
+            case "Pet Food Bags":
+                return R.drawable.item_id_8_pet_food_bags;
+            case "Clothes":
+                return R.drawable.item_id_9_clothes;
+            case "Paper":
+                return R.drawable.item_id_10_paper;
+            case "Cardboard Box":
+                return R.drawable.item_id_11_cardboard_box;
+            case "Disposable Battery":
+                return R.drawable.item_id_12_disposable_battery;
+            default:
+                return R.drawable.not_found;
         }
     }
+
 
     @Override
     public void onStart() {

@@ -268,54 +268,80 @@ public class HomeFragment extends Fragment {
 
         itemList.add(
                 new Item(
+                        "dasani",
                         "Dasani",
-                        "Plastic bottle",
+                        "Recycling a Dasani water bottle begins with emptying any remaining liquid and removing the cap. Once cleaned, the bottle can be placed in a recycling bin designated for plastic materials. ",
+                        "Most Dasani water bottles are made from PET (polyethylene terephthalate) plastic, which is commonly recyclable.",
                         7,
-                        "dasani"
-                ));
-        itemList.add(
-                new Item(
-                        "Cardboard",
-                        "Cardboard",
-                        13,
-                        "cardboard"
-                ));
-        itemList.add(
-                new Item(
-                        "Spindrift",
-                        "Aluminum can",
-                        16,
-                        "spindrift"
-                ));
+                        "January 10, 2024"
+                )
+        );
 
         itemList.add(
                 new Item(
+                        "cardboard",
+                        "Cardboard",
+                        "Recycling cardboard is a simple process that involves breaking down the material into smaller pieces and placing it in a recycling bin. Cardboard can be recycled multiple times and is a valuable material for creating new products.",
+                        "Cardboard is a recyclable material that is commonly used for packaging and shipping products.",
+                        13,
+                        "January 9, 2024"
+                )
+        );
+
+        itemList.add(
+                new Item(
+                        "spindrift",
+                        "Spindrift",
+                        "Recycling an aluminum can involves cleaning the can and placing it in a recycling bin designated for aluminum materials. Aluminum is a valuable material that can be recycled multiple times without losing its quality.",
+                        "Aluminum is a recyclable material that is commonly used for beverage cans and food packaging.",
+                        16,
+                        "January 8, 2024"
+                )
+        );
+
+        itemList.add(
+                new Item(
+                        "paper",
                         "Paper",
-                        "Paper",
+                        "Recycling paper involves breaking down the material into smaller pieces and placing it in a recycling bin. Paper can be recycled multiple times and is a valuable material for creating new products.",
+                        "Paper is a recyclable material that is commonly used for printing and packaging products.",
                         9,
-                        "paper"
-                ));
+                        "April 27, 2024"
+                )
+        );
+
         itemList.add(
                 new Item(
+                        "glass",
                         "Glass",
-                        "Glass",
+                        "Recycling glass involves cleaning the material and placing it in a recycling bin designated for glass materials. Glass is a valuable material that can be recycled multiple times without losing its quality.",
+                        "Glass is a recyclable material that is commonly used for beverage bottles and food containers.",
                         14,
-                        "glass"
-                ));
+                        "March 12, 2024"
+                )
+        );
+
         itemList.add(
                 new Item(
+                        "textile",
                         "Textile",
-                        "Textile",
+                        "Recycling textiles involves donating or repurposing old clothing and fabrics. Textiles can be recycled into new products or used for insulation and other applications.",
+                        "Textiles are recyclable materials that include clothing, linens, and other fabric-based products.",
                         20,
-                        "textile"
-                ));
+                        "January 20, 2024"
+                )
+        );
+
         itemList.add(
                 new Item(
+                        "batteries",
                         "Batteries",
-                        "Batteries",
+                        "Recycling batteries involves taking them to a designated recycling center or drop-off location. Batteries contain toxic materials that can harm the environment if not disposed of properly.",
+                        "Batteries are recyclable materials that are commonly used to power electronic devices and vehicles.",
                         7,
-                        "batteries"
-                ));
+                        "January 10, 2024"
+                )
+        );
 
         itemAdapter = new ItemAdapter(itemList, getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));

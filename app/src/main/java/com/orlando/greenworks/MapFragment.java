@@ -49,11 +49,8 @@ import java.util.Objects;
  * */
 
 public class MapFragment extends Fragment implements OnMapReadyCallback{
-
-    private GoogleMap mMap;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1; // Added constant for location permission request code
     private final ArrayList<RecyclingCenter> recyclingCenterList = new ArrayList<>();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,7 +59,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
         MainActivity.fragmentTitle.setText(R.string.map); // Set the title of the fragment in the toolbar.
 
         loadData();
-
 
         // Check if user was granted permission
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -77,28 +73,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
             mapFragment.getMapAsync(this);
         }
 
-
         return view;
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         try {
-            mMap = googleMap;
-
-            // Log the API key
-            Log.d("API_KEY", BuildConfig.MAPS_API_KEY);
-
             LatLng orlando = new LatLng(28.5383, -81.3792); // Orlando, FL Map
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(orlando, 11)); // adjust default map zoom level
 
-            // Enable zoom controls
-            mMap.getUiSettings().setZoomControlsEnabled(true);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(orlando, 11)); // adjust default map zoom level
+
+            googleMap.getUiSettings().setZoomControlsEnabled(true); // Enable zoom controls
 
             // Check if user was granted permission
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
-                mMap.setMyLocationEnabled(true); // Enable location layer if permission is granted
+                googleMap.setMyLocationEnabled(true); // Enable location layer if permission is granted
             } else {
                 // Request location permission if it is not granted
                 ActivityCompat.requestPermissions(requireActivity(),
@@ -108,9 +98,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
 
             // Define the size of the marker icon
             int scaledSize = 90; // adjust this size as needed, default is 60
+            int recycleBin = R.drawable.recycle_bin_1;
 
             // Create a scaled bitmap from the original drawable resource
-            BitmapDrawable binImage = (BitmapDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.recycle_bin_1, null);
+            BitmapDrawable binImage = (BitmapDrawable) ResourcesCompat.getDrawable(getResources(), recycleBin, null);
             assert binImage != null;
             Bitmap b = binImage.getBitmap();
             Bitmap smallMarker = Bitmap.createScaledBitmap(b, scaledSize, scaledSize, false);
@@ -121,19 +112,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
             // Add a marker for each location
             for (RecyclingCenter center : recyclingCenterList) {
                 String snippet = "Click Here To Navigate To This Location";
-                Marker marker = mMap.addMarker(new MarkerOptions()
+                Marker marker = googleMap.addMarker(new MarkerOptions()
                         .position(center.getLatLng()) // Set the position of the marker
                         .title(center.getAddress()) // Set the title of the marker to the address
                         .snippet(snippet) // Set the snippet of the marker to the additional text
                         .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
-
 
                 // Store the association between the marker and the recycling center
                 markerRecyclingCenterMap.put(marker, center);
             }
 
             // Set an InfoWindow click listener
-            mMap.setOnInfoWindowClickListener(marker -> {
+            googleMap.setOnInfoWindowClickListener(marker -> {
                 // When the InfoWindow is clicked, start an intent to open Google Maps for navigation
                 Uri gmmIntentUri = Uri.parse("google.navigation:q=" + Uri.encode(marker.getTitle()));
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
@@ -141,8 +131,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
                 startActivity(mapIntent);
             });
 
-
-            mMap.setOnMarkerClickListener(marker -> {
+            googleMap.setOnMarkerClickListener(marker -> {
                 // Get the recycling center associated with the clicked marker
                 RecyclingCenter clickedCenter = markerRecyclingCenterMap.get(marker);
                 // Show the bottom sheet dialog for the clicked recycling center
@@ -196,7 +185,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
         bottomSheetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bottomSheetDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         bottomSheetDialog.getWindow().setGravity(Gravity.BOTTOM);
-
     }
 
     void loadData() {
@@ -211,7 +199,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
         super.onStop();
 
         MainActivity.fragmentTitle.setText(""); // Clear the title of the fragment in the toolbar.
-
     }
 
 }

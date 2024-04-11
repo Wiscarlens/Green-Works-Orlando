@@ -10,13 +10,28 @@ package com.orlando.greenworks;
  * - Jordan Kinlocke
  * */
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
+    private String itemImage;
     private String itemName;
     private String itemDescription;
     private String itemMaterial;
     private Integer itemPoint;
-    private String itemImage;
     private String itemDate;
+
+    public Item(){
+
+    }
+
+    public Item(String itemImage, String itemName, String itemDescription, String itemMaterial, Integer itemPoint, String itemDate) {
+        this.itemImage = itemImage;
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
+        this.itemMaterial = itemMaterial;
+        this.itemPoint = itemPoint;
+        this.itemDate = itemDate;
+    }
 
     public Item(String itemName, String itemDescription, Integer itemPoint, String itemImage) {
         this.itemName = itemName;
@@ -81,4 +96,5 @@ public class Item {
     public void setItemMaterial(String itemMaterial) {
         this.itemMaterial = itemMaterial;
     }
+
 }

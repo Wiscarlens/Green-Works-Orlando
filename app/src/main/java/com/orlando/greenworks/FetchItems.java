@@ -2,6 +2,7 @@ package com.orlando.greenworks;
 
 import android.os.AsyncTask;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -12,16 +13,29 @@ import android.util.Log;
 
 public class FetchItems {
 
-    private ItemInformationFragment itemInformationFragment;
+    private final ItemInformationFragment itemInformationFragment;
+    private FetchItemsTask fetchItemsTask; // Keep a reference to the FetchItemsTask
 
     public FetchItems(ItemInformationFragment itemInformationFragment) {
         this.itemInformationFragment = itemInformationFragment;
     }
 
     public void fetchItems(String query) {
+//        Log.d("FetchItems", "Fetching items for query: " + query);
+//        new FetchItemsTask().execute(query);
+
         Log.d("FetchItems", "Fetching items for query: " + query);
-        new FetchItemsTask().execute(query);
+
+        // Cancel the previous FetchItemsTask if it's still running
+        if (fetchItemsTask != null) {
+            fetchItemsTask.cancel(true);
+        }
+
+        // Start a new FetchItemsTask
+        fetchItemsTask = new FetchItemsTask();
+        fetchItemsTask.execute(query);
     }
+
 
     private class FetchItemsTask extends AsyncTask<String, Void, JSONObject> {
 

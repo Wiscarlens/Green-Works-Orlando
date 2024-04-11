@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -23,13 +25,8 @@ import java.util.ArrayList;
  * */
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryHolder> {
-//    private List<ScannedItems> itemsList;
     private final ArrayList<Item> itemList;
     private final Context context;
-
-//    public HistoryAdapter(List<ScannedItems> itemsList) {
-//        this.itemsList = itemsList;
-//    }
 
     public HistoryAdapter(ArrayList<Item> itemList, Context context) {
         this.itemList = itemList;
@@ -55,6 +52,19 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         holder.itemMaterial.setText(itemList.get(position).getItemMaterial());
         holder.itemPoint.setText(materialPoint);
         holder.scanDate.setText(itemList.get(position).getItemDate());
+
+        holder.historyLayout.setOnClickListener(v -> {
+                    Item item = itemList.get(position);  // Get the item that was clicked
+
+                    // Create a new instance of ItemInformationFragment with the item
+                    ItemInformationFragment itemInformationFragment = ItemInformationFragment.newInstance(item, false);
+
+                    // Show the fragment
+                    itemInformationFragment.show(((AppCompatActivity) context)
+                            .getSupportFragmentManager(), itemInformationFragment.getTag());
+
+                }
+        );
     }
 
     @Override
@@ -68,6 +78,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         private final TextView itemMaterial;
         private final TextView itemPoint;
         private final TextView scanDate;
+        private LinearLayout historyLayout;
 
         public HistoryHolder(View itemView) {
             super(itemView);
@@ -77,6 +88,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
             itemMaterial = itemView.findViewById(R.id.item_material);
             itemPoint = itemView.findViewById(R.id.item_points);
             scanDate = itemView.findViewById(R.id.scan_date);
+            historyLayout = itemView.findViewById(R.id.history_item_layout);
         }
     }
 }

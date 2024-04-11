@@ -102,4 +102,5 @@
     <string name="no_items_found">No items found.</string>
     <string name="item_image">item image</string>
     <string name="item_name">Item Name</string>
+    <string name="no_item">No items found for "%1$s".</string>
 </resources>

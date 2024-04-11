@@ -111,14 +111,6 @@ public class HistoryFragment extends Fragment {
                 )
         );
 
-
-//        itemList.add(new Item("cardboard", "Cardboard Box", "Cardboard", 10, "01/10/2024"));
-//        itemList.add(new Item("paper", "Paper", "Paper", 5, "01/09/2024"));
-//        itemList.add(new Item("spindrift", "Spindrift", "Plastic", 5, "01/08/2024"));
-//        itemList.add(new Item("dasani", "Dasani", "Plastic", 5, "01/07/2024"));
-//        itemList.add(new Item("glass", "Glass Bottle", "Glass", 10, "01/06/2024"));
-//        itemList.add(new Item("water_bottle", "Water Bottle", "Plastic", 5, "01/05/2024"));
-
     }
 
     @Override

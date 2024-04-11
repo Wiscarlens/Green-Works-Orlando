@@ -38,4 +38,45 @@
 
     </RelativeLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/zxing_transparent"
+        android:layout_marginBottom="25dp"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/typeBarcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/zxing_transparent"
+            android:contentDescription="@string/type_barcode_button"
+            android:src="@drawable/barcode_type"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/guessItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/zxing_transparent"
+            android:contentDescription="@string/guess_item"
+            android:src="@drawable/machine_learning_icon"
+            app:tint="@color/white"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"/>
+
+        <ImageButton
+            android:id="@+id/flashLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/zxing_transparent"
+            android:contentDescription="@string/flash_on_and_off_button"
+            android:src="@drawable/baseline_flash_on_24"
+            app:tint="@color/white" />
+
+
+    </LinearLayout>
+
 </RelativeLayout>

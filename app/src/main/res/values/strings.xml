@@ -124,4 +124,7 @@
 
     <string name="enable_notifications">Enable Notifications</string>
     <string name="language">Language</string>
+    <string name="type_barcode_button">type barcode button</string>
+    <string name="guess_item">Guess Item</string>
+    <string name="flash_on_and_off_button">Flash on and off button</string>
 </resources>

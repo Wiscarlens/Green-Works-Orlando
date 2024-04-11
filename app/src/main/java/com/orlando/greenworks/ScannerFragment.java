@@ -32,6 +32,7 @@ import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.journeyapps.barcodescanner.DefaultDecoderFactory;
+import com.journeyapps.barcodescanner.camera.CameraSettings;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -55,9 +56,6 @@ public class ScannerFragment extends BottomSheetDialogFragment {
 
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
 
-    public ScannerFragment(String s, String date, int cardboard) {
-    }
-
     public ScannerFragment() {
 
     }
@@ -66,7 +64,7 @@ public class ScannerFragment extends BottomSheetDialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        NotificationHelper.createNotificationChannel(getContext());
+//        NotificationHelper.createNotificationChannel(getContext());
 
     }
 
@@ -78,8 +76,12 @@ public class ScannerFragment extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.fragment_scanner, container, false);
 
         ImageButton backButton = view.findViewById(R.id.backButton);
-
         barcodeView = view.findViewById(R.id.barcodeScannerView);
+        ImageButton typeBarcode = view.findViewById(R.id.typeBarcode);
+        ImageButton guessItem = view.findViewById(R.id.guessItem);
+        ImageButton flashlight = view.findViewById(R.id.flashLight);
+
+
         Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.QR_CODE, BarcodeFormat.CODE_39);
         barcodeView.getBarcodeView().setDecoderFactory(new DefaultDecoderFactory(formats));
         barcodeView.initializeFromIntent(requireActivity().getIntent());
@@ -100,6 +102,32 @@ public class ScannerFragment extends BottomSheetDialogFragment {
         backButton.setOnClickListener(v -> {
             // Close the bottom sheet
             dismiss();
+        });
+
+        typeBarcode.setOnClickListener(v -> {
+            // Open the barcode input dialog
+            Toast.makeText(requireActivity(), "Opening barcode input...", Toast.LENGTH_SHORT).show();
+        });
+
+        guessItem.setOnClickListener(v -> {
+            // Open the item guess dialog
+            Toast.makeText(requireActivity(), "Opening item guess...", Toast.LENGTH_SHORT).show();
+        });
+
+        flashlight.setOnClickListener(v -> {
+            CameraSettings settings = barcodeView.getBarcodeView().getCameraSettings();
+
+            if (settings.isScanInverted()) {
+                settings.setScanInverted(false);
+                barcodeView.getBarcodeView().setCameraSettings(settings);
+                flashlight.setImageResource(R.drawable.baseline_flash_on_24); // Set the icon to 'flash on'
+//                Toast.makeText(requireActivity(), "Flashlight turned off", Toast.LENGTH_SHORT).show();
+            } else {
+                settings.setScanInverted(true);
+                barcodeView.getBarcodeView().setCameraSettings(settings);
+                flashlight.setImageResource(R.drawable.baseline_flash_off_24); // Set the icon to 'flash off'
+//                Toast.makeText(requireActivity(), "Flashlight turned on", Toast.LENGTH_SHORT).show();
+            }
         });
 
         return view;
@@ -154,6 +182,7 @@ public class ScannerFragment extends BottomSheetDialogFragment {
             lastText = result.getText();
 
 
+            // TODO: Add logic to handle the scanned barcode
             if (result.getText().equals("078742040370")) {
                 Drawable image = getResources().getDrawable(R.drawable.water_bottle, null);
 

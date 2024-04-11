@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,8 @@ import android.util.Base64;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
+
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import android.util.Log;
 import android.content.SharedPreferences;
@@ -36,7 +40,7 @@ import android.content.Context;
 
 public class LoginFragment extends Fragment {
 
-    private TextView loginErrorTextView;
+//    private TextView loginErrorTextView;
     private DatabaseHelper db;
 
     @Override
@@ -45,13 +49,17 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        loginErrorTextView = view.findViewById(R.id.login_errorTextView);
-        loginErrorTextView.setVisibility(View.GONE);
+//        loginErrorTextView = view.findViewById(R.id.login_errorTextView);
+//        loginErrorTextView.setVisibility(View.GONE);
 
         MainActivity mainActivity = (MainActivity) getActivity();
         assert mainActivity != null;
         mainActivity.enableNavigationViews(View.GONE);
 
+        TextInputEditText emailText = view.findViewById(R.id.emailText);
+        TextInputLayout emailLayout = view.findViewById(R.id.emailLayout);
+        TextInputEditText passwordText = view.findViewById(R.id.passwordText);
+        TextInputLayout passwordLayout = view.findViewById(R.id.passwordLayout);
         TextView forgotPassword = view.findViewById(R.id.forgotPassword);
         LinearLayout signUp = view.findViewById(R.id.signUpLoginLL);
         Button loginButton = view.findViewById(R.id.loginButton);
@@ -69,12 +77,35 @@ public class LoginFragment extends Fragment {
         // Validate the user's email and password credentials and log them in
         db = new DatabaseHelper(getContext());
         loginButton.setOnClickListener(view1 -> {
-            TextInputLayout emailLayout = view.findViewById(R.id.emailLayout);
-            TextInputLayout passwordLayout = view.findViewById(R.id.passwordLayout);
-            String email = emailLayout.getEditText().getText().toString();
-            String password = passwordLayout.getEditText().getText().toString();
+            String email = String.valueOf(emailText.getText()).toLowerCase().trim();
+            String password = String.valueOf(passwordText.getText());
 
-            // FOR DEBUGGING PURPOSES ONLY:
+            // Clear any error messages
+            emailLayout.setError(null);
+            passwordLayout.setError(null);
+
+            // Check if the email is empty
+            if (email.isEmpty()) {
+                emailLayout.setError("Email is required");
+                return;
+            }
+
+            // Check if the email is valid
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                emailLayout.setError("Please enter a valid email address");
+                return;
+            }
+
+            // Check if the password is empty
+            if (password.isEmpty()) {
+                passwordLayout.setError("Password is required");
+                return;
+            }
+
+
+
+
+            // TODO: FOR DEBUGGING PURPOSES ONLY:
             // Log the email and password entered by the user
             Log.d("LoginFragment", "Email entered: " + email);
             Log.d("LoginFragment", "Password entered: " + password);
@@ -82,13 +113,14 @@ public class LoginFragment extends Fragment {
 
             // Hash the password
             String hashedPassword = null;
+
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA-256");
                 byte[] hash = md.digest(password.getBytes(StandardCharsets.UTF_8));
                 hashedPassword = Base64.encodeToString(hash, Base64.DEFAULT).trim();
                 Log.d("LoginFragment", "Hashed password: " + hashedPassword);
             } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
+                Log.i("LoginFragment", "Hashing algorithm not found" + e.getMessage());
             }
 
             // Check if the email exists in the database
@@ -102,7 +134,7 @@ public class LoginFragment extends Fragment {
             Log.d("LoginFragment", "Email exists in database: " + emailExists);
 
             if (!emailExists) {
-                loginErrorTextView.setVisibility(View.VISIBLE);
+                Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -118,7 +150,8 @@ public class LoginFragment extends Fragment {
 
             cursor.close();
             if (!passwordMatches) {
-                loginErrorTextView.setVisibility(View.VISIBLE);
+                Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_LONG).show();
+//                loginErrorTextView.setVisibility(View.VISIBLE);
                 return;
             }
 
@@ -129,7 +162,6 @@ public class LoginFragment extends Fragment {
             editor.putString("email", email);
             editor.apply();
             Log.d("LoginFragment", "User logged in as " +email);
-
 
             changeFragment(new HomeFragment());
         });

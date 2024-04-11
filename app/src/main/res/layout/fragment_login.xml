@@ -71,7 +71,7 @@
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/logEmail"
+                android:id="@+id/emailText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
@@ -102,7 +102,7 @@
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/logPassword"
+                android:id="@+id/passwordText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="45dp"
@@ -191,18 +191,6 @@
             android:textSize="11sp"
             android:textStyle="bold"
             tools:ignore="TextContrastCheck" />
-
-        <TextView
-            android:id="@+id/login_errorTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/red"
-            android:textSize="16sp"
-            android:visibility="gone"
-            android:layout_marginTop="10dp"
-            android:text="@string/login_failure" />
-
-
 
     </LinearLayout>
 

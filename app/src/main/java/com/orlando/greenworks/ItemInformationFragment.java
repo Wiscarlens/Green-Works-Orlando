@@ -72,11 +72,6 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
             item = (Item) getArguments().getSerializable(ARG_ITEM);
         }
 
-
-//        if (item != null) {
-//            isDataFetching = true; // Set isDataFetching back to true if an item was passed as a new instance
-//        }
-
         if (isDataFetching){
             // Handle the argument passed to this fragment
             Bundle arguments = getArguments();

@@ -128,7 +128,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (int i = 0; i < badgeNames.length; i++) {
             values.put("badge_id", i + 1);
             values.put("badge_name", badgeNames[i]);
-            values.put("badge_description", badgeDescriptions[i]); // Use actual descriptions
+            values.put("badge_description", badgeDescriptions[i]);
             values.put("badge_total_points_required", badgePoints[i]);
             db.insert("Badge", null, values);
         }

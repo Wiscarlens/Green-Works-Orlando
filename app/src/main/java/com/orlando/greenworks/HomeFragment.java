@@ -89,6 +89,7 @@ public class HomeFragment extends Fragment {
         LinearLayout rewardsLayout = view.findViewById(R.id.rewardsLayout);
         LinearLayout profileLayout = view.findViewById(R.id.profileLayout);
         TextView guestLoginRegistrationLink = view.findViewById(R.id.guest_login_registration_link);
+        TextView rewardsPointsTV = view.findViewById(R.id.rewardsPointsTV);
 
         // Login / Sign-up link for guest users
         // Set an OnClickListener on the guestLoginRegistrationLink TextView
@@ -115,16 +116,19 @@ public class HomeFragment extends Fragment {
         if (isLoggedIn) {
             String email = sharedPreferences.getString("email", "");
             Log.d("HomeFragment", "Email: " + email);
-            String[] columns = {"first_name"};
+            String[] columns = {"first_name", "totalPoints"}; // Add totalPoints to the columns array
             String selection = "email_address=?";
             String[] selectionArgs = {email};
             Cursor cursor = db.getReadableDatabase().query("User", columns, selection, selectionArgs, null, null, null);
             int columnIndex = cursor.getColumnIndex("first_name");
+            int columnIndexTotalPoints = cursor.getColumnIndex("totalPoints"); // Get the index of totalPoints
             Log.d("HomeFragment", "First name column index: " + columnIndex);
             if (columnIndex != -1 && cursor.moveToFirst()) {
                 String firstName = cursor.getString(columnIndex);
                 Log.d("HomeFragment", "First name: " + firstName);
                 userFirstNameTV.setText(firstName); // Set greeting to show account user's first name
+                int totalPoints = cursor.getInt(columnIndexTotalPoints); // Fetch totalPoints from the cursor
+                rewardsPointsTV.setText(String.valueOf(totalPoints)); // Set totalPoints to rewardsPointsTV
             } else {
                 Log.d("HomeFragment", "No user found with email: " + email);
             }

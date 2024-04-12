@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "greenworks_orlando_db";
 
     // Increment the database version to trigger onUpgrade when the schema changes
-    private static final int DATABASE_VERSION = 21;
+    private static final int DATABASE_VERSION = 22;
 
 
     // Create Tables
@@ -148,7 +148,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.e("DatabaseHelper", "Error occurred during password hashing", e);
         }
         userValues.put("password", hashedPassword);
-        //userValues.put("totalPoints", 0);
+        userValues.put("totalPoints", 250);
         userValues.put("first_name", "Test");
         userValues.put("last_name", "Test");
         userValues.put("phone_number", "(555) 555-5555");

@@ -32,12 +32,12 @@ import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.journeyapps.barcodescanner.DefaultDecoderFactory;
-import com.journeyapps.barcodescanner.camera.CameraSettings;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /*
  * This is a collaborative effort by the following team members:
@@ -81,27 +81,19 @@ public class ScannerFragment extends BottomSheetDialogFragment {
         ImageButton guessItem = view.findViewById(R.id.guessItem);
         ImageButton flashlight = view.findViewById(R.id.flashLight);
 
+        AtomicBoolean isFlashOn = new AtomicBoolean(false);
 
         Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.QR_CODE, BarcodeFormat.CODE_39);
         barcodeView.getBarcodeView().setDecoderFactory(new DefaultDecoderFactory(formats));
         barcodeView.initializeFromIntent(requireActivity().getIntent());
         barcodeView.decodeContinuous(callback);
 
-//        // Request camera permission
-//        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(getActivity(),
-//                    new String[]{Manifest.permission.CAMERA},
-//                    CAMERA_PERMISSION_REQUEST_CODE);
-//        }
-
         beepManager = new BeepManager(requireActivity());
 
         barcodeView.setStatusText("");
 
         backButton.setOnClickListener(v -> {
-            // Close the bottom sheet
-            dismiss();
+            dismiss(); // Close the bottom sheet
         });
 
         typeBarcode.setOnClickListener(v -> {
@@ -115,18 +107,16 @@ public class ScannerFragment extends BottomSheetDialogFragment {
         });
 
         flashlight.setOnClickListener(v -> {
-            CameraSettings settings = barcodeView.getBarcodeView().getCameraSettings();
+            if(!isFlashOn.get()){
+                barcodeView.setTorchOn();
+                flashlight.setImageResource(R.drawable.baseline_flash_off_24);
 
-            if (settings.isScanInverted()) {
-                settings.setScanInverted(false);
-                barcodeView.getBarcodeView().setCameraSettings(settings);
-                flashlight.setImageResource(R.drawable.baseline_flash_on_24); // Set the icon to 'flash on'
-//                Toast.makeText(requireActivity(), "Flashlight turned off", Toast.LENGTH_SHORT).show();
+                isFlashOn.set(true);
             } else {
-                settings.setScanInverted(true);
-                barcodeView.getBarcodeView().setCameraSettings(settings);
-                flashlight.setImageResource(R.drawable.baseline_flash_off_24); // Set the icon to 'flash off'
-//                Toast.makeText(requireActivity(), "Flashlight turned on", Toast.LENGTH_SHORT).show();
+                barcodeView.setTorchOff();
+                flashlight.setImageResource(R.drawable.baseline_flash_on_24);
+
+                isFlashOn.set(false);
             }
         });
 

@@ -38,6 +38,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import android.util.Log;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 public class HomeFragment extends Fragment {
     private LinearLayout weeklyStats;
     private ImageView weeklyStatsImage;
@@ -78,8 +82,33 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // Get the userFirstNameTV TextView
         userFirstNameTV = view.findViewById(R.id.userFirstNameTV);
         db = new DatabaseHelper(getContext()); // Initialize the DatabaseHelper
+        // Get the other views needed
+        LinearLayout rewardsLayout = view.findViewById(R.id.rewardsLayout);
+        LinearLayout profileLayout = view.findViewById(R.id.profileLayout);
+        TextView guestLoginRegistrationLink = view.findViewById(R.id.guest_login_registration_link);
+
+        // Login / Sign-up link for guest users
+        // Set an OnClickListener on the guestLoginRegistrationLink TextView
+        guestLoginRegistrationLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create a new instance of LoginFragment
+                LoginFragment loginFragment = new LoginFragment();
+
+                // Use FragmentManager and FragmentTransaction to replace the current fragment with the LoginFragment
+                FragmentManager fragmentManager = getFragmentManager();
+                if (fragmentManager != null) {
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, loginFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            }
+        });
+
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
 
@@ -95,15 +124,28 @@ public class HomeFragment extends Fragment {
             if (columnIndex != -1 && cursor.moveToFirst()) {
                 String firstName = cursor.getString(columnIndex);
                 Log.d("HomeFragment", "First name: " + firstName);
-                userFirstNameTV.setText(firstName);
+                userFirstNameTV.setText(firstName); // Set greeting to show account user's first name
             } else {
                 Log.d("HomeFragment", "No user found with email: " + email);
             }
             Log.d("HomeFragment", "Cursor count: " + cursor.getCount());
             cursor.close();
-        } else {
+            // Make the rewards and profile pages visible and hide the Login / Sign-up link for account users
+            // Set the visibility of rewardsLayout and profileLayout to VISIBLE
+            rewardsLayout.setVisibility(View.VISIBLE);
+            profileLayout.setVisibility(View.VISIBLE);
+            // Set the visibility of guest_login_registration_link to GONE
+            guestLoginRegistrationLink.setVisibility(View.GONE);
+        } else {  // Make rewards and profile page invisible to guest users and give them a link to login or sign up
             Log.d("HomeFragment", "Is logged in: false");
+            // Set the visibility of rewardsLayout and profileLayout to GONE
+            rewardsLayout.setVisibility(View.GONE);
+            profileLayout.setVisibility(View.GONE);
+            // Set the visibility of guest_login_registration_link to VISIBLE
+            guestLoginRegistrationLink.setVisibility(View.VISIBLE);
         }
+
+
 
 
         MainActivity.fragmentTitle.setText(""); // Set the title of the fragment in the toolbar.

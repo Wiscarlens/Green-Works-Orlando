@@ -21,6 +21,12 @@ import android.os.Looper;
 
 import java.util.concurrent.ExecutionException;
 import java.lang.Exception;
+import android.util.Log;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.nio.charset.StandardCharsets;
+import android.util.Base64;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -37,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "greenworks_orlando_db";
 
     // Increment the database version to trigger onUpgrade when the schema changes
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 21;
 
 
     // Create Tables
@@ -46,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "user_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "email_address TEXT, " +
             "password TEXT, " +
-            "user_points INTEGER, " +
+            "totalPoints INTEGER, " +
             "first_name TEXT, " +
             "last_name TEXT, " +
             "phone_number INTEGER, " +
@@ -80,14 +86,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "badge_total_points_required INTEGER, " +
             "badge_image BLOB)";
 
-    // SQL statement to create the User_Badge table
-    //private static final String CREATE_TABLE_USER_BADGE = "CREATE TABLE User_Badge (" +
-    //"user_badge_id INTEGER PRIMARY KEY AUTOINCREMENT , " +
-    //"badge_id INTEGER, " +
-    //"user_id INTEGER, " +
-    //"date_earned TEXT, " +
-    //"progress INTEGER)";
-
 
     private Context context;
 
@@ -100,11 +98,65 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_USER);
         db.execSQL(CREATE_TABLE_BADGE);
-        //db.execSQL(CREATE_TABLE_USER_BADGE);
         db.execSQL(CREATE_TABLE_ITEMS);
         db.execSQL(CREATE_TABLE_USER_ITEMS);
 
-        // Populate the Items table after it's created (for API items that are periodically updated)
+        // Add new badges here
+        ContentValues values = new ContentValues();
+        String[] badgeNames = {
+                "Recruit Recycler",
+                "Initiate Recycler",
+                "Adept Recycler",
+                "Heroic Recycler",
+                "Epic Recycler",
+                "Legendary Recycler",
+                "Mythic Recycler",
+                "Ultimate Recycler"
+        };
+        String[] badgeDescriptions = {
+                "Description for Recruit Recycler",
+                "Description for Initiate Recycler",
+                "Description for Adept Recycler",
+                "Description for Heroic Recycler",
+                "Description for Epic Recycler",
+                "Description for Legendary Recycler",
+                "Description for Mythic Recycler",
+                "Description for Ultimate Recycler"
+        };
+        int[] badgePoints = {100, 250, 400, 550, 700, 850, 900, 1000};
+
+        for (int i = 0; i < badgeNames.length; i++) {
+            values.put("badge_id", i + 1);
+            values.put("badge_name", badgeNames[i]);
+            values.put("badge_description", badgeDescriptions[i]); // Use actual descriptions
+            values.put("badge_total_points_required", badgePoints[i]);
+            db.insert("Badge", null, values);
+        }
+
+
+        // Insert a test user
+        ContentValues userValues = new ContentValues();
+        userValues.put("email_address", "test@test.com");
+        // Hash the password
+        String testPassword = "Test123!";
+        String hashedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(testPassword.getBytes(StandardCharsets.UTF_8));
+            hashedPassword = Base64.encodeToString(hash, Base64.DEFAULT).trim();
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("DatabaseHelper", "Error occurred during password hashing", e);
+        }
+        userValues.put("password", hashedPassword);
+        //userValues.put("totalPoints", 0);
+        userValues.put("first_name", "Test");
+        userValues.put("last_name", "Test");
+        userValues.put("phone_number", "(555) 555-5555");
+        userValues.put("apt_suite", "00");
+        userValues.put("address", "1800 South Kirkman Road, Orlando, FL, USA");
+        db.insert("User", null, userValues);
+
+
         populateItemsTable();
 
 
@@ -122,9 +174,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Items");
         db.execSQL("DROP TABLE IF EXISTS User_Items");
         onCreate(db);
+
     }
 
     public void populateItemsTable() {
+        Log.d("DatabaseHelper", "populateItemsTable() called");
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -136,7 +190,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         connection.setRequestMethod("GET");
                         connection.setRequestProperty("Accept", "application/json");
 
-                        if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        int responseCode = connection.getResponseCode();
+                        Log.d("DB_API_Response_Code", String.valueOf(responseCode));
+
+                        if (responseCode == HttpURLConnection.HTTP_OK) {
                             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                             String inputLine;
                             StringBuilder response = new StringBuilder();
@@ -145,6 +202,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                                 response.append(inputLine);
                             }
                             in.close();
+
+                            Log.d("DB_API_Response", response.toString());
 
                             JSONObject item = new JSONObject(response.toString());
                             String name = item.optString("name");
@@ -157,6 +216,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                             values.put("item_title", name);
                             values.put("item_description", description);
                             values.put("recycle_tag", recycleTag);
+
 
                             // Set item_points based on item_id
                             // Must be done manually for each new recyclable item added to API, as API does not have item points yet
@@ -201,19 +261,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                                 values.put("item_image", getBitmapAsByteArray(R.drawable.not_found));
                             }
 
-                            db.insert("Items", null, values);
+                            long result = db.insert("Items", null, values);
+                            if (result == -1) {
+                                Log.e("DB_Insert_Error", "Failed to insert item with id: " + i);
+                            } else {
+                                Log.d("DB_Insert_Success", "Successfully inserted item with id: " + i);
+                            }
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Log.e("DB_API_Error", "Error at item id: " + i, e);
                     }
                 }
 
-
                 return null;
             }
-
-
         }.execute();
     }
-
 }

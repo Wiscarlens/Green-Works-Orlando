@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BottomAppBar bottomAppBar;
     BottomNavigationView bottomNavigationView;
     FloatingActionButton fab;
+    private DatabaseHelper dbHelper;
+
 
     EditText etToken;
 
@@ -56,8 +58,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // Create notification channel
         NotificationHelper.createNotificationChannel(this);
+
+        // open database at app launch
+        dbHelper = new DatabaseHelper(this);
+        dbHelper.getReadableDatabase();
 
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -168,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
-
     }
+
+
 }

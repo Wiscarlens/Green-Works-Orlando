@@ -43,7 +43,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MaterialViewHo
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.MaterialViewHolder holder, int position) {
         //  TODO: Turn this into a method
-        String imageName = itemList.get(position).getItemImage();
+        String imageName = itemList.get(position).getItemImagePath();
         int imageResId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
 
         String materialPoint = itemList.get(position).getItemPoint() + " points";

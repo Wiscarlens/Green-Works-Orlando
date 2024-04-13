@@ -10,9 +10,6 @@ package com.orlando.greenworks;
  * - Jordan Kinlocke
  * */
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,11 +33,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import android.util.Log;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 public class HomeFragment extends Fragment {
     private LinearLayout weeklyStats;
@@ -65,8 +57,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
 
-    private DatabaseHelper db;
-    private TextView userFirstNameTV;
+    ArrayList<Item> itemList = new ArrayList<>();
+    ArrayList<EventDay> greenDays = new ArrayList<>();
 
 
     @Override
@@ -78,82 +70,22 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Get the userFirstNameTV TextView
-        userFirstNameTV = view.findViewById(R.id.userFirstNameTV);
-        db = new DatabaseHelper(getContext()); // Initialize the DatabaseHelper
-        // Get the other views needed
-        LinearLayout rewardsLayout = view.findViewById(R.id.rewardsLayout);
-        LinearLayout profileLayout = view.findViewById(R.id.profileLayout);
-        TextView guestLoginRegistrationLink = view.findViewById(R.id.guest_login_registration_link);
-
-        // Login / Sign-up link for guest users
-        // Set an OnClickListener on the guestLoginRegistrationLink TextView
-        guestLoginRegistrationLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create a new instance of LoginFragment
-                LoginFragment loginFragment = new LoginFragment();
-
-                // Use FragmentManager and FragmentTransaction to replace the current fragment with the LoginFragment
-                FragmentManager fragmentManager = getFragmentManager();
-                if (fragmentManager != null) {
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_container, loginFragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                }
-            }
-        });
-
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
-        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
-
-        if (isLoggedIn) {
-            String email = sharedPreferences.getString("email", "");
-            Log.d("HomeFragment", "Email: " + email);
-            String[] columns = {"first_name"};
-            String selection = "email_address=?";
-            String[] selectionArgs = {email};
-            Cursor cursor = db.getReadableDatabase().query("User", columns, selection, selectionArgs, null, null, null);
-            int columnIndex = cursor.getColumnIndex("first_name");
-            Log.d("HomeFragment", "First name column index: " + columnIndex);
-            if (columnIndex != -1 && cursor.moveToFirst()) {
-                String firstName = cursor.getString(columnIndex);
-                Log.d("HomeFragment", "First name: " + firstName);
-                userFirstNameTV.setText(firstName); // Set greeting to show account user's first name
-            } else {
-                Log.d("HomeFragment", "No user found with email: " + email);
-            }
-            Log.d("HomeFragment", "Cursor count: " + cursor.getCount());
-            cursor.close();
-            // Make the rewards and profile pages visible and hide the Login / Sign-up link for account users
-            // Set the visibility of rewardsLayout and profileLayout to VISIBLE
-            rewardsLayout.setVisibility(View.VISIBLE);
-            profileLayout.setVisibility(View.VISIBLE);
-            // Set the visibility of guest_login_registration_link to GONE
-            guestLoginRegistrationLink.setVisibility(View.GONE);
-        } else {  // Make rewards and profile page invisible to guest users and give them a link to login or sign up
-            Log.d("HomeFragment", "Is logged in: false");
-            // Set the visibility of rewardsLayout and profileLayout to GONE
-            rewardsLayout.setVisibility(View.GONE);
-            profileLayout.setVisibility(View.GONE);
-            // Set the visibility of guest_login_registration_link to VISIBLE
-            guestLoginRegistrationLink.setVisibility(View.VISIBLE);
-        }
-
-
-
+        MainActivity mainActivity = (MainActivity) getActivity();
+        assert mainActivity != null;
+        mainActivity.enableNavigationViews(View.VISIBLE);
 
         MainActivity.fragmentTitle.setText(""); // Set the title of the fragment in the toolbar.
 
-        LinearLayout reward = view.findViewById(R.id.rewardsLayout);
+        LinearLayout rewardsLayout = view.findViewById(R.id.rewardsLayout);
         TextView rewardsPoint = view.findViewById(R.id.rewardsPointsTV);
+
         ImageView profileImage = view.findViewById(R.id.profileImageIV);
-        //TextView userFirstName = view.findViewById(R.id.userFirstNameTV);
+
+        TextView userFirstNameTV = view.findViewById(R.id.userFirstNameTV);
+
         SearchView searchView = view.findViewById(R.id.searchView);
         ImageButton sortingGuideButton = view.findViewById(R.id.sortingGuideIB);
 
@@ -171,13 +103,125 @@ public class HomeFragment extends Fragment {
 
         calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
 
-        Drawable buttonPressBackground = AppCompatResources.getDrawable(requireContext(), R.drawable.button_press_background);
-        Drawable buttonBackground = AppCompatResources.getDrawable(requireContext(), R.drawable.button_background);
+        RecyclerView recyclerView = view.findViewById(R.id.popularSeachRV);
 
-        int whiteColor = ContextCompat.getColor(requireContext(), R.color.white);
-        int darkGreenColor = ContextCompat.getColor(requireContext(), R.color.dark_green);
+        weeklyStats = view.findViewById(R.id.weeklyStatsLL);
+        weeklyStatsImage = view.findViewById(R.id.weeklyStatsIV);
+        weeklyStatsPoints = view.findViewById(R.id.weeklyStatsTV);
 
+        monthlyStats = view.findViewById(R.id.monthlyStatsLL);
+        monthlyStatsImage = view.findViewById(R.id.monthlyStatsIV);
+        monthlyStatsPoints = view.findViewById(R.id.monthlyStatsTV);
+
+        yearlyStats = view.findViewById(R.id.yearlyStatsLL);
+        yearlyStatsImage = view.findViewById(R.id.yearlyStatsIV);
+        yearlyStatsPoints = view.findViewById(R.id.yearlyStatsTV);
+
+        statsTopOnePoints = view.findViewById(R.id.statsTopOnePointsTV);
+        statsTopOneMaterial = view.findViewById(R.id.statsTopOneMaterialTV);
+        statsTopTwoPoints = view.findViewById(R.id.statsTopTwoPointsTV);
+        statsTopTwoMaterial = view.findViewById(R.id.statsTopTwoMaterialTV);
+        statsTopThreePoints = view.findViewById(R.id.statsTopThreePointsTV);
+        statsTopThreeMaterial = view.findViewById(R.id.statsTopThreeMaterialTV);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                SearchHandler searchHandler = new SearchHandler();
+                searchHandler.handleSearch(query, getParentFragmentManager());
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Implement if necessary for dynamic search/filtering
+                return false;
+            }
+        });
+
+
+
+        if (MainActivity.currentUser != null) {
+            userFirstNameTV.setText(MainActivity.currentUser.getFirstName()); // Custom greeting for logged in users
+        }
+
+        UIController uiController = new UIController(requireActivity());
+
+        rewardsLayout.setOnClickListener(view1 -> {
+            if (MainActivity.currentUser != null) {
+                uiController.openBottomSheet(new RewardsFragment());
+            } else {
+                uiController.changeFragment(new LoginFragment());
+            }
+        });
+
+        profileImage.setOnClickListener(v -> {
+            if (MainActivity.currentUser != null) {
+                uiController.openBottomSheet(new ProfileFragment());
+            } else {
+                uiController.changeFragment(new LoginFragment());
+            }
+        });
+
+        sortingGuideButton.setOnClickListener(v -> {
+            SortingGuideFragment sortingGuideFragment = new SortingGuideFragment();
+            sortingGuideFragment.show(getParentFragmentManager(), sortingGuideFragment.getTag());
+        });
+
+
+
+
+//        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+//        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+//
+//        if (isLoggedIn) {
+//            String email = sharedPreferences.getString("email", "");
+//            Log.d("HomeFragment", "Email: " + email);
+//            String[] columns = {"first_name"};
+//            String selection = "email_address=?";
+//            String[] selectionArgs = {email};
+//            Cursor cursor = db.getReadableDatabase().query("User", columns, selection, selectionArgs, null, null, null);
+//            int columnIndex = cursor.getColumnIndex("first_name");
+//            Log.d("HomeFragment", "First name column index: " + columnIndex);
+//            if (columnIndex != -1 && cursor.moveToFirst()) {
+//                String firstName = cursor.getString(columnIndex);
+//                Log.d("HomeFragment", "First name: " + firstName);
+//                userFirstNameTV.setText(firstName); // Set greeting to show account user's first name
+//            } else {
+//                Log.d("HomeFragment", "No user found with email: " + email);
+//            }
+//            Log.d("HomeFragment", "Cursor count: " + cursor.getCount());
+//            cursor.close();
+            // Make the rewards and profile pages visible and hide the Login / Sign-up link for account users
+            // Set the visibility of rewardsLayout and profileLayout to VISIBLE
+
+
+//            rewardsLayout.setVisibility(View.VISIBLE);
+//            profileLayout.setVisibility(View.VISIBLE);
+
+
+            // Set the visibility of guest_login_registration_link to GONE
+//            guestLoginRegistrationLink.setVisibility(View.GONE);
+//        } else {  // Make rewards and profile page invisible to guest users and give them a link to login or sign up
+//            Log.d("HomeFragment", "Is logged in: false");
+            // Set the visibility of rewardsLayout and profileLayout to GONE
+
+
+//            rewardsLayout.setVisibility(View.GONE);
+//            profileLayout.setVisibility(View.GONE);
+
+
+            // Set the visibility of guest_login_registration_link to VISIBLE
+//            guestLoginRegistrationLink.setVisibility(View.VISIBLE);
+//        }
+
+
+
+
+        // Heat map
         int currentYear;
+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             currentYear = LocalDate.now().getYear();
         } else {
@@ -188,15 +232,15 @@ public class HomeFragment extends Fragment {
             selectedDate = LocalDate.now();
         }
 
-        ArrayList<EventDay> greenDays = new ArrayList<>();
-
-        greenDays.add(new EventDay(23, 1, 2024));
-        greenDays.add(new EventDay(7, 3, 2024, 3));
-        greenDays.add(new EventDay(14, 3, 2024, 2));
-        greenDays.add(new EventDay(12, 3, 2024, 4));
-        greenDays.add(new EventDay(12, 2, 2024, 5));
-
+        loadGreenDay();
         setMonthView(greenDays);
+
+        // Progress Card
+        Drawable buttonPressBackground = AppCompatResources.getDrawable(requireContext(), R.drawable.button_press_background);
+        Drawable buttonBackground = AppCompatResources.getDrawable(requireContext(), R.drawable.button_background);
+
+        int whiteColor = ContextCompat.getColor(requireContext(), R.color.white);
+        int darkGreenColor = ContextCompat.getColor(requireContext(), R.color.dark_green);
 
         q1.setOnClickListener(v -> {
             q1.setBackground(buttonBackground);
@@ -266,46 +310,25 @@ public class HomeFragment extends Fragment {
             setMonthView(greenDays);
         });
 
-        weeklyStats = view.findViewById(R.id.weeklyStatsLL);
-        weeklyStatsImage = view.findViewById(R.id.weeklyStatsIV);
-        weeklyStatsPoints = view.findViewById(R.id.weeklyStatsTV);
 
-        monthlyStats = view.findViewById(R.id.monthlyStatsLL);
-        monthlyStatsImage = view.findViewById(R.id.monthlyStatsIV);
-        monthlyStatsPoints = view.findViewById(R.id.monthlyStatsTV);
+        // Popular Search
+        loadPopularItem();
 
-        yearlyStats = view.findViewById(R.id.yearlyStatsLL);
-        yearlyStatsImage = view.findViewById(R.id.yearlyStatsIV);
-        yearlyStatsPoints = view.findViewById(R.id.yearlyStatsTV);
+        ItemAdapter itemAdapter = new ItemAdapter(itemList, getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(itemAdapter);
 
-        statsTopOnePoints = view.findViewById(R.id.statsTopOnePointsTV);
-        statsTopOneMaterial = view.findViewById(R.id.statsTopOneMaterialTV);
-        statsTopTwoPoints = view.findViewById(R.id.statsTopTwoPointsTV);
-        statsTopTwoMaterial = view.findViewById(R.id.statsTopTwoMaterialTV);
-        statsTopThreePoints = view.findViewById(R.id.statsTopThreePointsTV);
-        statsTopThreeMaterial = view.findViewById(R.id.statsTopThreeMaterialTV);
-
-        RecyclerView recyclerView = view.findViewById(R.id.myBadgesRV);
-
-        ItemAdapter itemAdapter;
-        ArrayList<Item> itemList = new ArrayList<>();
 
         int circleSelection = R.drawable.circle_selection;
         int circle = R.drawable.circle;
         int lightGreen = R.color.light_green;
         int darkGreen = R.color.dark_green;
 
-        MainActivity mainActivity = (MainActivity) getActivity();
-        assert mainActivity != null;
-        mainActivity.enableNavigationViews(View.VISIBLE);
-
-        reward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RewardsFragment rewardsFragment = new RewardsFragment();
-                rewardsFragment.show(getParentFragmentManager(), rewardsFragment.getTag());
-            }
-        });
+        // Set value for default stats
+        setTextValues("20", "Textile",
+                "16", "Aluminum",
+                "14", "Glass"
+        );
 
         weeklyStats.setOnClickListener(v -> {
             setBackgroundResources(weeklyStats, monthlyStats, yearlyStats, circleSelection, circle, circle);
@@ -345,6 +368,19 @@ public class HomeFragment extends Fragment {
 
         });
 
+
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+    }
+
+    private void loadPopularItem() {
         itemList.add(
                 new Item(
                         "dasani",
@@ -421,24 +457,6 @@ public class HomeFragment extends Fragment {
                         "January 10, 2024"
                 )
         );
-
-        itemAdapter = new ItemAdapter(itemList, getContext());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(itemAdapter);
-
-        profileImage.setOnClickListener(v -> {
-            ProfileFragment profileFragment = new ProfileFragment();
-            profileFragment.show(getParentFragmentManager(), profileFragment.getTag());
-        });
-
-
-
-        sortingGuideButton.setOnClickListener(v -> {
-            SortingGuideFragment sortingGuideFragment = new SortingGuideFragment();
-            sortingGuideFragment.show(getParentFragmentManager(), sortingGuideFragment.getTag());
-        });
-
-        return view;
     }
 
     private void setBackgroundResources(LinearLayout weeklyStats, LinearLayout monthlyStats, LinearLayout yearlyStats, int weeklyStatsBackground, int monthlyStatsBackground, int yearlyStatsBackground) {
@@ -470,10 +488,15 @@ public class HomeFragment extends Fragment {
         statsTopThreeMaterial.setText(topThreeMaterial);
     }
 
+    private void loadGreenDay() {
+        greenDays.add(new EventDay(23, 1, 2024));
+        greenDays.add(new EventDay(7, 3, 2024, 3));
+        greenDays.add(new EventDay(14, 3, 2024, 2));
+        greenDays.add(new EventDay(12, 3, 2024, 4));
+        greenDays.add(new EventDay(12, 2, 2024, 5));
+    }
 
     private void setMonthView(ArrayList<EventDay> greenDays) {
-//        monthYearText.setText(monthYearFromDate(selectedDate));
-
         ArrayList<EventDay> daysInMonth = new ArrayList<>();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -490,8 +513,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         }
-
-
 
         HeatmapAdapter calendarAdapter = new HeatmapAdapter(daysInMonth, greenDays, (position, dayText) -> {
             // Implement onItemClick method if needed

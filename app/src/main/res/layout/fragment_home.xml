@@ -29,8 +29,7 @@
                 android:orientation="vertical"
                 android:clickable="true"
                 tools:ignore="UselessParent"
-                android:focusable="true"
-                android:visibility="gone">
+                android:focusable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -69,8 +68,7 @@
             android:orientation="horizontal"
             android:layout_gravity="end"
             android:gravity="center_vertical|end"
-            android:background="@drawable/border"
-            android:visibility="gone">
+            android:background="@drawable/border">
 
             <ImageView
                 android:id="@+id/profileImageIV"
@@ -83,16 +81,6 @@
                 android:background="@drawable/rounded_image"/>
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/guest_login_registration_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/guest_login_registration_link"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/dark_green"
-            android:visibility="visible"/>
 
     </LinearLayout>
 
@@ -179,7 +167,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Q1"
+                            android:text="@string/q1"
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="11sp"/>
@@ -202,7 +190,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Q2"
+                            android:text="@string/q2"
                             android:textStyle="bold"
                             android:textColor="@color/dark_green"
                             android:textSize="11sp"/>
@@ -225,7 +213,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Q3"
+                            android:text="@string/q3"
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="11sp"/>
@@ -248,7 +236,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Q4"
+                            android:text="@string/q4"
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="11sp"/>
@@ -275,7 +263,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Less"
+                        android:text="@string/less"
                         android:textSize="11sp"
                         android:layout_marginEnd="5dp" />
 
@@ -322,7 +310,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="More"
+                        android:text="@string/more"
                         android:textSize="11sp"
                         android:layout_marginEnd="5dp"/>
 
@@ -339,14 +327,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/last_scanned"
+        android:text="@string/popular_searches"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myBadgesRV"
+        android:id="@+id/popularSeachRV"
         android:layout_width="wrap_content"
         android:layout_height="145dp"
         tools:listitem="@layout/item_design"

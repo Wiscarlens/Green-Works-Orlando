@@ -121,7 +121,7 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
             disposeButton.setVisibility(View.VISIBLE);
         } else {
             if (!isDataFetching && item != null) {
-                String imageName = item.getItemImage();
+                String imageName = item.getItemImagePath();
                 int imageResId = requireContext().getResources().getIdentifier(imageName, "drawable", requireContext().getPackageName());
 
                 itemImage.setImageResource(imageResId);

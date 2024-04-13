@@ -10,12 +10,12 @@ package com.orlando.greenworks;
  * - Jordan Kinlocke
  * */
 
+import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,15 +26,18 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.Year;
 import java.util.Objects;
@@ -48,7 +51,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     BottomNavigationView bottomNavigationView;
     FloatingActionButton fab;
 
-    EditText etToken;
+    static FirebaseAuth mAuth;
+    FirebaseUser user;
+
+    public static User currentUser;
+
+    UIController uiController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +64,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+
         // Create notification channel
         NotificationHelper.createNotificationChannel(this);
 
-
         NavigationView navigationView = findViewById(R.id.nav_view);
+
         toolbar = findViewById(R.id.toolbar);
         bottomAppBar = findViewById(R.id.bottomAppBar);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -70,7 +81,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView yearTV = navigationView.findViewById(R.id.copyRightYear);
         fragmentTitle = toolbar.findViewById(R.id.fragmentTitle);
 
-        switchFragment(new WelcomeFragment());
+        uiController = new UIController(MainActivity.this);
+
+        MenuItem logoutItem = navigationView.getMenu().findItem(R.id.nav_logout);
+
+
+        // Check if user is logged in
+        if (user != null) {
+            String uid = user.getUid();
+
+            // Get user data from Firebase
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        currentUser = new User(
+                                uid,
+                                String.valueOf(dataSnapshot.child("firstName").getValue()),
+                                String.valueOf(dataSnapshot.child("lastName").getValue()),
+                                String.valueOf(dataSnapshot.child("address").getValue()),
+                                user.getEmail(),
+                                String.valueOf(dataSnapshot.child("phoneNumber").getValue())
+                        );
+
+                        currentUser.setSuite(String.valueOf(dataSnapshot.child("suite").getValue()));
+
+                        if (logoutItem != null) {
+                            logoutItem.setVisible(true);
+                        }
+
+                        uiController.changeFragment(new HomeFragment());
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e("Firebase", "Error getting user data", databaseError.toException());
+                }
+            });
+        } else {
+           uiController.changeFragment(new WelcomeFragment());
+            if (logoutItem != null) {
+                logoutItem.setVisible(false);
+            }
+        }
+
+
+
+
+
 
 
 
@@ -102,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             yearTV.setText(String.valueOf(Year.now()));
         }
+
 
 
         // TODO: Disable placeholder item button
@@ -146,16 +209,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ContactFragment contactFragment = new ContactFragment();
             contactFragment.show(getSupportFragmentManager(), contactFragment.getTag());
         } else if (id == R.id.nav_logout) {
-            // Dialog to confirm log out
-
-            switchFragment(new LoginFragment());
-            Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
-
+            confirmLogoutDialog();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void confirmLogoutDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Confirm")
+                .setMessage("Are you sure you want to log out?")
+                .setNegativeButton("No", (dialog, which) -> {
+                    // When user click on NO
+                    dialog.cancel();
+                })
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // When user click on YES
+                    mAuth.signOut(); // Sign out from Server
+
+                    currentUser = null;
+
+                    Toast.makeText(this, getResources().getString(R.string.logout) + "!", Toast.LENGTH_SHORT).show();
+
+                    recreate(); // Refresh MainActivity
+
+                }).show();
+    }
+
 
     protected void enableNavigationViews(int visibility) {
         toolbar.setVisibility(visibility);
@@ -163,11 +244,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setVisibility(visibility);
     }
 
-    private void switchFragment(Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .commit();
-
-    }
 }

@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "710543737586",
-    "project_id": "green-works-orlando-6e331",
-    "storage_bucket": "green-works-orlando-6e331.appspot.com"
+    "project_number": "60366290448",
+    "project_id": "green-work-orlando",
+    "storage_bucket": "green-work-orlando.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:710543737586:android:65c5414435e42d9f1e866b",
+        "mobilesdk_app_id": "1:60366290448:android:2324d70491c87f0fa11495",
         "android_client_info": {
           "package_name": "com.orlando.greenworks"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA1i-lyZGX8_otS2_zXbon3u42EqQb9jM0"
+          "current_key": "AIzaSyB040C6d8FtXal1PxszeEtK9946E3Wkvgg"
         }
       ],
       "services": {

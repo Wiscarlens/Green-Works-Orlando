@@ -43,7 +43,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
 
     @Override
     public void onBindViewHolder(@NonNull HistoryHolder holder, int position) {
-        String imageName = itemList.get(position).getItemImage();
+        String imageName = itemList.get(position).getItemImagePath();
         int imageResId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
         String materialPoint = itemList.get(position).getItemPoint() + " points";
 

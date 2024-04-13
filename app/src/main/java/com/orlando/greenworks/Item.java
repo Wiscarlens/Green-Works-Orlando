@@ -13,7 +13,7 @@ package com.orlando.greenworks;
 import java.io.Serializable;
 
 public class Item implements Serializable {
-    private String itemImage;
+    private String itemImagePath;
     private String itemName;
     private String itemDescription;
     private String itemMaterial;
@@ -25,7 +25,7 @@ public class Item implements Serializable {
     }
 
     public Item(String itemImage, String itemName, String itemDescription, String itemMaterial, Integer itemPoint, String itemDate) {
-        this.itemImage = itemImage;
+        this.itemImagePath = itemImage;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemMaterial = itemMaterial;
@@ -37,12 +37,12 @@ public class Item implements Serializable {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemPoint = itemPoint;
-        this.itemImage = itemImage;
+        this.itemImagePath = itemImage;
     }
 
     // History constructor
     public Item(String itemImage, String itemName, String itemMaterial, Integer itemPoint, String itemDate) {
-        this.itemImage = itemImage;
+        this.itemImagePath = itemImage;
         this.itemName = itemName;
         this.itemMaterial = itemMaterial;
         this.itemPoint = itemPoint;
@@ -73,12 +73,12 @@ public class Item implements Serializable {
         this.itemPoint = itemPoint;
     }
 
-    public String getItemImage() {
-        return itemImage;
+    public String getItemImagePath() {
+        return itemImagePath;
     }
 
-    public void setItemImage(String itemImage) {
-        this.itemImage = itemImage;
+    public void setItemImagePath(String itemImagePath) {
+        this.itemImagePath = itemImagePath;
     }
 
     public String getItemDate() {

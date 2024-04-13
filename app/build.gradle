@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' // NEED FOR MAPS
+    id 'com.google.gms.google-services' // Google Services Plugin
 }
 
 android {
@@ -42,6 +43,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
     implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    implementation 'com.google.firebase:firebase-storage:20.3.0'
     testImplementation 'junit:junit:4.13.2'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -52,7 +54,10 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:3.4.0' // NEED FOR MAPS
     implementation 'androidx.fragment:fragment:1.6.2'
     implementation 'com.airbnb.android:lottie:6.1.0'
-    implementation 'com.google.firebase:firebase-messaging:23.4.1'
+    implementation platform('com.google.firebase:firebase-bom:32.8.1') // Firebase BoM
+    implementation("com.google.firebase:firebase-auth") // Authentication
+    implementation 'com.google.firebase:firebase-database:20.3.1' // Realtime Database
+    implementation 'com.google.firebase:firebase-storage:20.3.0' // Storage
 }
 
 // NEED FOR MAPS

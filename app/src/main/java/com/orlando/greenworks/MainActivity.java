@@ -42,7 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.time.Year;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FirebaseHandler.OnUserCreatedListener{
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -242,6 +242,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setVisibility(visibility);
         bottomAppBar.setVisibility(visibility);
         fab.setVisibility(visibility);
+    }
+
+
+    @Override
+    public void onUserCreated() {
+        recreate();
     }
 
 }

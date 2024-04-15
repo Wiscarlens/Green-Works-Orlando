@@ -27,6 +27,14 @@ import java.util.Objects;
 public class FirebaseHandler {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private static final FirebaseStorage storage = FirebaseStorage.getInstance();
+    private OnUserCreatedListener listener;
+
+    public FirebaseHandler() {
+    }
+
+    public FirebaseHandler(OnUserCreatedListener listener) {
+        this.listener = listener;
+    }
 
     public static String getCurrentUserOnlineID(FirebaseAuth mAuth) {
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
@@ -58,7 +66,6 @@ public class FirebaseHandler {
 
                             Log.i("Firebase", "User Added Successfully!");
 
-
                         } catch (Exception e) {
                             Log.e("Firebase", "Error while adding user to online database", e);
                         }
@@ -66,6 +73,10 @@ public class FirebaseHandler {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("Firebase", "createUserWithEmail:success");
                         Toast.makeText(context, "Account created!", Toast.LENGTH_SHORT).show();
+
+                        removeFragment(); // Remove Fragment from stack
+                        listener.onUserCreated(); // Notify user created
+
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("Firebase", "createUserWithEmail:failure", task.getException());
@@ -99,6 +110,23 @@ public class FirebaseHandler {
             Log.e("FirebaseHandler", "Error while uploading image to Firebase Storage", exception);
         }).addOnSuccessListener(taskSnapshot -> Log.i("FirebaseHandler", "Image uploaded successfully"));
     }
+
+    private void removeFragment() {
+        if (listener != null) {
+            if (listener instanceof MainActivity) {
+                MainActivity mainActivity = (MainActivity) listener;
+                RegistrationFragment registrationFragment = (RegistrationFragment) mainActivity.getSupportFragmentManager().findFragmentByTag("RegistrationFragment");
+                if (registrationFragment != null) {
+                    mainActivity.getSupportFragmentManager().beginTransaction().remove(registrationFragment).commit();
+                }
+            }
+        }
+    }
+
+    public interface OnUserCreatedListener {
+        void onUserCreated();
+    }
+
 
 //    public static void readItem(String tableName, Context context){
 //        DatabaseReference firebaseRef = FirebaseDatabase.getInstance().getReference(tableName);

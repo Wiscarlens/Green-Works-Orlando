@@ -1,7 +1,9 @@
 package com.orlando.greenworks;
 
+import android.app.Dialog;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -110,9 +112,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
         });
 
         // Disable editing after an item is selected from the dropdown
-        addressAC.setOnItemClickListener((parent, view1, position, id) -> {
-            addressAC.setEnabled(false);
-        });
+        addressAC.setOnItemClickListener((parent, view1, position, id) -> addressAC.setEnabled(false));
         // Re-enable editing when the AutoCompleteTextView gains focus
         // Clear the field if the text is not part of the suggestions when it loses focus
         addressAC.setOnFocusChangeListener((v, hasFocus) -> {
@@ -137,10 +137,17 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
             }
         });
 
+        passwordTIET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                isPasswordValid(String.valueOf(s), passwordLayout);
+            }
+        });
 
-
-        // Initialize the AutoCompleteTextView for address field
-//        addressAC = view.findViewById(R.id.addressAutoComplete);
         adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line);
         addressAC.setAdapter(adapter);
         addressAC.setThreshold(1);
@@ -156,66 +163,52 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
             public void afterTextChanged(Editable s) {}
         });
 
+        createAccountButton.setOnClickListener(v -> {
+            createAccountButton.setClickable(false);
 
+            String firstName = String.valueOf(firstNameTIET.getText()).trim();
+            String lastName = String.valueOf(lastNameTIET.getText()).trim();
+            String emailAddress = String.valueOf(emailTIET.getText()).trim();
+            String password = String.valueOf(passwordTIET.getText());
+            String confirm_password = String.valueOf(confirmPasswordTIET.getText());
+            String address = String.valueOf(addressAC.getText()).trim();
+            String suite = String.valueOf(suiteTIET.getText()).trim();
+            String phoneNumber = String.valueOf(phoneNumberTIET.getText()).trim();
+            boolean termAgree = termCheckBox.isChecked();
 
-        // Store registration data in the database and open LoginFragment upon successful account creation
-//        Button createAccountButton = view.findViewById(R.id.createAccountButton);
-        createAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createAccountButton.setClickable(false);
+            clearAllErrors(firstNameTIL, lastNameTIL, addressLayout, emailLayout, phoneNumberLayout, passwordLayout, confirmPasswordLayout);
 
-                String firstName = String.valueOf(firstNameTIET.getText()).trim();
-                String lastName = String.valueOf(lastNameTIET.getText()).trim();
-                String emailAddress = String.valueOf(emailTIET.getText()).trim();
-                String password = String.valueOf(passwordTIET.getText());
-                String confirm_password = String.valueOf(confirmPasswordTIET.getText());
-                String address = String.valueOf(addressAC.getText()).trim();
-                String suite = String.valueOf(suiteTIET.getText()).trim();
-                String phoneNumber = String.valueOf(phoneNumberTIET.getText()).trim();
-                boolean termAgree = termCheckBox.isChecked();
+            // Check if the required fields are empty
+            isFieldEmpty(firstName, firstNameTIL, "First name is required");
+            isFieldEmpty(lastName, lastNameTIL, "Last name is required");
+            isFieldEmpty(emailAddress, emailLayout, "Email is required");
+            isFieldEmpty(password, passwordLayout, "Password is required");
+            isFieldEmpty(confirm_password, confirmPasswordLayout, "Confirm password is required");
+            isFieldEmpty(address, addressLayout, "Address is required");
+            isFieldEmpty(phoneNumber, phoneNumberLayout, "Phone number is required");
 
-                clearAllErrors(firstNameTIL, lastNameTIL, addressLayout, emailLayout, phoneNumberLayout, passwordLayout, confirmPasswordLayout);
+            if (isNameInvalid(firstName, firstNameTIL)) {
+                createAccountButton.setClickable(true);
+                return;
+            }
 
-                // Check if the required fields are empty
-                isFieldEmpty(firstName, firstNameTIL, "First name is required");
-                isFieldEmpty(lastName, lastNameTIL, "Last name is required");
-                isFieldEmpty(emailAddress, emailLayout, "Email is required");
-                isFieldEmpty(password, passwordLayout, "Password is required");
-                isFieldEmpty(confirm_password, confirmPasswordLayout, "Confirm password is required");
-//                isFieldEmpty(address, addressLayout, "Address is required");
-                isFieldEmpty(phoneNumber, phoneNumberLayout, "Phone number is required");
+            if (isNameInvalid(lastName, lastNameTIL)) {
+                createAccountButton.setClickable(true);
+                return;
+            }
 
+            if (!isEmailValid(emailAddress, emailLayout)) {
+                createAccountButton.setClickable(true);
+                return;
+            }
 
-//                boolean errorOccurred = false;
+            if (phoneNumber.length() != 14){
+                phoneNumberLayout.setError("Phone number is too short");
+                createAccountButton.setClickable(true);
+                return;
+            }
 
-//                // Sanitize and validate the user input fields
-//                if (emailExistsInDatabase(emailAddress)) {
-//                    // TODO: not necessary to check if phone number exists in database
-//                    Toast.makeText(getContext(), "Email already exists", Toast.LENGTH_SHORT).show();
-//                    createAccountButton.setClickable(true);
-//                    return;
-//                }
-//
-//                if (phoneNumberExistsInDatabase(phoneNumber)) {
-//                    // TODO: not necessary to check if phone number exists in database
-//                    Toast.makeText(getContext(), "Phone number already exists", Toast.LENGTH_SHORT).show();
-//                    createAccountButton.setClickable(true);
-//                    return;
-//                }
-
-
-                if (!isNameValid(firstName, firstNameTIL)) {
-                    createAccountButton.setClickable(true);
-                    return;
-                }
-
-                if (!isNameValid(lastName, lastNameTIL)) {
-                    createAccountButton.setClickable(true);
-                    return;
-                }
-
-
+            // TODO: Validate address
 //
 //                if (adapter.getPosition(address) == -1) {
 //                    addressLayout.setError("Address is invalid");
@@ -223,92 +216,52 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
 //                    return;
 //                }
 
-                if (!isEmailValid(emailAddress, emailLayout)) {
-                    createAccountButton.setClickable(true);
-                    return;
-                }
+            if (isPasswordValid(password, passwordLayout)){
+                createAccountButton.setClickable(true);
+                return;
+            }
 
+            if (!password.equals(confirm_password)) {
+                confirmPasswordLayout.setError("Passwords do not match");
+                createAccountButton.setClickable(true);
+                return;
+            }
 
+            if (!termAgree) {
+                Toast.makeText(getContext(), "Please agree to the terms and conditions", Toast.LENGTH_SHORT).show();
+                createAccountButton.setClickable(true);
+            } else {
+                // Show a ProgressDialog
+                Dialog progressDialog = new Dialog(requireContext());
+                progressDialog.setContentView(R.layout.dialog_progress);
+                progressDialog.show();
 
-                if (phoneNumber.length() != 14){
-                    phoneNumberLayout.setError("Phone number is too short");
-                    createAccountButton.setClickable(true);
-                    return;
-                }
-//
-//                if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,12}$")) {
-//                    passwordLayout.setError("Password is invalid");
-//                   createAccountButton.setClickable(true);
-//                    return;
-//                }
-//
-                if (!password.equals(confirm_password)) {
-                    confirmPasswordLayout.setError("Passwords do not match");
-                    createAccountButton.setClickable(true);
-                    return;
-                }
+                new Handler().postDelayed(() -> {
+                    if (isAdded() && getActivity() != null) {
+                        createAccountButton.setClickable(false);
+                    }
+                }, 2000);
 
-                if (!termAgree) {
-                    Toast.makeText(getContext(), "Please agree to the terms and conditions", Toast.LENGTH_SHORT).show();
-                   createAccountButton.setClickable(true);
-                    return;
-                } else {
-                    // If all checks pass then create the account and store it in the database, then proceed to login with success message
-                    // Hash the password
-//                    String hashedPassword = null;
-//                    try {
-//                        Log.d("RegistrationFragment", "Starting password hashing process");
-//                        MessageDigest md = MessageDigest.getInstance("SHA-256");
-//                        byte[] hash = md.digest(password.getBytes(StandardCharsets.UTF_8));
-//                        hashedPassword = Base64.encodeToString(hash, Base64.DEFAULT).trim();
-//                        Log.d("RegistrationFragment", "Password hashed successfully");
-//                    } catch (NoSuchAlgorithmException e) {
-//                        Log.e("RegistrationFragment", "Error occurred during password hashing", e);
-//                        // ... handle the exception ...
-//                    }
+                // Get the MainActivity instance
+                MainActivity mainActivity = (MainActivity) getActivity();
 
-//                    // Store the data in the database
-//                    DatabaseHelper db = new DatabaseHelper(getContext());
-//                    ContentValues values = new ContentValues();
-//                    values.put("first_name", firstName);
-//                    values.put("last_name", lastName);
-//                    values.put("email_address", emailAddress);
-//                    values.put("password", hashedPassword);
-//                    values.put("address", address);
-//                    values.put("apt_suite", aptSuite);
-//                    values.put("phone_number", phoneNumber);
-//
-//                    long result = db.getWritableDatabase().insert("User", null, values);
-//
-//                    if (result == -1) {
-//                        Log.e("RegistrationFragment", "Error inserting data into the database");
-//                    } else {
-//                        Log.d("RegistrationFragment", "Data inserted into the database successfully");
-//                    }
+                // Create a new FirebaseHandler instance and set the OnUserCreatedListener
+                FirebaseHandler mAuth = new FirebaseHandler(mainActivity);
 
-                    FirebaseHandler mAuth = new FirebaseHandler();
+                // Call the createUser method
+                mAuth.createUser(
+                        new User(firstName, lastName, address, suite, emailAddress, phoneNumber, password),
+                        getContext()
+                );
 
-                    mAuth.createUser(
-                            new User(firstName, lastName, address, suite, emailAddress, phoneNumber, password),
-                            getContext()
-                    );
-
-                    createAccountButton.setClickable(true);
-
-                    // Open Home Fragment
-                    UIController uiController = new UIController(requireActivity());
-                    uiController.changeFragment(new HomeFragment());
-                }
-
-
-                // Log a message at the end of the onClick method
-                Log.d("RegistrationFragment", "Create account button click ended");
+                createAccountButton.setClickable(true);
+                dismiss();
+                progressDialog.dismiss();
 
             }
+
         });
 
-
-        // Inflate the layout for this fragment
         return view;
     }
 
@@ -370,7 +323,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
                 conn.disconnect();
 
                 // Log the response
-                Log.d("fetchSuggestions", "API Response: " + response.toString());
+                Log.d("fetchSuggestions", "API Response: " + response);
 
                 JSONObject json = new JSONObject(response.toString());
                 JSONArray predictions = json.getJSONArray("predictions");
@@ -405,6 +358,70 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
         }
     }
 
+    public boolean isPasswordValid(String password, TextInputLayout passwordLayout) {
+        // Check if password is at least 8 characters long
+        if (password.length() < 8) {
+            passwordLayout.setError("Password must be at least 8 characters long");
+            return false;
+        }
+
+        // Check if password contains at least one letter, one number and one symbol
+        boolean hasLetter = false;
+        boolean hasDigit = false;
+        boolean hasSymbol = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isLetter(c)) {
+                hasLetter = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            } else if (!Character.isLetterOrDigit(c)) {
+                hasSymbol = true;
+            }
+        }
+
+        if (!hasLetter) {
+            passwordLayout.setError("Password must contain at least one letter");
+            return false;
+        }
+
+        if (!hasDigit) {
+            passwordLayout.setError("Password must contain at least one number");
+            return false;
+        }
+
+        if (!hasSymbol) {
+            passwordLayout.setError("Password must contain at least one symbol");
+            return false;
+        }
+
+        passwordLayout.setError(null);
+        return true;
+    }
+
+    public boolean isPasswordValid(String password) {
+        // Check if password is at least 8 characters long
+        if (password.length() < 8) {
+            return false;
+        }
+
+        // Check if password contains at least one letter, one number and one symbol
+        boolean hasLetter = false;
+        boolean hasDigit = false;
+        boolean hasSymbol = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isLetter(c)) {
+                hasLetter = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            } else if (!Character.isLetterOrDigit(c)) {
+                hasSymbol = true;
+            }
+        }
+
+        return hasLetter && hasDigit && hasSymbol;
+    }
 
 
     public void formatPhoneNumber(Editable s) {
@@ -438,12 +455,12 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
         }
     }
 
-    private boolean isNameValid(String name, TextInputLayout nameTIL) {
-        if (!name.matches("^[a-zA-Z]*$") || name.length() > 30) {
-            nameTIL.setError("Name is invalid");
-            return false;
+    private boolean isNameInvalid(String name, TextInputLayout nameTIL) {
+        if (name.matches("^[a-zA-Z]*$") && name.length() <= 30) {
+            return true;
         }
-        return true;
+        nameTIL.setError("Name is invalid");
+        return false;
     }
 
     private boolean isEmailValid(String email, TextInputLayout emailLayout) {

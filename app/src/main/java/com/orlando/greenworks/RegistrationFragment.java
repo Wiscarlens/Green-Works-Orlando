@@ -141,7 +141,9 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
             @Override
             public void afterTextChanged(Editable s) {
                 isPasswordValid(String.valueOf(s), passwordLayout);
@@ -184,28 +186,38 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
             isFieldEmpty(emailAddress, emailLayout, "Email is required");
             isFieldEmpty(password, passwordLayout, "Password is required");
             isFieldEmpty(confirm_password, confirmPasswordLayout, "Confirm password is required");
-            isFieldEmpty(address, addressLayout, "Address is required");
+//            isFieldEmpty(address, addressLayout, "Address is required");
             isFieldEmpty(phoneNumber, phoneNumberLayout, "Phone number is required");
 
-            if (isNameInvalid(firstName, firstNameTIL)) {
+
+            if (!isNameValid(firstName, firstNameTIL)) {
                 createAccountButton.setClickable(true);
                 return;
+            } else {
+                createAccountButton.setClickable(true);
             }
 
-            if (isNameInvalid(lastName, lastNameTIL)) {
+            if (!isNameValid(lastName, lastNameTIL)) {
                 createAccountButton.setClickable(true);
                 return;
+            } else {
+                createAccountButton.setClickable(true);
             }
+
 
             if (!isEmailValid(emailAddress, emailLayout)) {
                 createAccountButton.setClickable(true);
                 return;
+            } else {
+                createAccountButton.setClickable(true);
             }
 
             if (phoneNumber.length() != 14){
                 phoneNumberLayout.setError("Phone number is too short");
                 createAccountButton.setClickable(true);
                 return;
+            } else {
+                createAccountButton.setClickable(true);
             }
 
             // TODO: Validate address
@@ -216,7 +228,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
 //                    return;
 //                }
 
-            if (isPasswordValid(password, passwordLayout)){
+            if (!isPasswordValid(password, passwordLayout)){
                 createAccountButton.setClickable(true);
                 return;
             }
@@ -236,11 +248,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
                 progressDialog.setContentView(R.layout.dialog_progress);
                 progressDialog.show();
 
-                new Handler().postDelayed(() -> {
-                    if (isAdded() && getActivity() != null) {
-                        createAccountButton.setClickable(false);
-                    }
-                }, 2000);
+                new Handler().postDelayed(() -> {}, 2000);
 
                 // Get the MainActivity instance
                 MainActivity mainActivity = (MainActivity) getActivity();
@@ -257,7 +265,6 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
                 createAccountButton.setClickable(true);
                 dismiss();
                 progressDialog.dismiss();
-
             }
 
         });
@@ -455,7 +462,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
         }
     }
 
-    private boolean isNameInvalid(String name, TextInputLayout nameTIL) {
+    private boolean isNameValid(String name, TextInputLayout nameTIL) {
         if (name.matches("^[a-zA-Z]*$") && name.length() <= 30) {
             return true;
         }

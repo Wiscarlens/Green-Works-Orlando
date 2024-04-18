@@ -10,6 +10,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import android.util.Log;
 
+/*
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
+
 
 public class FetchItems {
 

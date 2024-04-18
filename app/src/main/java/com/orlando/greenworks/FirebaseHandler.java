@@ -24,6 +24,16 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
+/*
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
+
 public class FirebaseHandler {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private static final FirebaseStorage storage = FirebaseStorage.getInstance();

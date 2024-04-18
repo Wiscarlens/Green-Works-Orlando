@@ -5,6 +5,16 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 
+/*
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
+
 public class NetworkManager {
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

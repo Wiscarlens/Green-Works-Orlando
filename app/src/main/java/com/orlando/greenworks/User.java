@@ -1,5 +1,15 @@
 package com.orlando.greenworks;
 
+/*
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
+
 public class User {
 
     private String userID;

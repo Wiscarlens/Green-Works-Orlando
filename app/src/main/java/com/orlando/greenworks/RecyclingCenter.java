@@ -2,6 +2,16 @@ package com.orlando.greenworks;
 
 import com.google.android.gms.maps.model.LatLng;
 
+/*
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
+
 public class RecyclingCenter {
     private String name;
     private String address;

@@ -12,12 +12,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
+
+/*
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
 
 
 public class ContactFragment extends BottomSheetDialogFragment {
@@ -43,10 +55,22 @@ public class ContactFragment extends BottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         ImageButton closeButton = view.findViewById(R.id.closeButton);
+
+        TextInputEditText firstName = view.findViewById(R.id.firstNameText);
+        TextInputEditText lastName = view.findViewById(R.id.lastNameText);
+        TextInputEditText phoneNumber = view.findViewById(R.id.phoneNumberText);
+        TextInputEditText email = view.findViewById(R.id.emailText);
+        TextInputEditText message = view.findViewById(R.id.message);
         Button submitButton = view.findViewById(R.id.submitButton);
 
-
         closeButton.setOnClickListener(v -> dismiss());
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "This feature is not available yet!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

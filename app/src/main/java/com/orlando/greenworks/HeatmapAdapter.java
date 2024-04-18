@@ -10,6 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/*
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
+
 class HeatmapAdapter extends RecyclerView.Adapter<HeatmapViewHolder>
 {
     private final ArrayList<EventDay> daysOfMonth;

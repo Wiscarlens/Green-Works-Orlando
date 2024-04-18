@@ -140,4 +140,5 @@
     <string name="search_history">Search History</string>
     <string name="next_collection">Next Collection</string>
     <string name="schedule">Schedule</string>
+    <string name="unit">Unit</string>
 </resources>

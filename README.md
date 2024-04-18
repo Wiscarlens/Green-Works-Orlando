@@ -14,3 +14,12 @@ Green Works Orlando is a mobile application designed to raise awareness about re
 
    git clone https://github.com/Wiscarlens/Green-Works-Orlando.git
 
+2. **Google Maps API key:**
+
+   - Create a new project in the Google Cloud Console.
+   - Enable the Google Maps SDK for Android and PLaces.
+   - Create an API key.
+   - Add the API key to local.properties file in the following format: GMP_KEY=your_api_key
+
+   ```properties
+

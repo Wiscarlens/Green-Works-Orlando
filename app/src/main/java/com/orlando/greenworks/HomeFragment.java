@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -103,7 +104,7 @@ public class HomeFragment extends Fragment {
 
         calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
 
-        RecyclerView recyclerView = view.findViewById(R.id.popularSeachRV);
+        RecyclerView recyclerView = view.findViewById(R.id.popularSearchRV);
 
         weeklyStats = view.findViewById(R.id.weeklyStatsLL);
         weeklyStatsImage = view.findViewById(R.id.weeklyStatsIV);
@@ -123,6 +124,8 @@ public class HomeFragment extends Fragment {
         statsTopTwoMaterial = view.findViewById(R.id.statsTopTwoMaterialTV);
         statsTopThreePoints = view.findViewById(R.id.statsTopThreePointsTV);
         statsTopThreeMaterial = view.findViewById(R.id.statsTopThreeMaterialTV);
+
+        pressCurrentQuarterButton(q1, q2, q3, q4);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -169,67 +172,14 @@ public class HomeFragment extends Fragment {
             sortingGuideFragment.show(getParentFragmentManager(), sortingGuideFragment.getTag());
         });
 
-
-
-
-//        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
-//        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
-//
-//        if (isLoggedIn) {
-//            String email = sharedPreferences.getString("email", "");
-//            Log.d("HomeFragment", "Email: " + email);
-//            String[] columns = {"first_name"};
-//            String selection = "email_address=?";
-//            String[] selectionArgs = {email};
-//            Cursor cursor = db.getReadableDatabase().query("User", columns, selection, selectionArgs, null, null, null);
-//            int columnIndex = cursor.getColumnIndex("first_name");
-//            Log.d("HomeFragment", "First name column index: " + columnIndex);
-//            if (columnIndex != -1 && cursor.moveToFirst()) {
-//                String firstName = cursor.getString(columnIndex);
-//                Log.d("HomeFragment", "First name: " + firstName);
-//                userFirstNameTV.setText(firstName); // Set greeting to show account user's first name
-//            } else {
-//                Log.d("HomeFragment", "No user found with email: " + email);
-//            }
-//            Log.d("HomeFragment", "Cursor count: " + cursor.getCount());
-//            cursor.close();
-            // Make the rewards and profile pages visible and hide the Login / Sign-up link for account users
-            // Set the visibility of rewardsLayout and profileLayout to VISIBLE
-
-
-//            rewardsLayout.setVisibility(View.VISIBLE);
-//            profileLayout.setVisibility(View.VISIBLE);
-
-
-            // Set the visibility of guest_login_registration_link to GONE
-//            guestLoginRegistrationLink.setVisibility(View.GONE);
-//        } else {  // Make rewards and profile page invisible to guest users and give them a link to login or sign up
-//            Log.d("HomeFragment", "Is logged in: false");
-            // Set the visibility of rewardsLayout and profileLayout to GONE
-
-
-//            rewardsLayout.setVisibility(View.GONE);
-//            profileLayout.setVisibility(View.GONE);
-
-
-            // Set the visibility of guest_login_registration_link to VISIBLE
-//            guestLoginRegistrationLink.setVisibility(View.VISIBLE);
-//        }
-
-
-
-
         // Heat map
         int currentYear;
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             currentYear = LocalDate.now().getYear();
+            selectedDate = LocalDate.now();
         } else {
             currentYear = 2024;
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            selectedDate = LocalDate.now();
         }
 
         loadGreenDay();
@@ -318,7 +268,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(itemAdapter);
 
-
         int circleSelection = R.drawable.circle_selection;
         int circle = R.drawable.circle;
         int lightGreen = R.color.light_green;
@@ -367,8 +316,6 @@ public class HomeFragment extends Fragment {
             );
 
         });
-
-
 
         return view;
     }
@@ -459,25 +406,29 @@ public class HomeFragment extends Fragment {
         );
     }
 
-    private void setBackgroundResources(LinearLayout weeklyStats, LinearLayout monthlyStats, LinearLayout yearlyStats, int weeklyStatsBackground, int monthlyStatsBackground, int yearlyStatsBackground) {
+    private void setBackgroundResources(LinearLayout weeklyStats, LinearLayout monthlyStats,
+                                        LinearLayout yearlyStats, int weeklyStatsBackground, int monthlyStatsBackground, int yearlyStatsBackground) {
         weeklyStats.setBackgroundResource(weeklyStatsBackground);
         monthlyStats.setBackgroundResource(monthlyStatsBackground);
         yearlyStats.setBackgroundResource(yearlyStatsBackground);
     }
 
-    private void setColorFilters(ImageView weeklyStatsImage, ImageView monthlyStatsImage, ImageView yearlyStatsImage, int weeklyColor, int monthlyColor, int yearlyColor) {
+    private void setColorFilters(ImageView weeklyStatsImage, ImageView monthlyStatsImage,
+                                 ImageView yearlyStatsImage, int weeklyColor, int monthlyColor, int yearlyColor) {
         weeklyStatsImage.setColorFilter(ContextCompat.getColor(requireContext(), weeklyColor));
         monthlyStatsImage.setColorFilter(ContextCompat.getColor(requireContext(), monthlyColor));
         yearlyStatsImage.setColorFilter(ContextCompat.getColor(requireContext(), yearlyColor));
     }
 
-    private void setTextColors(@NonNull TextView weeklyStatsPoints, TextView monthlyStatsPoints, TextView yearlyStatsPoints, int weeklyColor, int monthlyColor, int yearlyColor) {
+    private void setTextColors(@NonNull TextView weeklyStatsPoints, TextView monthlyStatsPoints,
+                               TextView yearlyStatsPoints, int weeklyColor, int monthlyColor, int yearlyColor) {
         weeklyStatsPoints.setTextColor(ContextCompat.getColor(requireContext(), weeklyColor));
         monthlyStatsPoints.setTextColor(ContextCompat.getColor(requireContext(), monthlyColor));
         yearlyStatsPoints.setTextColor(ContextCompat.getColor(requireContext(), yearlyColor));
     }
 
-    private void setTextValues(String topOnePoints, String topOneMaterial, String topTwoPoints, String topTwoMaterial, String topThreePoints, String topThreeMaterial) {
+    private void setTextValues(String topOnePoints, String topOneMaterial, String topTwoPoints,
+                               String topTwoMaterial, String topThreePoints, String topThreeMaterial) {
         statsTopOnePoints.setText(topOnePoints);
         statsTopOneMaterial.setText(topOneMaterial);
 
@@ -524,6 +475,47 @@ public class HomeFragment extends Fragment {
 
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
+    }
+
+    public int getQuarterOfTheYear() {
+        LocalDate currentDate;
+        Month currentMonth;
+        int currentMonthValue = 0;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            currentDate = LocalDate.now();
+            currentMonth = currentDate.getMonth();
+            currentMonthValue = currentMonth.getValue();
+        }
+
+        if (currentMonthValue <= 3) {
+            return 1;
+        } else if (currentMonthValue <= 6) {
+            return 2;
+        } else if (currentMonthValue <= 9) {
+            return 3;
+        } else {
+            return 4;
+        }
+    }
+
+    private void pressCurrentQuarterButton(FrameLayout q1, FrameLayout q2, FrameLayout q3, FrameLayout q4) {
+        int currentQuarter = getQuarterOfTheYear();
+
+        switch (currentQuarter) {
+            case 1:
+                q1.performClick();
+                break;
+            case 2:
+                q2.performClick();
+                break;
+            case 3:
+                q3.performClick();
+                break;
+            case 4:
+                q4.performClick();
+                break;
+        }
     }
 
 }

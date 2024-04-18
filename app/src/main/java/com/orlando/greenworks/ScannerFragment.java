@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -97,8 +98,30 @@ public class ScannerFragment extends BottomSheetDialogFragment {
         });
 
         typeBarcode.setOnClickListener(v -> {
-            // Open the barcode input dialog
-            Toast.makeText(requireActivity(), "Opening barcode input...", Toast.LENGTH_SHORT).show();
+            // Create an AlertDialog.Builder instance
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+
+            // Create an EditText instance
+            EditText input = new EditText(requireActivity());
+
+            // Set the EditText instance as the AlertDialog's view
+            builder.setView(input);
+
+            // Set the AlertDialog's message
+            builder.setMessage("Please enter the barcode");
+
+            // Set the AlertDialog's positive button
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                String barcode = input.getText().toString();
+                // Handle the entered barcode
+                Toast.makeText(requireActivity(), "Entered barcode: " + barcode, Toast.LENGTH_SHORT).show();
+            });
+
+            // Set the AlertDialog's negative button
+            builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+
+            // Show the AlertDialog
+            builder.show();
         });
 
         guessItem.setOnClickListener(v -> {

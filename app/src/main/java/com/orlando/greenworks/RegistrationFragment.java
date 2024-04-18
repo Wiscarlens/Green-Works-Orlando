@@ -111,7 +111,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                fetchSuggestions(s.toString());
+                fetchAddressSuggestions(s.toString());
             }
             @Override
             public void afterTextChanged(Editable s) {
@@ -169,7 +169,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                fetchSuggestions(s.toString());
+                fetchAddressSuggestions(s.toString());
             }
             @Override
             public void afterTextChanged(Editable s) {}
@@ -321,8 +321,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
     // Fetch address suggestions from Google Places API
     // If address suggestions do not show:
     // If your API key is restricted, please make sure it is correctly configured and can call the Places API.
-    private void fetchSuggestions(String input) {
-
+    private void fetchAddressSuggestions(String input) {
         new Thread(() -> {
             try {
                 String encodedInput = URLEncoder.encode(input, StandardCharsets.UTF_8.toString());
@@ -330,12 +329,15 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
                 URL url = new URL(urlString);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
+
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder response = new StringBuilder();
                 String line;
+
                 while ((line = reader.readLine()) != null) {
                     response.append(line);
                 }
+
                 reader.close();
                 conn.disconnect();
 
@@ -345,6 +347,7 @@ public class RegistrationFragment extends BottomSheetDialogFragment {
                 JSONObject json = new JSONObject(response.toString());
                 JSONArray predictions = json.getJSONArray("predictions");
                 List<String> suggestions = new ArrayList<>();
+
                 for (int i = 0; i < predictions.length(); i++) {
                     String suggestion = predictions.getJSONObject(i).getString("description");
                     suggestions.add(suggestion);

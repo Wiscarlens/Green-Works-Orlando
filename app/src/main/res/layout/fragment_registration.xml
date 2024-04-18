@@ -155,6 +155,7 @@
                     android:focusable="true"
                     android:paddingStart="45dp"
                     android:paddingEnd="0dp"
+                    android:textSize="11sp"
                     android:textColorHint="@color/light_gray"
                     android:completionThreshold="1"
                     tools:ignore="TextContrastCheck" />
@@ -171,13 +172,12 @@
                 app:boxBackgroundMode="outline"
                 app:helperText=""
                 android:layout_marginTop="8dp"
-                android:hint="Unit"
+                android:hint="@string/unit"
                 app:helperTextTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:endIconMode="clear_text">
-
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/aptSuiteText"

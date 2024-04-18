@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
         android:baselineAligned="false">
@@ -63,8 +63,8 @@
 
         <LinearLayout
             android:id="@+id/profileLayout"
-            android:layout_width="65dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:orientation="horizontal"
             android:layout_gravity="end"
             android:gravity="center_vertical|end"
@@ -88,7 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:gravity="center">
 
         <TextView
@@ -131,7 +131,7 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:orientation="vertical"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:gravity="center">
 
         <androidx.cardview.widget.CardView
@@ -248,7 +248,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/calendarRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
+                    android:layout_height="145dp"
                     tools:itemCount="7"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
@@ -316,8 +316,6 @@
 
                 </LinearLayout>
 
-
-
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -334,10 +332,11 @@
         android:layout_marginBottom="5dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/popularSeachRV"
-        android:layout_width="wrap_content"
-        android:layout_height="145dp"
+        android:id="@+id/popularSearchRV"
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
         tools:listitem="@layout/item_design"
+        android:orientation="horizontal"
         tools:listitemcount="10"/>
 
     <TextView
@@ -364,13 +363,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/weeklyStatsLL"
-                    android:layout_width="70dp"
+                    android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/circle_selection"
                     android:gravity="center"
@@ -393,13 +392,14 @@
                         android:layout_marginTop="5dp"
                         android:text="@string/weekly"
                         android:textColor="@color/light_green"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
+                        android:textSize="9sp"
+                        android:textStyle="bold"
+                        tools:ignore="SmallSp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/monthlyStatsLL"
-                    android:layout_width="70dp"
+                    android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -423,14 +423,15 @@
                         android:layout_height="wrap_content"
                         android:text="@string/monthly"
                         android:textColor="@color/dark_green"
-                        android:textSize="11sp"
+                        android:textSize="9sp"
                         android:textStyle="bold"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="5dp"
+                        tools:ignore="SmallSp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/yearlyStatsLL"
-                    android:layout_width="70dp"
+                    android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -452,9 +453,10 @@
                         android:layout_height="wrap_content"
                         android:text="@string/yearly"
                         android:textColor="@color/dark_green"
-                        android:textSize="11sp"
+                        android:textSize="9sp"
                         android:textStyle="bold"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="5dp"
+                        tools:ignore="SmallSp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -500,7 +502,6 @@
                             android:textStyle="bold" />
 
                     </LinearLayout>
-
 
                     <View
                         android:layout_width="2dp"
@@ -579,10 +580,5 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <FrameLayout
-    android:id="@+id/fragment_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
 
 </LinearLayout>

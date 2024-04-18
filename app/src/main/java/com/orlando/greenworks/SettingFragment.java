@@ -25,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 /*
  * This is a collaborative effort by the following team members:
@@ -130,7 +131,7 @@ public class SettingFragment extends BottomSheetDialogFragment {
             NotificationHelper.createNotificationChannel(getContext());
             NotificationHelper.displayNotification(getContext(), "Trash Pickup Day", "Your next trash pickup day is May 15th");
             notificationStatus.setText("Notifications Enabled");
-
+            Toast.makeText(getActivity(), "You have enabled notifications", Toast.LENGTH_SHORT).show();
             // Add the code to open the system settings for the app
             Intent intent = new Intent();
             intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");

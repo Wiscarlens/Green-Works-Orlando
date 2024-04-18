@@ -136,6 +136,13 @@
             android:layout_height="250dp"/>
 
     </LinearLayout>
+    <Switch
+    android:id="@+id/switch_pickup_notifications"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Enable pickup notifications"
+    android:layout_marginStart="25dp"
+    android:layout_marginTop="15dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -165,6 +172,7 @@
             android:textColor="@color/gray"
             android:gravity="center"
             android:layout_marginBottom="45dp"/>
+
 
 
     </LinearLayout>

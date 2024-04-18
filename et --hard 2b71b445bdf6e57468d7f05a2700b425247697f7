@@ -1,0 +1,909 @@
+[33mcommit 2b71b445bdf6e57468d7f05a2700b425247697f7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: jkinlocke <kinlocke.jordan@gmail.com>
+Date:   Tue Apr 9 08:41:07 2024 -0400
+
+    Local notificatoins
+
+[33mcommit 26bea98a9e5f07c9657af5c444a7bff2657ebd36[m
+Merge: c8fd2cc 35fe819
+Author: jkinlocke <kinlocke.jordan@gmail.com>
+Date:   Sun Mar 31 23:12:45 2024 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       .idea/deploymentTargetDropDown.xml
+    #       app/src/main/java/com/orlando/greenworks/MainActivity.java
+
+[33mcommit 35fe819a4f21c5cebfed03bfa57122721947880b[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Sun Mar 31 18:09:14 2024 -0400
+
+    Map: Re-add navigation instruction text and add real contact information and hours for each recycle center location.
+
+[33mcommit 1c9531cf580e260a63f3bbd8be63e5f4c2a07114[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sat Mar 30 22:07:54 2024 -0400
+
+    put fragment on top of button navigation and work on profile UI
+
+[33mcommit 765522ffb77d9752700dbad8d7385768d280dd3f[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sat Mar 30 20:20:56 2024 -0400
+
+    delete landscape fragment_map.xml
+
+[33mcommit c2c3d1fc4b31ba66fd26e70ab28021e643c2e9e8[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sat Mar 30 20:16:44 2024 -0400
+
+    add a toast message when location permission is dinied
+
+[33mcommit bd27672605763245d9962d6e924553e143b1cfbc[m
+Merge: 9db554b 93062b8
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sat Mar 30 20:06:33 2024 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       .idea/deploymentTargetDropDown.xml
+    #       app/src/main/java/com/orlando/greenworks/MapFragment.java
+
+[33mcommit 9db554bf5278b0eefa7303853e58b794827b4b4a[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sat Mar 30 20:05:55 2024 -0400
+
+    Polishing map UI Element
+
+[33mcommit 93062b8604887c292981d8a4febfbc96e7175ba4[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Sat Mar 30 02:23:31 2024 -0400
+
+    Restore responsive map layout and add navigation instruction text to map location markers.
+
+[33mcommit c723dbb491d6ab4486f232bb5442f99e23a6a30e[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Fri Mar 29 22:39:06 2024 -0400
+
+    Fixed registration layout ("Login" "Sign-Up" and "Logout" were crashing the app) since "login" branch merge. Also, multiple instance bug for sorting guide search was reintroduced (pressing "Exit" on Item Information Screen was opening second instance of Sorting Guide). Reverted SortingGuideFragment and IteInformationFragment code to commit bda4a62 to fix this.
+
+[33mcommit 94a87b07608db5b5c5436e5eadb41a7379cd7175[m
+Merge: d1aaae0 72fc715
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Fri Mar 29 22:26:21 2024 -0400
+
+    Merge branch 'master' of https://github.com/Wiscarlens/Green-Works-Orlando
+    
+    # Conflicts:
+    #       app/src/main/res/layout/fragment_registration.xml
+
+[33mcommit d1aaae033d6c78a0393337f42fa60c17d71436af[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Fri Mar 29 22:17:39 2024 -0400
+
+    Fixed registration layout ("Login" "Sign-Up" and "Logout" were crashing the app) since "login" branch merge. Also, multiple instance bug for sorting guide search was reintroduced (pressing "Exit" on Item Information Screen was opening second instance of Sorting Guide). Reverted SortingGuideFragment and IteInformationFragment code to commit bda4a62 to fix this.
+
+[33mcommit 72fc7150d75bed5428b0e9a0daeda0a5f73a030a[m
+Merge: 79c5ced ade338e
+Author: Amanpreet Singh <51552560+Singhamanpreet2002@users.noreply.github.com>
+Date:   Fri Mar 29 18:22:09 2024 -0400
+
+    Merge branch 'login'
+
+[33mcommit 79c5cedd139fc8290aea1d3e2b3a25803a06805c[m
+Merge: 84f0478 614fc00
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Thu Mar 28 20:12:30 2024 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 84f0478f0fa87385cb8142ca2bbe304554ae7a4f[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Thu Mar 28 20:12:09 2024 -0400
+
+    fix RewardsFragment. Use RecyclerView instead of static view.
+
+[33mcommit 614fc00148b825f4d153b09e6d825d3fd04236c9[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Thu Mar 28 17:12:40 2024 -0400
+
+    Added local database for backend and added phone number field to registration layout
+
+[33mcommit c8fd2cc146337e6e90f51b0a88d222019fe88347[m
+Author: jkinlocke <kinlocke.jordan@gmail.com>
+Date:   Thu Mar 28 15:35:46 2024 -0400
+
+    Push notifications(not operational yet).
+
+[33mcommit bda4a622bc7b0353135ceb0f3df8fde1ef0c81a8[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Wed Mar 27 23:46:28 2024 -0400
+
+    Fixed multiple instances bug in SortingGuideFragment and ItemInformationFragment
+
+[33mcommit 41c4a38e756af9e52d6a6e58f24d2d538e491a3f[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Wed Mar 27 23:44:16 2024 -0400
+
+    "Fixed multiple instances bug in SortingGuideFragment and ItemInformationFragment"
+
+[33mcommit 5bbb3c3da9ac87b963c45d5af54e2a270644462f[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Wed Mar 27 15:08:32 2024 -0400
+
+    Create Badge.java class
+
+[33mcommit ade338eb52b1d16a07233836c69f0d8047a98fde[m[33m ([m[1;31morigin/login[m[33m)[m
+Author: Amanpreet Singh <51552560+Singhamanpreet2002@users.noreply.github.com>
+Date:   Tue Mar 26 20:32:51 2024 -0400
+
+    Login / registration
+    
+    using local db
+
+[33mcommit 8e87930d5bcd4c58d16dd7162ebd7c314d104f49[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Tue Mar 26 17:28:02 2024 -0400
+
+    design badge card and badge progress card to make fragment_rewards.xml more dynamic
+
+[33mcommit 41f3befc4e37baf809ac6ccbf07d7ce592d4b8a4[m
+Merge: b6242aa 3b0c54f
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Tue Mar 26 13:12:43 2024 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit b6242aa029717e0fe6dfb6b947843ad1fcef5c46[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Tue Mar 26 13:05:20 2024 -0400
+
+    Add animation into sorting guide screen. Add dispose button intoItem information screen
+
+[33mcommit 3b0c54ffb6d07eb9a85454482c483c84a0a28948[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Mon Mar 25 23:46:58 2024 -0400
+
+    fix issue where sorting guide search was opening multiple instances of item information fragment
+
+[33mcommit f0273e6f26d625c3d861bc3d92e94d9f18450652[m
+Merge: c18cfc6 a979b76
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Mon Mar 25 23:27:23 2024 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       app/src/main/java/com/orlando/greenworks/SortingGuideFragment.java
+
+[33mcommit c18cfc6279e73994ae2bc474bef6d83294b794a7[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Mon Mar 25 23:25:48 2024 -0400
+
+    added click listener for close button on sorting guide. Also fixed issue where user cannot see item information layout after entering search query in sorting guide search.
+
+[33mcommit a979b763e640a657f99555f4378e1a66db7ef11d[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Mon Mar 25 22:37:59 2024 -0400
+
+    Fix layout in sorting guide fragment and make ItemInformationFragment a bottomsheet layout
+
+[33mcommit 73d58497627ce216309088ff949edb6a7462b07c[m
+Merge: 1e42766 ac2973b
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Mon Mar 25 22:22:38 2024 -0400
+
+    Merge branch 'master' of https://github.com/Wiscarlens/Green-Works-Orlando
+    
+    # Conflicts:
+    #       app/src/main/java/com/orlando/greenworks/SortingGuideFragment.java
+    #       app/src/main/res/layout-land/fragment_map.xml
+
+[33mcommit ac2973ba5acf43d47253d31a2589738f3a4cf0e7[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Mon Mar 25 19:41:15 2024 -0400
+
+    Make sorting guide bottom sheet layout full screen
+
+[33mcommit e767413f0e00aff6e6b1b14257b8fac0e792c04a[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Mon Mar 25 19:21:18 2024 -0400
+
+    create a custom calendar to add a dot under schedule day
+
+[33mcommit 5839d0e2c4d7636611ca2d75ba6112f47d3047ea[m
+Merge: c02797c 8f3834b
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Mon Mar 25 15:54:08 2024 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit c02797c3fe918345016802736262e6fe7aa159e5[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Mon Mar 25 15:53:50 2024 -0400
+
+    rename CalendarAdapter.java to HeatmapAdapter and CalendarViewHolder.java to HeatmapViewHolder.java.
+
+[33mcommit 8f3834b29226c48ee421ff5aa7a52b9915245d67[m
+Merge: 937fc39 cdc752f
+Author: Wiscarlens Lucius <89714495+Wiscarlens@users.noreply.github.com>
+Date:   Mon Mar 25 15:21:52 2024 -0400
+
+    Merge pull request #2 from Wiscarlens/features/item_information_backend
+    
+    add backend for item information
+
+[33mcommit cdc752f5785b4c88e78870b0fdd53dc5d78f9f4c[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Sun Mar 24 15:13:23 2024 -0400
+
+    add backend for item information
+
+[33mcommit 1e4276643c8e1c8ce95b477ec2545822d9f34cb8[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Sun Mar 24 15:04:14 2024 -0400
+
+    add backend for item information
+
+[33mcommit 937fc3987b9051cc22a1a985d78aa4aef18ee839[m
+Author: Administrator <egklausner@gmail.com>
+Date:   Sat Mar 23 14:06:08 2024 -0400
+
+    restore map layout
+
+[33mcommit ba0d1a8cc6d770e0c4a0252dcff2ed0fcae31d99[m
+Merge: 9c3c1eb 2c5342a
+Author: Administrator <egklausner@gmail.com>
+Date:   Sat Mar 23 14:04:56 2024 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       app/src/main/res/layout-land/fragment_map.xml
+    #       app/src/main/res/layout/fragment_map.xml
+
+[33mcommit 9c3c1eb4d933566d8913e68791a9a4e2195f8fc5[m
+Author: Administrator <egklausner@gmail.com>
+Date:   Sat Mar 23 14:04:08 2024 -0400
+
+    restore map layout
+
+[33mcommit 2c5342afebcb83a08b7236d8187d89d45740d151[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Wed Mar 20 12:21:39 2024 -0400
+
+    show user a message when there is no collection schedule
+
+[33mcommit 623319f9d6adc20420a6e877acd99a0b58562ac0[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Wed Mar 20 01:11:25 2024 -0400
+
+    Show details when user click on a schedule day
+
+[33mcommit 6d8367b2d19073e9e26f5084f73afa883f79cefc[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Tue Mar 19 21:44:42 2024 -0400
+
+    Refine calendar UI
+
+[33mcommit 79550601e9b401f4037bc04724ea0ce938065f5e[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Mon Mar 18 22:21:20 2024 -0400
+
+    Replace ScannedItems.java with item class instead. Make image path as a string instead of Drawable
+
+[33mcommit 0eedd81ca2e3f75a56848ec43d5a99143efbdfe5[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Mon Mar 18 21:15:16 2024 -0400
+
+    Add fragment title into tittle bar. add more details to history card.
+
+[33mcommit 40cacdb7e3a42bf789eba8eb3c39cda800a19133[m
+Author: Administrator <egklausner@gmail.com>
+Date:   Sun Mar 17 14:45:22 2024 -0400
+
+    added responsive layout for map
+
+[33mcommit ced68206c8af7ed64b94525689eb302632636937[m
+Merge: a0951be d9478ad
+Author: Administrator <egklausner@gmail.com>
+Date:   Sun Mar 17 14:43:39 2024 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       app/src/main/res/values/strings.xml
+
+[33mcommit a0951be706744e1f0a93896aa9bb182412afe7ae[m
+Author: Administrator <egklausner@gmail.com>
+Date:   Sun Mar 17 14:42:49 2024 -0400
+
+    added responsive layout for map
+
+[33mcommit d9478ad90416d449e2459e56d8d2b46bdcd1e8c6[m
+Author: Alexandra Perez <alexandraperez@Alexandras-MacBook-Pro.local>
+Date:   Sat Mar 16 20:17:21 2024 -0400
+
+    fixed up rewards ui
+
+[33mcommit c9bb7cea9120708ec53686bcae34d4a4e393dd09[m
+Merge: 557eb31 f2f3c7d
+Author: Alexandra Perez <alexandraperez@Alexandras-MacBook-Pro.local>
+Date:   Fri Mar 15 21:46:38 2024 -0400
+
+    fixing merge issues
+
+[33mcommit 557eb318cbe1520e0f36a97395228ee6cfcc9faa[m
+Author: Alexandra Perez <alexandraperez@Alexandras-MacBook-Pro.local>
+Date:   Fri Mar 15 21:16:21 2024 -0400
+
+    sorting guide and rewards page initial UI
+
+[33mcommit f2f3c7dcb57e9493daac72f742f2566029c1e21b[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Fri Mar 15 21:04:51 2024 -0400
+
+    make logo in welcome screen same size as button and field. Fix warning message in map class.
+
+[33mcommit df81f0f11ceac4ecaf1aa4bbe66c42af99d3e1e6[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Thu Mar 14 21:11:21 2024 -0400
+
+    Fix bottom sheet headers
+
+[33mcommit 5c3a13af1a5b6fb95319c0c8791a62e913c1c1ae[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Wed Mar 13 17:39:13 2024 -0400
+
+    Make contact form and registration screen uniform
+
+[33mcommit 4e6094e931c6c173904ff4c727091b7f9270339a[m
+Merge: d1f7799 17d1582
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Wed Mar 13 12:04:33 2024 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       app/src/main/java/com/orlando/greenworks/HomeFragment.java
+
+[33mcommit d1f7799eadf800747c94ad766128261308e19372[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Wed Mar 13 12:02:07 2024 -0400
+
+    add heatmap and quater button
+
+[33mcommit 17d158279040a148c9ba8e520e3ea3882fa00320[m
+Merge: fd00795 97cef2c
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Tue Mar 12 22:46:19 2024 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit fd007950736904515c5534210b2a19c0f2a0c49f[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Tue Mar 12 22:45:59 2024 -0400
+
+    history page fix and ui changes
+
+[33mcommit 97cef2c6684dc57311aa3e2a33743056821eced5[m
+Merge: 4a3f84a 6018354
+Author: Amanpreet Singh <51552560+Singhamanpreet2002@users.noreply.github.com>
+Date:   Tue Mar 12 21:17:29 2024 -0400
+
+    Merge branch 'master' of https://github.com/Wiscarlens/Green-Works-Orlando
+
+[33mcommit 4a3f84ab8c434e7cee55561c372a5ccd9dd0964e[m
+Author: Amanpreet Singh <51552560+Singhamanpreet2002@users.noreply.github.com>
+Date:   Tue Mar 12 21:17:27 2024 -0400
+
+    profile update
+
+[33mcommit 6018354d2fce3d39b80eec03f124f1d56b5e8dfd[m
+Merge: 2da0c0c 37ad87d
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Tue Mar 12 19:41:17 2024 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 2da0c0ca8a398794ecd886d60e47afedb3d68ee4[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Tue Mar 12 19:40:57 2024 -0400
+
+    fixed gps location loading issue
+
+[33mcommit 37ad87df96eebd8e340f5dbbc3947b4a2ac58918[m
+Merge: 7d3eab8 479abd0
+Author: jkinlocke <kinlocke.jordan@gmail.com>
+Date:   Tue Mar 12 17:44:01 2024 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 7d3eab8f0eff9c2fb7a3fadf39513e6a5430c607[m
+Author: jkinlocke <kinlocke.jordan@gmail.com>
+Date:   Tue Mar 12 17:43:19 2024 -0400
+
+    History page
+
+[33mcommit 479abd0d743c9fb46e17dba91aee97b0c2663b92[m
+Author: Amanpreet Singh <51552560+Singhamanpreet2002@users.noreply.github.com>
+Date:   Tue Mar 12 15:32:12 2024 -0400
+
+    profile page
+
+[33mcommit 07b78f437e047d8485c618ed8fdd3a6940431da1[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Tue Mar 12 06:46:11 2024 -0400
+
+    fixed gps location loading issue
+
+[33mcommit 9364a86afc101b2dc1e81d0b125f516e6152deaf[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Sat Mar 9 02:28:42 2024 -0500
+
+    add settings screen
+
+[33mcommit 97de884ad1537fb78b41a86cc4469e44ba13da31[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Thu Mar 7 20:54:04 2024 -0500
+
+    add item information screen - front-end
+
+[33mcommit 65d554feb2d0c27a77fe6cf77e3d1b865edb106d[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Wed Mar 6 22:58:42 2024 -0500
+
+    remove calendar updates
+
+[33mcommit e705afcbb5a968476f73d3c1f2ba8106b4a4749c[m
+Merge: 0857c91 67ddfa3
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Wed Mar 6 20:17:27 2024 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 0857c91ae6107c7eda98c83c6401322f6dde8fee[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Wed Mar 6 20:16:42 2024 -0500
+
+    update calendar using recollect api, styling changes to maps page
+
+[33mcommit 67ddfa37dd340f65eee5d88af567bcec767f2b45[m
+Merge: 100d7e9 911b9f2
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Tue Mar 5 11:22:00 2024 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 100d7e97c83eb7cd8b3fe8b5c4830efbd27ffca0[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Tue Mar 5 11:21:41 2024 -0500
+
+    done with contact screen UI
+
+[33mcommit 911b9f2871b3c77d77d0ec7284da3f263fa78d4a[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Mon Mar 4 21:11:15 2024 -0500
+
+    Fix maps
+
+[33mcommit f298db319c08303069a572374d079ee109806e35[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Mon Mar 4 21:07:19 2024 -0500
+
+    Fix maps
+
+[33mcommit e1a4e4665332853b3c39502d9a28a185f4afea35[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sat Mar 2 21:25:10 2024 -0500
+
+    fix style bug
+
+[33mcommit 0e640cb67ca1d1973f82a0e1b9ff0421c148ccff[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sat Mar 2 21:12:29 2024 -0500
+
+    create contact fragment
+
+[33mcommit c42b910ff603c3f864a2ee7910a9882f7cf7a43c[m
+Merge: ac3277c 8403c0d
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sat Mar 2 21:06:28 2024 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit ac3277ccdb23c913d089db16b6cae4803fd97a90[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sat Mar 2 21:04:36 2024 -0500
+
+    create contact fragment
+
+[33mcommit 8403c0d41f211f7380fd1f0114103e2c178d57b8[m
+Merge: 4be1da0 626f33e
+Author: jkinlocke <132914282+jkinlocke@users.noreply.github.com>
+Date:   Fri Mar 1 23:16:23 2024 -0500
+
+    Merge pull request #1 from Wiscarlens/master1
+    
+    Master1
+
+[33mcommit 626f33e49ba37c69a5225193266a3828306c3548[m
+Merge: c1bca66 4be1da0
+Author: jkinlocke <kinlocke.jordan@gmail.com>
+Date:   Fri Mar 1 23:12:25 2024 -0500
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       app/src/main/res/values/colors.xml
+    #       app/src/main/res/values/styles.xml
+
+[33mcommit c1bca66e788fc215fef8bfc18c0bc82f041ab2b4[m
+Author: jkinlocke <kinlocke.jordan@gmail.com>
+Date:   Fri Mar 1 23:10:50 2024 -0500
+
+    Calendar fragment and HistoryFragment, Unfortunately history fragment is not up and running as yet
+
+[33mcommit 4be1da031f4a854a788559036878ce1887d0e3ab[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Fri Mar 1 21:27:20 2024 -0500
+
+    Add close button to terms fragment and update gradle version
+
+[33mcommit 3fd8112d14e374f71ca4e807b96e474c9fa197be[m
+Author: jkinlocke <kinlocke.jordan@gmail.com>
+Date:   Wed Feb 28 20:23:43 2024 -0500
+
+    Calendar fragment
+
+[33mcommit 03cec23f795fb513adeb48b968842abe0e477355[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Wed Feb 28 19:47:54 2024 -0500
+
+    Add terms of service fragment
+
+[33mcommit 1c509b7e4b710e5c9f53c002ad9292369e3471a1[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Tue Feb 27 15:45:43 2024 -0500
+
+    Optimize welcome and signup page. Change color to match them.
+
+[33mcommit b21666301814c2e3ca9b7b0ccdf2c17e44094618[m
+Merge: 342a237 aaf2ac4
+Author: Amanpreet Singh <51552560+Singhamanpreet2002@users.noreply.github.com>
+Date:   Mon Feb 26 21:25:26 2024 -0500
+
+    Merge branch 'master' of https://github.com/Wiscarlens/Green-Works-Orlando
+
+[33mcommit 342a2374c83713d347f312b0dc48c2b2cf4647df[m
+Author: Amanpreet Singh <51552560+Singhamanpreet2002@users.noreply.github.com>
+Date:   Mon Feb 26 21:25:18 2024 -0500
+
+    sign up page
+
+[33mcommit aaf2ac4509d4e36c6cc70b1b2465ef757dc73db0[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Mon Feb 26 01:55:26 2024 -0500
+
+    Added try-catch block in onMapReady method to handle runtime exceptions
+
+[33mcommit 0570fbef5b4897a3fb91ff7c368453caf18d0ca1[m
+Author: Amanpreet Singh <51552560+Singhamanpreet2002@users.noreply.github.com>
+Date:   Sat Feb 24 20:39:53 2024 -0500
+
+    Welcome page
+
+[33mcommit 356452bb19a92feb04b4f9c62a1aef62c75997e1[m
+Author: Wiscarlens <wiscarlens@gmail.com>
+Date:   Fri Feb 23 20:35:24 2024 -0500
+
+    rename package name to greenworks
+
+[33mcommit 5f38ead0d0e5f6d764cc5090db56b2c7f04b575f[m
+Author: Wiscarlens <wiscarlens@gmail.com>
+Date:   Fri Feb 23 20:29:55 2024 -0500
+
+    add app icon
+
+[33mcommit 7ea33503f7a12b77f14797271afc07a2dae007f9[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Wed Feb 21 22:07:40 2024 -0500
+
+    change color to dark green
+
+[33mcommit 14af525a502ad651844e32b734beaffe67a8ae7d[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Wed Feb 21 21:32:31 2024 -0500
+
+    map fragment
+
+[33mcommit a7b4fc25b054bf3785cd3cdc91447d5c620184bb[m
+Author: Wiscarlens <wiscarlens@gmail.com>
+Date:   Wed Feb 21 20:54:08 2024 -0500
+
+    push API map key
+
+[33mcommit f24ee5c14b525deeecf568c49a3d2d93cf4408c2[m
+Merge: f27f85d f764954
+Author: Wiscarlens <wiscarlens@gmail.com>
+Date:   Wed Feb 21 20:05:19 2024 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit f27f85d11695ecde3a586f66a56854456271b703[m
+Author: Wiscarlens <wiscarlens@gmail.com>
+Date:   Wed Feb 21 20:04:54 2024 -0500
+
+    change progress theme color to green
+
+[33mcommit f764954124abb34764739b33e18d9b5296aeea9b[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Wed Feb 21 19:53:35 2024 -0500
+
+    fix maps
+
+[33mcommit a0a9166dd5b9108f6cf30b4b4afbd3d2a335176e[m
+Author: Wiscarlens <wiscarlens@gmail.com>
+Date:   Tue Feb 20 14:36:38 2024 -0500
+
+    change progress theme color to green
+
+[33mcommit 9941acac33df01a7d34b933e5fe206ebef2531ab[m
+Author: Wiscarlens <wiscarlens@gmail.com>
+Date:   Mon Feb 19 22:00:16 2024 -0500
+
+    item dialog is working fine
+
+[33mcommit 225030d5a06db2701c4bf6efbbe8fe747f204aa1[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Sun Feb 18 05:08:12 2024 -0500
+
+    maps update - add new logos
+
+[33mcommit 19efb89c967436722f53d533b7d406f97ead88f8[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Sun Feb 18 05:02:17 2024 -0500
+
+    maps update
+
+[33mcommit 227a72257ed4d1704fcfa28de7b5732c04da5322[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Sun Feb 18 04:39:19 2024 -0500
+
+    maps update - add new logos
+
+[33mcommit dea0163e6ef5b249cd0dd1fd18519b30eafd2941[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Sun Feb 18 04:35:32 2024 -0500
+
+    maps update - add new logos
+
+[33mcommit 84d2e7c3b0806b7850c8845b4f6c41e0bac843db[m
+Merge: 1d5edc5 76d1fba
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Sun Feb 18 04:06:20 2024 -0500
+
+    maps update
+
+[33mcommit 1d5edc56a76d3edd4dcedd9dbd16416af7793763[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Sun Feb 18 03:59:52 2024 -0500
+
+    maps update
+
+[33mcommit 76d1fba4daa38d3fcc295a5d11e8fc7286f1173e[m
+Author: Wiscarlens <wiscarlens@gmail.com>
+Date:   Sat Feb 17 17:47:46 2024 -0500
+
+    Send user to login page when they log out
+
+[33mcommit 383285c13d5beb98e041fba931c9075aefde1b85[m
+Author: Wiscarlens <wiscarlens@gmail.com>
+Date:   Sat Feb 17 17:33:20 2024 -0500
+
+    set click listener for forgot password and make it a bottomsheet fragment.
+
+[33mcommit 2ef4f486e165d52b13a1c419992cf6803b400b1e[m
+Author: Wiscarlens <wiscarlens@gmail.com>
+Date:   Sat Feb 17 17:19:48 2024 -0500
+
+    create login and reset password fragment
+
+[33mcommit 43c00570229aa0720e0fed83e5b30e8ef02a673d[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Thu Feb 15 23:15:03 2024 -0500
+
+    decrease the size of item design
+
+[33mcommit b71b9e49b12f7bd116ad9003dda256267c630c1f[m
+Merge: c58a803 789d51d
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Thu Feb 15 22:52:46 2024 -0500
+
+    Merge branch 'master' of https://github.com/Wiscarlens/Orlando_Recycle
+    
+    # Conflicts:
+    #       app/src/main/AndroidManifest.xml
+    #       app/src/main/java/com/orlando/orlandorecycle/MainActivity.java
+    #       app/src/main/java/com/orlando/orlandorecycle/ScannerManager.java
+
+[33mcommit c58a8033ad1087438e6da1ea96cce5108819b4aa[m
+Merge: 8254932 8655025
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Thu Feb 15 22:52:14 2024 -0500
+
+    maps update
+
+[33mcommit 789d51d0e41f11ad55fea4349d89ef0e29316341[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Thu Feb 15 10:12:29 2024 -0500
+
+    Create ScannerFragment. Scanner fragment is a bottom sheet layout. It will be call when user click on scan button.
+
+[33mcommit d1a27f68f8306fef3d033f2a90589aad1aad2f19[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Thu Feb 15 00:19:24 2024 -0500
+
+    Scanner feature is able to read bar code and show in a toast message
+
+[33mcommit 8655025a42c22823387a0747fd7a6badd0cc1c70[m
+Author: Wiscarlens <wiscarlens@gmail.com>
+Date:   Wed Feb 14 10:31:18 2024 -0500
+
+    working on scanner feature
+
+[33mcommit c24e73681d3811ec25805768504019a93915e300[m
+Author: Wiscarlens <wiscarlens@gmail.com>
+Date:   Tue Feb 13 23:42:49 2024 -0500
+
+    Update dependencies
+
+[33mcommit 82549328fff2d77920a8c9586c0f4a0aee04d03d[m
+Merge: 9236630 0b85aa6
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Tue Feb 13 14:46:45 2024 -0500
+
+    Merge branch 'master' of https://github.com/Wiscarlens/Orlando_Recycle
+    
+    # Conflicts:
+    #       app/src/main/java/com/orlando/orlandorecycle/MapFragment.java
+
+[33mcommit 9236630e74af55bd251f1a99eb9f283e5fbba737[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Tue Feb 13 14:42:28 2024 -0500
+
+    maps update
+
+[33mcommit 0b85aa6d6080b780d70cbcd97f243547f9e02b8d[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sun Feb 11 16:07:59 2024 -0500
+
+    Create method that change the UI of the progress card
+
+[33mcommit b25f656cf6cbe0e844c071df0d0aab542e53f5c6[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sat Feb 10 17:47:14 2024 -0500
+
+    Add member name in all class
+
+[33mcommit 920b5492a43cfa95bb0979e84993137262dbeca1[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Fri Feb 9 20:21:08 2024 -0500
+
+    Make stats clickable
+
+[33mcommit edb2c6eda9db8cbe5710192c7eb8daf3b5b318e1[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Fri Feb 9 19:17:15 2024 -0500
+
+    Populate recyclerview lasted scanned
+
+[33mcommit 055f9678b15dedabdaf44a4563cc2fb5fcda631d[m
+Merge: 161f0c0 58db317
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Fri Feb 9 19:07:53 2024 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 161f0c0f8805f74da7b88a92322c88f16990ba8f[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Fri Feb 9 11:46:43 2024 -0500
+
+    Populate recyclerview lasted scanned
+
+[33mcommit 58db3175c525cef09f041121357f1d81f5beea92[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Fri Feb 9 02:06:46 2024 -0500
+
+    maps update
+
+[33mcommit e685405afe42e7a528c74e836d30606f89a0f4c5[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Fri Feb 9 02:04:02 2024 -0500
+
+    maps update
+
+[33mcommit 85426805ceea77789ee9c45ff42aee4447cbe90d[m
+Author: sneseric <eklausner@mail.valenciacollege.edu>
+Date:   Thu Feb 8 22:11:09 2024 -0500
+
+    maps update
+
+[33mcommit 12a8ebf3211cfcb612a3c4636d5079278d8565d7[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Thu Feb 8 10:15:44 2024 -0500
+
+    Add app version in navigation
+
+[33mcommit dc6d5776a4fc8fee39e21e73e429fc20982c4be9[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Thu Feb 8 09:22:13 2024 -0500
+
+    Add logo to the side navigation
+
+[33mcommit 5606b96d2dc3081e603e990e717250318356f573[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Wed Feb 7 21:17:34 2024 -0500
+
+    Set bottom sheet layout for profile and sorting guide
+
+[33mcommit ae00860a7f612917812daef520219496e3bbf363[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Wed Feb 7 12:04:35 2024 -0500
+
+    Map button to their fragment
+
+[33mcommit d39234d8415c7992024fbf43c3aa900761db6fe7[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Mon Feb 5 22:16:13 2024 -0500
+
+    create other screens fragment
+
+[33mcommit 3cd4efe574acbd36ec47b4d4ae48144ef71ed57d[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sun Feb 4 22:31:16 2024 -0500
+
+    Design Sorting Guide button
+
+[33mcommit 3738ce8ce7dbdcfe9fb4d424981e26e9d8c7e59a[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sat Feb 3 21:52:32 2024 -0500
+
+    work on material scrollview
+
+[33mcommit 3728cd0660fbbbbcc039fd3cda2cb6f620c69bbd[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Fri Feb 2 01:59:09 2024 -0500
+
+    create bottom navigation and header for the home screen
+
+[33mcommit f4d1b0bdb83a5cfda86568b0de8a4e570a7d1152[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Thu Feb 1 22:20:52 2024 -0500
+
+    Create navigation and set app themes colors
+
+[33mcommit 38f59ae8451a5f6af52f67a91cd2733487feb92f[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Mon Jan 29 23:30:04 2024 -0500
+
+    Android team
+
+[33mcommit 332aebaef08464d4219eaa06ab27d1b15be5d8f8[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Sun Jan 28 10:13:43 2024 -0500
+
+    Add team members
+
+[33mcommit 249e01178052d4a9c49b239116ea76c998d28da8[m
+Author: Wiscarlens Lucius <89714495+Wiscarlens@users.noreply.github.com>
+Date:   Fri Jan 26 20:32:22 2024 -0500
+
+    Create README.md
+
+[33mcommit 83bcd90683358d456364737a2e388b2fdffbc301[m
+Author: Wiscarlens Lucius <wiscarlens@gmail.com>
+Date:   Fri Jan 26 20:31:21 2024 -0500
+
+    Initial commit

@@ -21,9 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OrlandoRecycle"
-        android:enableOnBackInvokedCallback="true"
         android:hardwareAccelerated="true"
         tools:targetApi="tiramisu">
+        <receiver android:name=".NotificationReceiver"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

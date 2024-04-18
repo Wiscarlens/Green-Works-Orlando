@@ -21,6 +21,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -108,11 +113,44 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 //
 //        });
 
-
+        Switch switchPickupNotifications = view.findViewById(R.id.switch_pickup_notifications);
+        switchPickupNotifications.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                scheduleNotifications();
+                Toast.makeText(getActivity(), "You have enabled trash pickup notifications", Toast.LENGTH_SHORT).show();
+            } else {
+                cancelNotifications();
+                Toast.makeText(getActivity(), "You have disabled trash pickup notifications", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }
 
+
+    private void scheduleNotifications() {
+    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+    Intent intent = new Intent(getActivity(), NotificationReceiver.class);
+    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+    // Schedule the alarm to start at approximately 2:00 p.m.
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTimeInMillis(System.currentTimeMillis());
+    calendar.set(Calendar.HOUR_OF_DAY, 14);
+
+    // With setInexactRepeating(), you have to use one of the AlarmManager interval
+    // constants--in this case, AlarmManager.INTERVAL_DAY.
+    alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+            AlarmManager.INTERVAL_DAY, pendingIntent);
+}
+
+private void cancelNotifications() {
+    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+    Intent intent = new Intent(getActivity(), NotificationReceiver.class);
+    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+    alarmManager.cancel(pendingIntent);
+}
     private void setMonthView() {
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);

@@ -10,22 +10,25 @@ package com.orlando.greenworks;
  * - Jordan Kinlocke
  * */
 
+import android.app.AlarmManager;
+import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -80,56 +83,12 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         previousMonth.setOnClickListener(this::previousMonthAction);
         nextMonth.setOnClickListener(this::nextMonthAction);
 
-//        CalendarView calendarView = view.findViewById(R.id.calendarView);
-//
-//        calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
-//            scheduleList.removeAllViews();  // Clear the layout before adding new schedule
-//
-//            Calendar calendar = Calendar.getInstance();
-//            calendar.set(year, month, dayOfMonth);
-//
-//            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-//            String monthName = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
-//
-//            switch (dayOfWeek) {
-//                case Calendar.MONDAY:
-//                    showSchedule("Monday, " + monthName + " " +dayOfMonth, "Garbage");
-//                    break;
-//                case Calendar.THURSDAY:
-//                    showSchedule("Thursday, " + monthName + " " + dayOfMonth, "Recycling");
-//                    showSchedule("Thursday, " + monthName + " " + dayOfMonth, "Yard Waste");
-//                    break;
-//                case Calendar.TUESDAY:
-//                case Calendar.WEDNESDAY:
-//                case Calendar.FRIDAY:
-//                case Calendar.SATURDAY:
-//                case Calendar.SUNDAY:
-//                    noSchedule.setVisibility(View.VISIBLE);
-//                    scheduleList.addView(noSchedule); // Add the noSchedule TextView back to the layout
-//                    break;
-//                default:
-//                    Log.i("Day of week", "Invalid day");
-//            }
-//
-//        });
-
-        Switch switchPickupNotifications = view.findViewById(R.id.switch_pickup_notifications);
-        switchPickupNotifications.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                scheduleNotifications();
-                Toast.makeText(getActivity(), "You have enabled trash pickup notifications", Toast.LENGTH_SHORT).show();
-            } else {
-                cancelNotifications();
-                Toast.makeText(getActivity(), "You have disabled trash pickup notifications", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         return view;
     }
 
 
     private void scheduleNotifications() {
-    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+    AlarmManager alarmManager = (AlarmManager) requireActivity().getSystemService(Context.ALARM_SERVICE);
     Intent intent = new Intent(getActivity(), NotificationReceiver.class);
     PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
@@ -145,7 +104,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 }
 
 private void cancelNotifications() {
-    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+    AlarmManager alarmManager = (AlarmManager) requireActivity().getSystemService(Context.ALARM_SERVICE);
     Intent intent = new Intent(getActivity(), NotificationReceiver.class);
     PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
@@ -286,6 +245,7 @@ private void cancelNotifications() {
 
         noSchedule.setVisibility(View.GONE);
 
+
         // Set the properties of the views with the custom information
         scheduleDate.setText(date);
         scheduleRecyclingType.setText(recyclingType);
@@ -295,22 +255,55 @@ private void cancelNotifications() {
             case "Garbage":
                 scheduleRecyclingIcon.setImageResource(R.drawable.garbage);
                 scheduleCard.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.medium_dark_green));
+
+                scheduleCard.setOnClickListener(v -> {
+                    showBottomSheetDialog(recyclingType, "Place your garbage bin on the curb by 6:00 a.m. on the day of collection.");
+                });
+
                 break;
             case "Recycling":
                 scheduleRecyclingIcon.setImageResource(R.drawable.recycling);
                 scheduleCard.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.green));
+
+                scheduleCard.setOnClickListener(v -> {
+                    showBottomSheetDialog(recyclingType, "Put all of your recyclable into one cart. Do not bag your recyclables.");
+                });
+
                 break;
             case "Yard Waste":
                 scheduleRecyclingIcon.setImageResource(R.drawable.yard_waste);
                 scheduleCard.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.dark_green));
-                break;
 
-                // TODO: add default case show nothing is schedule for that day
+                scheduleCard.setOnClickListener(v -> {
+                    showBottomSheetDialog(recyclingType, "Yard waste include only grass, clippings, leaves, and small branches. Yard Waste must be bagged or tied in bundles");
+                });
+
+                break;
         }
 
 
         // Add the schedule view to the scheduleList
         scheduleList.addView(scheduleView);
+    }
+
+    public void showBottomSheetDialog(String recyclingType, String collectionDetails) {
+        final Dialog bottomSheetDialog = new Dialog(requireContext());
+
+        bottomSheetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        bottomSheetDialog.setContentView(R.layout.calendar_bottom_dialog);
+
+        TextView recyclingTypeTV = bottomSheetDialog.findViewById(R.id.wasteType);
+        TextView collectionDetailsTV = bottomSheetDialog.findViewById(R.id.collectionDetails);
+
+        recyclingTypeTV.setText(recyclingType);
+        collectionDetailsTV.setText(collectionDetails);
+
+        bottomSheetDialog.show();
+
+        Objects.requireNonNull(bottomSheetDialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        bottomSheetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        bottomSheetDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        bottomSheetDialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
     @Override

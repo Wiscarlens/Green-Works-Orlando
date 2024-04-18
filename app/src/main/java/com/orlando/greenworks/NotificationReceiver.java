@@ -8,6 +8,16 @@ import android.content.Intent;
 import android.os.Build;
 import androidx.core.app.NotificationCompat;
 
+/*
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
+
 public class NotificationReceiver extends BroadcastReceiver {
     private static final String CHANNEL_ID = "com.orlando.greenworks.notification.channel";
 

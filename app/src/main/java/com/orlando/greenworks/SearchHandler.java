@@ -6,6 +6,16 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentManager;
 
+/*
+ * This is a collaborative effort by the following team members:
+ * Team members:
+ * - Wiscarlens Lucius (Team Leader)
+ * - Amanpreet Singh
+ * - Alexandra Perez
+ * - Eric Klausner
+ * - Jordan Kinlocke
+ * */
+
 public class SearchHandler {
     private boolean isSearchInProgress = false;
 

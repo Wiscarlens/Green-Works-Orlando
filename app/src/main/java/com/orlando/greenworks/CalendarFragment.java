@@ -10,22 +10,25 @@ package com.orlando.greenworks;
  * - Jordan Kinlocke
  * */
 
+import android.app.AlarmManager;
+import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -42,11 +45,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
 
-    /**
-     * CalendarFragment is a Fragment that displays a calendar to the user.
-     * It allows the user to navigate through the calendar and view schedules for each day.
-     * It also provides the functionality to enable or disable notifications for trash pickup.
-     */
+
 public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener {
     private LayoutInflater inflater;
     private ViewGroup container;
@@ -57,12 +56,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
 
-
-    /**
-     * This method is called to do initial creation of the fragment.
-     * It sets up the calendar view and the actions for the previous and next month buttons.
-     * It also sets up the switch for enabling or disabling notifications.
-     */
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflater = inflater;
         this.container = container;
@@ -90,27 +83,12 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         previousMonth.setOnClickListener(this::previousMonthAction);
         nextMonth.setOnClickListener(this::nextMonthAction);
 
-
-        Switch switchPickupNotifications = view.findViewById(R.id.switch_pickup_notifications);
-        switchPickupNotifications.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                scheduleNotifications();
-                Toast.makeText(getActivity(), "You have enabled trash pickup notifications", Toast.LENGTH_SHORT).show();
-            } else {
-                cancelNotifications();
-                Toast.makeText(getActivity(), "You have disabled trash pickup notifications", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         return view;
     }
 
-    /**
-     * This method schedules notifications for trash pickup.
-     * The notifications are scheduled to start at approximately 2:00 p.m. every day.
-     */
+
     private void scheduleNotifications() {
-    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+    AlarmManager alarmManager = (AlarmManager) requireActivity().getSystemService(Context.ALARM_SERVICE);
     Intent intent = new Intent(getActivity(), NotificationReceiver.class);
     PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
@@ -123,24 +101,15 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     // constants--in this case, AlarmManager.INTERVAL_DAY.
     alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
             AlarmManager.INTERVAL_DAY, pendingIntent);
-    }
+}
 
-    /**
-     * This method cancels the scheduled notifications for trash pickup.
-     */
-    private void cancelNotifications() {
-        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+private void cancelNotifications() {
+    AlarmManager alarmManager = (AlarmManager) requireActivity().getSystemService(Context.ALARM_SERVICE);
+    Intent intent = new Intent(getActivity(), NotificationReceiver.class);
+    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-        alarmManager.cancel(pendingIntent);
-    }
-
-
-    /**
-     * This method sets up the month view for the calendar.
-     * It sets the text for the month and year and populates the calendar with the days of the month.
-     */
+    alarmManager.cancel(pendingIntent);
+}
     private void setMonthView() {
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
@@ -151,9 +120,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
-    /**
-     * This method returns an ArrayList of Strings representing the days in the given month.
-     */
     private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = null;
@@ -190,9 +156,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         return  daysInMonthArray;
     }
 
-    /**
-     * This method returns a String representing the month and year of the given date.
-     */
     private String monthYearFromDate(LocalDate date)
     {
         DateTimeFormatter formatter = null;
@@ -205,10 +168,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         return null;
     }
 
-    /**
-     * This method is called when the previous month button is clicked.
-     * It decrements the selected date by one month and updates the month view.
-     */
     public void previousMonthAction(View view)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -217,10 +176,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         setMonthView();
     }
 
-    /**
-     * This method is called when the next month button is clicked.
-     * It increments the selected date by one month and updates the month view.
-     */
     public void nextMonthAction(View view)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -229,10 +184,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         setMonthView();
     }
 
-    /**
-     * This method is called when a day in the calendar is clicked.
-     * It displays the schedule for the selected day.
-     */
     @Override
     public void onItemClick(int position, String dayText) {
         if(!dayText.isEmpty())
@@ -281,9 +232,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         }
     }
 
-    /**
-     * This method displays the schedule for the selected day.
-     */
     void showSchedule(String date, String recyclingType) {
         // Inflate the layout for schedule design
         View scheduleView = inflater.inflate(R.layout.schedule_design, container, false);
@@ -297,6 +245,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
         noSchedule.setVisibility(View.GONE);
 
+
         // Set the properties of the views with the custom information
         scheduleDate.setText(date);
         scheduleRecyclingType.setText(recyclingType);
@@ -306,17 +255,30 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             case "Garbage":
                 scheduleRecyclingIcon.setImageResource(R.drawable.garbage);
                 scheduleCard.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.medium_dark_green));
+
+                scheduleCard.setOnClickListener(v -> {
+                    showBottomSheetDialog(recyclingType, "Place your garbage bin on the curb by 6:00 a.m. on the day of collection.");
+                });
+
                 break;
             case "Recycling":
                 scheduleRecyclingIcon.setImageResource(R.drawable.recycling);
                 scheduleCard.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.green));
+
+                scheduleCard.setOnClickListener(v -> {
+                    showBottomSheetDialog(recyclingType, "Put all of your recyclable into one cart. Do not bag your recyclables.");
+                });
+
                 break;
             case "Yard Waste":
                 scheduleRecyclingIcon.setImageResource(R.drawable.yard_waste);
                 scheduleCard.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.dark_green));
-                break;
 
-                // TODO: add default case show nothing is schedule for that day
+                scheduleCard.setOnClickListener(v -> {
+                    showBottomSheetDialog(recyclingType, "Yard waste include only grass, clippings, leaves, and small branches. Yard Waste must be bagged or tied in bundles");
+                });
+
+                break;
         }
 
 
@@ -324,10 +286,26 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         scheduleList.addView(scheduleView);
     }
 
-    /**
-     * This method is called when the fragment is no longer started.
-     * It clears the title of the fragment in the toolbar.
-     */
+    public void showBottomSheetDialog(String recyclingType, String collectionDetails) {
+        final Dialog bottomSheetDialog = new Dialog(requireContext());
+
+        bottomSheetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        bottomSheetDialog.setContentView(R.layout.calendar_bottom_dialog);
+
+        TextView recyclingTypeTV = bottomSheetDialog.findViewById(R.id.wasteType);
+        TextView collectionDetailsTV = bottomSheetDialog.findViewById(R.id.collectionDetails);
+
+        recyclingTypeTV.setText(recyclingType);
+        collectionDetailsTV.setText(collectionDetails);
+
+        bottomSheetDialog.show();
+
+        Objects.requireNonNull(bottomSheetDialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        bottomSheetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        bottomSheetDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        bottomSheetDialog.getWindow().setGravity(Gravity.BOTTOM);
+    }
+
     @Override
     public void onStop() {
         super.onStop();

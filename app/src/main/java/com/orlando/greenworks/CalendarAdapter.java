@@ -19,17 +19,32 @@ import java.util.ArrayList;
  * - Jordan Kinlocke
  * */
 
+/**
+ * The CalendarAdapter class extends the RecyclerView.Adapter class.
+ * It represents an adapter for a RecyclerView to display a list of days in a month.
+ */
 class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 {
     private final ArrayList<String> daysOfMonth;
     private final OnItemListener onItemListener;
 
+    /**
+     * This constructor initializes the list of days and the item click listener.
+     * @param daysOfMonth The list of days in a month.
+     * @param onItemListener The listener for item clicks.
+     */
     public CalendarAdapter(ArrayList<String> daysOfMonth, OnItemListener onItemListener)
     {
         this.daysOfMonth = daysOfMonth;
         this.onItemListener = onItemListener;
     }
 
+    /**
+     * This method creates a new ViewHolder for the RecyclerView.
+     * @param parent The ViewGroup into which the new View will be added after it is bound to an adapter position.
+     * @param viewType The view type of the new View.
+     * @return A new ViewHolder that holds a View of the given view type.
+     */
     @NonNull
     @Override
     public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
@@ -42,6 +57,12 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         return new CalendarViewHolder(view, onItemListener);
     }
 
+    /**
+     * This method binds the data to the ViewHolder.
+     * It sets the day of the month and the visibility of the dots based on the position.
+     * @param holder The ViewHolder to be updated.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position)
     {
@@ -71,12 +92,19 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         }
     }
 
+    /**
+     * This method returns the total number of items in the data set held by the adapter.
+     * @return The total number of items in this adapter.
+     */
     @Override
     public int getItemCount()
     {
         return daysOfMonth.size();
     }
 
+    /**
+     * This interface defines the method for responding to item clicks.
+     */
     public interface  OnItemListener
     {
         void onItemClick(int position, String dayText);

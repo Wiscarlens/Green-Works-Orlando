@@ -45,7 +45,11 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
 
-
+/**
+ * CalendarFragment is a Fragment that displays a calendar to the user.
+ * It allows the user to navigate through the calendar and view schedules for each day.
+ * It also provides the functionality to enable or disable notifications for trash pickup.
+ */
 public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener {
     private LayoutInflater inflater;
     private ViewGroup container;
@@ -56,6 +60,11 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
 
+    /**
+     * This method is called to do initial creation of the fragment.
+     * It sets up the calendar view and the actions for the previous and next month buttons.
+     * It also sets up the switch for enabling or disabling notifications.
+     */
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflater = inflater;
         this.container = container;
@@ -87,6 +96,10 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     }
 
 
+    /**
+     * This method schedules notifications for trash pickup.
+     * The notifications are scheduled to start at approximately 2:00 p.m. every day.
+     */
     private void scheduleNotifications() {
     AlarmManager alarmManager = (AlarmManager) requireActivity().getSystemService(Context.ALARM_SERVICE);
     Intent intent = new Intent(getActivity(), NotificationReceiver.class);
@@ -103,13 +116,22 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             AlarmManager.INTERVAL_DAY, pendingIntent);
 }
 
-private void cancelNotifications() {
-    AlarmManager alarmManager = (AlarmManager) requireActivity().getSystemService(Context.ALARM_SERVICE);
-    Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+    /**
+     * This method cancels the notifications for trash pickup.
+     */
+    private void cancelNotifications() {
+        AlarmManager alarmManager = (AlarmManager) requireActivity().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-    alarmManager.cancel(pendingIntent);
+        alarmManager.cancel(pendingIntent);
 }
+
+    /**
+     * This method sets the month view for the calendar.
+     * It displays the month and year at the top of the calendar.
+     * It also sets up the calendar adapter to display the days of the month.
+     */
     private void setMonthView() {
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
@@ -120,6 +142,13 @@ private void cancelNotifications() {
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
+    /**
+     * This method creates an array of days in the month.
+     * It calculates the number of days in the month and the day of the week for the first day of the month.
+     * It then creates an array of days in the month with empty strings for days before and after the month.
+     * @param date The selected date.
+     * @return An array of days in the month.
+     */
     private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = null;
@@ -156,6 +185,11 @@ private void cancelNotifications() {
         return  daysInMonthArray;
     }
 
+    /**
+     * This method formats the month and year from the selected date.
+     * @param date The selected date.
+     * @return The formatted month and year.
+     */
     private String monthYearFromDate(LocalDate date)
     {
         DateTimeFormatter formatter = null;
@@ -168,6 +202,11 @@ private void cancelNotifications() {
         return null;
     }
 
+    /**
+     * This method is called when the previous month button is clicked.
+     * It decrements the selected date by one month and updates the month view.
+     * @param view The previous month button.
+     */
     public void previousMonthAction(View view)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -176,6 +215,11 @@ private void cancelNotifications() {
         setMonthView();
     }
 
+    /**
+     * This method is called when the next month button is clicked.
+     * It increments the selected date by one month and updates the month view.
+     * @param view The next month button.
+     */
     public void nextMonthAction(View view)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -184,6 +228,12 @@ private void cancelNotifications() {
         setMonthView();
     }
 
+    /**
+     * This method is called when the day in the calendar is clicked.
+     * It displays the schedule for the selected day.
+     * @param position The position of the day in the calendar.
+     * @param dayText The text of the day in the calendar.
+     */
     @Override
     public void onItemClick(int position, String dayText) {
         if(!dayText.isEmpty())
@@ -232,6 +282,11 @@ private void cancelNotifications() {
         }
     }
 
+    /**
+     * This method displays the schedule for the selected day.
+     * @param date The date of the schedule.
+     * @param recyclingType The type of recycling for the schedule.
+     */
     void showSchedule(String date, String recyclingType) {
         // Inflate the layout for schedule design
         View scheduleView = inflater.inflate(R.layout.schedule_design, container, false);
@@ -286,6 +341,11 @@ private void cancelNotifications() {
         scheduleList.addView(scheduleView);
     }
 
+    /**
+     * This method shows a bottom sheet dialog with the recycling type and collection details.
+     * @param recyclingType The type of recycling.
+     * @param collectionDetails The collection details.
+     */
     public void showBottomSheetDialog(String recyclingType, String collectionDetails) {
         final Dialog bottomSheetDialog = new Dialog(requireContext());
 
@@ -306,6 +366,10 @@ private void cancelNotifications() {
         bottomSheetDialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
+    /**
+     * This method is called when the fragment is visible to the user and actively running.
+     * It schedules notifications for trash pickup.
+     */
     @Override
     public void onStop() {
         super.onStop();

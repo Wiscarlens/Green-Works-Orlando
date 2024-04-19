@@ -42,7 +42,11 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
 
-
+    /**
+     * CalendarFragment is a Fragment that displays a calendar to the user.
+     * It allows the user to navigate through the calendar and view schedules for each day.
+     * It also provides the functionality to enable or disable notifications for trash pickup.
+     */
 public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener {
     private LayoutInflater inflater;
     private ViewGroup container;
@@ -53,6 +57,12 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
 
+
+    /**
+     * This method is called to do initial creation of the fragment.
+     * It sets up the calendar view and the actions for the previous and next month buttons.
+     * It also sets up the switch for enabling or disabling notifications.
+     */
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflater = inflater;
         this.container = container;
@@ -80,38 +90,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         previousMonth.setOnClickListener(this::previousMonthAction);
         nextMonth.setOnClickListener(this::nextMonthAction);
 
-//        CalendarView calendarView = view.findViewById(R.id.calendarView);
-//
-//        calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
-//            scheduleList.removeAllViews();  // Clear the layout before adding new schedule
-//
-//            Calendar calendar = Calendar.getInstance();
-//            calendar.set(year, month, dayOfMonth);
-//
-//            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-//            String monthName = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
-//
-//            switch (dayOfWeek) {
-//                case Calendar.MONDAY:
-//                    showSchedule("Monday, " + monthName + " " +dayOfMonth, "Garbage");
-//                    break;
-//                case Calendar.THURSDAY:
-//                    showSchedule("Thursday, " + monthName + " " + dayOfMonth, "Recycling");
-//                    showSchedule("Thursday, " + monthName + " " + dayOfMonth, "Yard Waste");
-//                    break;
-//                case Calendar.TUESDAY:
-//                case Calendar.WEDNESDAY:
-//                case Calendar.FRIDAY:
-//                case Calendar.SATURDAY:
-//                case Calendar.SUNDAY:
-//                    noSchedule.setVisibility(View.VISIBLE);
-//                    scheduleList.addView(noSchedule); // Add the noSchedule TextView back to the layout
-//                    break;
-//                default:
-//                    Log.i("Day of week", "Invalid day");
-//            }
-//
-//        });
 
         Switch switchPickupNotifications = view.findViewById(R.id.switch_pickup_notifications);
         switchPickupNotifications.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -127,7 +105,10 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         return view;
     }
 
-
+    /**
+     * This method schedules notifications for trash pickup.
+     * The notifications are scheduled to start at approximately 2:00 p.m. every day.
+     */
     private void scheduleNotifications() {
     AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
     Intent intent = new Intent(getActivity(), NotificationReceiver.class);
@@ -142,15 +123,24 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     // constants--in this case, AlarmManager.INTERVAL_DAY.
     alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
             AlarmManager.INTERVAL_DAY, pendingIntent);
-}
+    }
 
-private void cancelNotifications() {
-    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-    Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+    /**
+     * This method cancels the scheduled notifications for trash pickup.
+     */
+    private void cancelNotifications() {
+        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-    alarmManager.cancel(pendingIntent);
-}
+        alarmManager.cancel(pendingIntent);
+    }
+
+
+    /**
+     * This method sets up the month view for the calendar.
+     * It sets the text for the month and year and populates the calendar with the days of the month.
+     */
     private void setMonthView() {
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
@@ -161,6 +151,9 @@ private void cancelNotifications() {
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
+    /**
+     * This method returns an ArrayList of Strings representing the days in the given month.
+     */
     private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = null;
@@ -197,6 +190,9 @@ private void cancelNotifications() {
         return  daysInMonthArray;
     }
 
+    /**
+     * This method returns a String representing the month and year of the given date.
+     */
     private String monthYearFromDate(LocalDate date)
     {
         DateTimeFormatter formatter = null;
@@ -209,6 +205,10 @@ private void cancelNotifications() {
         return null;
     }
 
+    /**
+     * This method is called when the previous month button is clicked.
+     * It decrements the selected date by one month and updates the month view.
+     */
     public void previousMonthAction(View view)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -217,6 +217,10 @@ private void cancelNotifications() {
         setMonthView();
     }
 
+    /**
+     * This method is called when the next month button is clicked.
+     * It increments the selected date by one month and updates the month view.
+     */
     public void nextMonthAction(View view)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -225,6 +229,10 @@ private void cancelNotifications() {
         setMonthView();
     }
 
+    /**
+     * This method is called when a day in the calendar is clicked.
+     * It displays the schedule for the selected day.
+     */
     @Override
     public void onItemClick(int position, String dayText) {
         if(!dayText.isEmpty())
@@ -273,6 +281,9 @@ private void cancelNotifications() {
         }
     }
 
+    /**
+     * This method displays the schedule for the selected day.
+     */
     void showSchedule(String date, String recyclingType) {
         // Inflate the layout for schedule design
         View scheduleView = inflater.inflate(R.layout.schedule_design, container, false);
@@ -313,6 +324,10 @@ private void cancelNotifications() {
         scheduleList.addView(scheduleView);
     }
 
+    /**
+     * This method is called when the fragment is no longer started.
+     * It clears the title of the fragment in the toolbar.
+     */
     @Override
     public void onStop() {
         super.onStop();

@@ -21,10 +21,23 @@ import java.util.ArrayList;
  * - Jordan Kinlocke
  * */
 
+/**
+ * The HistoryFragment class extends the Fragment class.
+ * It represents a fragment that displays a list of items in the history.
+ * The fragment includes a RecyclerView for the list of items and methods to create the view for the fragment and initialize dummy data for the items.
+ */
 public class HistoryFragment extends Fragment {
 
     private final ArrayList<Item> itemList = new ArrayList<>();
 
+    /**
+     * This method is called to do initial creation of the fragment.
+     * It sets up the RecyclerView and the adapter for the list of items.
+     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return Return the View for the fragment's UI, or null.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         MainActivity.fragmentTitle.setText(R.string.history); // Set the title of the fragment in the toolbar.
@@ -43,7 +56,11 @@ public class HistoryFragment extends Fragment {
         return view;
     }
 
-    // Method to initialize dummy data
+
+    /**
+     * This method initializes dummy data for the items.
+     * It adds items to the itemList with the item image path, name, description, material, points, and date.
+     */
     private void initializeDummyData() {
         itemList.add(
                 new Item(
@@ -113,6 +130,10 @@ public class HistoryFragment extends Fragment {
 
     }
 
+    /**
+     * This method is called when the fragment is no longer in use.
+     * It clears the title of the fragment in the toolbar.
+     */
     @Override
     public void onStop() {
         super.onStop();

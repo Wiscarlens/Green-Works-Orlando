@@ -37,6 +37,11 @@ import android.widget.Toast;
  * - Jordan Kinlocke
  * */
 
+/**
+ * The SettingFragment class extends the BottomSheetDialogFragment class.
+ * It represents a settings dialog that slides up from the bottom of the screen.
+ * The settings dialog includes options for the user to change the app theme, enable notifications, and change the app language.
+ */
 public class SettingFragment extends BottomSheetDialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,10 @@ public class SettingFragment extends BottomSheetDialogFragment {
 
     }
 
+
+    /**
+     * This method is called when the fragment is first created.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,6 +60,10 @@ public class SettingFragment extends BottomSheetDialogFragment {
         return inflater.inflate(R.layout.fragment_setting, container, false);
     }
 
+    /**
+     * This method is called to have the fragment instantiate its user interface view.
+     * It inflates the layout for this fragment.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -78,7 +91,6 @@ public class SettingFragment extends BottomSheetDialogFragment {
             }
         });
 
-
         // Add the click listener for the 'Theme' TextView
         TextView themeSettings = view.findViewById(R.id.theme_settings);
         LinearLayout themeOptions = view.findViewById(R.id.theme_options);
@@ -91,7 +103,6 @@ public class SettingFragment extends BottomSheetDialogFragment {
             }
         });
 
-
         // Add the change listener for the 'Change to Dark Mode' Switch
         Switch darkModeSwitch = view.findViewById(R.id.dark_mode_switch);
         TextView darkModeStatus = view.findViewById(R.id.dark_mode_status);
@@ -103,8 +114,6 @@ public class SettingFragment extends BottomSheetDialogFragment {
                 darkModeStatus.setVisibility(View.GONE);
             }
         });
-
-
 
         // Add the click listener for the 'Notification' TextView
         TextView notificationSettings = view.findViewById(R.id.notification_settings);
@@ -123,7 +132,6 @@ public class SettingFragment extends BottomSheetDialogFragment {
         });
 
         notificationStatus.setOnClickListener(v -> {
-
 
             // Code to enable notifications goes here
             // For now, just change the button text
@@ -146,12 +154,6 @@ public class SettingFragment extends BottomSheetDialogFragment {
             startActivity(intent);
         });
 
-
-
-
-
-
-
         // Add the click listener for 'Language' TextView
         TextView languageSettings = view.findViewById(R.id.language_settings);
         TextView languageStatus = view.findViewById(R.id.language_status);
@@ -167,6 +169,10 @@ public class SettingFragment extends BottomSheetDialogFragment {
 
     }
 
+    /**
+     * This method is called when the fragment is visible to the user and actively running.
+     * It sets the state of the bottom sheet dialog to expanded.
+     */
     @Override
     public void onStart() {
         super.onStart();

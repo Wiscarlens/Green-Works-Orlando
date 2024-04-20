@@ -7,8 +7,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * The CalendarViewHolder class extends the RecyclerView.ViewHolder class.
+ * It represents a view holder for a day in the calendar.
+ * The view holder includes a text view for the day of the month, a background circle view, and three dot views for different types of recycling.
+ */
 public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
+
     public final TextView dayOfMonth;
     private final View backgroundCircle;
     final View greenDot;
@@ -17,6 +23,11 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
     private final CalendarAdapter.OnItemListener onItemListener;
     private static View previousView = null;
 
+    /**
+     * The constructor for the CalendarViewHolder class.
+     * @param itemView The view for the day in the calendar.
+     * @param onItemListener The listener for the item.
+     */
     public CalendarViewHolder(@NonNull View itemView, CalendarAdapter.OnItemListener onItemListener)
     {
         super(itemView);
@@ -30,6 +41,9 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
         itemView.setOnClickListener(this);
     }
 
+    /**
+     * The selectDay method selects the day in the calendar.
+     */
     public void selectDay() {
         if(previousView != null){
             previousView.findViewById(R.id.backgroundCircle).setVisibility(View.INVISIBLE);
@@ -39,12 +53,19 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
         dayOfMonth.setTextColor(Color.BLACK);
     }
 
+    /**
+     * The currentDay method highlights the current day in the calendar.
+     */
     public void currentDay() {
         backgroundCircle.setVisibility(View.VISIBLE);
         backgroundCircle.setBackgroundResource(R.drawable.current_day_circle);
         dayOfMonth.setTextColor(Color.BLACK);
     }
 
+    /**
+     * The onClick method is called when the day in the calendar is clicked.
+     * @param view The view for the day in the calendar.
+     */
     @Override
     public void onClick(View view)
     {

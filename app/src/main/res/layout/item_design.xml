@@ -19,7 +19,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/itemImageIV"

@@ -123,6 +123,16 @@
 
     <Button
         style="@style/CustomButton"
+        android:id="@+id/suggestItemButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Suggest Item"
+        android:textColor="@color/white"
+        android:background="@drawable/button_press_background"
+        android:visibility="gone"/>
+
+    <Button
+        style="@style/CustomButton"
         android:id="@+id/btnReturnToSortingGuide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

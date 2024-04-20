@@ -41,6 +41,7 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
     private TextView itemName;
     private TextView itemInformation;
     private TextView itemRecyclingInfo;
+    Button suggestItemButton;
     private Button disposeButton;
     private LottieAnimationView loaderAnimation;
 
@@ -92,7 +93,6 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
                 fetchItems.fetchItems(searchQuery);
             }
         }
-
     }
 
     @Override
@@ -107,11 +107,13 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         itemName = view.findViewById(R.id.item_name);
         itemInformation = view.findViewById(R.id.item_details);
         itemRecyclingInfo = view.findViewById(R.id.itemRecyclingInfo);
+        suggestItemButton = view.findViewById(R.id.suggestItemButton);
         disposeButton = view.findViewById(R.id.disposeButton);
         Button exitButton = view.findViewById(R.id.btnReturnToSortingGuide);
 
         scrollView.setVisibility(View.INVISIBLE);
         loaderAnimation.setVisibility(View.VISIBLE);
+        suggestItemButton.setVisibility(View.GONE);
         disposeButton.setVisibility(View.VISIBLE);
 
         closeBtn.setOnClickListener(v -> dismiss());
@@ -121,13 +123,16 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
             Toast.makeText(requireContext(), "Dispose", Toast.LENGTH_SHORT).show();
         });
 
+        suggestItemButton.setOnClickListener(v -> {
+            Toast.makeText(requireContext(), "This feature is not available yet", Toast.LENGTH_SHORT).show();
+        });
+
         exitButton.setOnClickListener(v -> dismiss());
-
-
 
         if (itemDetailsToDisplay != null) {
             displayItemInformation(itemDetailsToDisplay);
 
+            suggestItemButton.setVisibility(View.GONE);
             disposeButton.setVisibility(View.VISIBLE);
         } else {
             if (!isDataFetching && item != null) {
@@ -140,21 +145,22 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
                 itemInformation.setText(item.getItemDescription());
 
                 disposeButton.setVisibility(View.GONE);
+                suggestItemButton.setVisibility(View.GONE);
 
                 isDataFetching = true;
-            } else {
-                disposeButton.setVisibility(View.GONE);
-
+            } else if (item == null) {
                 itemImage.setImageResource(R.drawable.not_found);
 
                 // Display custom message when no item details are available
-                String message = "No items found for \"" + searchQuery + "\".";
+                String noItemMessage = "No items found for \"" + searchQuery + "\".";
 
-                itemName.setText("");
-                itemRecyclingInfo.setText("");
-                itemInformation.setText(message);
+                itemName.setText("Unknown Product");
+                itemRecyclingInfo.setText("Can't find what you're looking for?");
+                itemInformation.setText(noItemMessage);
+
+                disposeButton.setVisibility(View.GONE);
+                suggestItemButton.setVisibility(View.VISIBLE);
             }
-
         }
 
         return view;
@@ -171,8 +177,6 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
                 loaderAnimation.setVisibility(View.GONE);
             }
         }, 2000); // Delay of 2 seconds to let api call finish
-
-
 
     }
 
@@ -223,19 +227,6 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         return tagInfo.toString().trim();
     }
 
-//    private void updateItemInformationViews() {
-//        itemName.setText(item.getItemName());
-//        itemInformation.setText(item.getItemDescription());
-//        itemRecyclingInfo.setText(item.getItemMaterial());
-//
-//        View view = getView();
-//        if (view != null) {
-//            int imageResId = getImageResIdBasedOnItemName(item.getItemName());
-//            itemImage.setImageResource(imageResId);
-//        }
-//
-//        disposeButton.setVisibility(View.VISIBLE);
-//    }
 
     private void updateItemInformationViews() {
         if (itemName != null) {
@@ -255,6 +246,7 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         }
 
         disposeButton.setVisibility(View.VISIBLE);
+        suggestItemButton.setVisibility(View.GONE);
     }
 
 

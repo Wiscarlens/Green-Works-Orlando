@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".WelcomeFragment">
+    tools:context=".view.fragments.WelcomeFragment">
 
     <LinearLayout
         android:layout_width="300dp"

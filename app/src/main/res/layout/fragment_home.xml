@@ -7,7 +7,7 @@
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
     android:orientation="vertical"
-    tools:context=".HomeFragment">
+    tools:context=".view.fragments.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,15 +56,14 @@
                         android:text="@string/points" />
                 </LinearLayout>
 
-
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/profileLayout"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:orientation="horizontal"
             android:layout_gravity="end"
             android:gravity="center_vertical|end"
@@ -84,11 +83,12 @@
 
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:gravity="center">
 
         <TextView
@@ -345,7 +345,7 @@
         android:text="@string/progress"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"/>
 
     <androidx.cardview.widget.CardView

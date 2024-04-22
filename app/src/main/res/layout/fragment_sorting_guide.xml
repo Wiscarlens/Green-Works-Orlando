@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:paddingStart="25dp"
     android:paddingEnd="25dp"
-    tools:context=".SortingGuideFragment">
+    tools:context=".view.fragments.SortingGuideFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -25,9 +25,9 @@
         android:theme="@style/Theme.OrlandoRecycle"
         android:hardwareAccelerated="true"
         tools:targetApi="tiramisu">
-        <receiver android:name=".NotificationReceiver"/>
+        <receiver android:name=".view.utils.NotificationReceiver"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

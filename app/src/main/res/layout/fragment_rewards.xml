@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:paddingStart="25dp"
     android:paddingEnd="25dp"
-    tools:context=".RewardsFragment">
+    tools:context=".view.fragments.RewardsFragment">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"

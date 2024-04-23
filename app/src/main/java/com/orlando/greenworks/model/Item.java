@@ -19,6 +19,7 @@ public class Item implements Serializable {
     private String itemMaterial;
     private Integer itemPoint;
     private String itemDate;
+    private String barcode;
 
     public Item(){
 
@@ -47,6 +48,15 @@ public class Item implements Serializable {
         this.itemMaterial = itemMaterial;
         this.itemPoint = itemPoint;
         this.itemDate = itemDate;
+    }
+
+    // For barcode
+    public Item(String itemName, String itemDescription, Integer itemPoint, String itemImage, String barcode) {
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
+        this.itemPoint = itemPoint;
+        this.itemImagePath = itemImage;
+        this.barcode = barcode;
     }
 
     public String getItemName() {
@@ -95,6 +105,14 @@ public class Item implements Serializable {
 
     public void setItemMaterial(String itemMaterial) {
         this.itemMaterial = itemMaterial;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 
 }

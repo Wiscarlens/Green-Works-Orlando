@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 import android.Manifest;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -34,7 +37,9 @@ import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.journeyapps.barcodescanner.DefaultDecoderFactory;
 import com.orlando.greenworks.R;
+import com.orlando.greenworks.model.Item;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -66,8 +71,6 @@ public class ScannerFragment extends BottomSheetDialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        NotificationHelper.createNotificationChannel(getContext());
-
     }
 
 
@@ -79,6 +82,12 @@ public class ScannerFragment extends BottomSheetDialogFragment {
 
         ImageButton backButton = view.findViewById(R.id.backButton);
         barcodeView = view.findViewById(R.id.barcodeScannerView);
+
+        LinearLayout editTextLayout = view.findViewById(R.id.editTextLayout);
+        EditText barcodeEditText = view.findViewById(R.id.barcodeET);
+        Button doneButton = view.findViewById(R.id.doneButton);
+        LinearLayout bottomButtonsLayout = view.findViewById(R.id.bottomButtonsLayout);
+
         ImageButton typeBarcode = view.findViewById(R.id.typeBarcode);
         ImageButton guessItem = view.findViewById(R.id.guessItem);
         ImageButton flashlight = view.findViewById(R.id.flashLight);
@@ -99,30 +108,28 @@ public class ScannerFragment extends BottomSheetDialogFragment {
         });
 
         typeBarcode.setOnClickListener(v -> {
-            // Create an AlertDialog.Builder instance
-            AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+            editTextLayout.setVisibility(View.VISIBLE);
+            bottomButtonsLayout.setVisibility(View.GONE);
 
-            // Create an EditText instance
-            EditText input = new EditText(requireActivity());
+            doneButton.setOnClickListener(v1 -> {
+                String barcode = barcodeEditText.getText().toString();
 
-            // Set the EditText instance as the AlertDialog's view
-            builder.setView(input);
+                if (barcode.isEmpty()) {
+                    editTextLayout.setVisibility(View.GONE);
+                    bottomButtonsLayout.setVisibility(View.VISIBLE);
 
-            // Set the AlertDialog's message
-            builder.setMessage("Please enter the barcode");
+                    Toast.makeText(requireActivity(), "Please enter a barcode", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!findBarcode(barcode)) {
+                        Toast.makeText(requireActivity(), barcode + " Not found", Toast.LENGTH_SHORT).show();
+                    } else {
+                        beepManager.playBeepSoundAndVibrate();
+                    }
 
-            // Set the AlertDialog's positive button
-            builder.setPositiveButton("OK", (dialog, which) -> {
-                String barcode = input.getText().toString();
-                // Handle the entered barcode
-                Toast.makeText(requireActivity(), "Entered barcode: " + barcode, Toast.LENGTH_SHORT).show();
+                    editTextLayout.setVisibility(View.GONE);
+                    bottomButtonsLayout.setVisibility(View.VISIBLE);
+                }
             });
-
-            // Set the AlertDialog's negative button
-            builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-
-            // Show the AlertDialog
-            builder.show();
         });
 
         guessItem.setOnClickListener(v -> {
@@ -196,18 +203,26 @@ public class ScannerFragment extends BottomSheetDialogFragment {
             lastText = result.getText();
 
 
-            // TODO: Add logic to handle the scanned barcode
-            if (result.getText().equals("078742040370")) {
-                Drawable image = getResources().getDrawable(R.drawable.water_bottle, null);
 
-                showItemDialog(image, "Water Bottle", "This is a water bottle");
-            } else {
+
+            // TODO: Add logic to handle the scanned barcode
+            if (!findBarcode(result.getText())) {
                 Toast.makeText(requireActivity(), result.getText() + " Not found", Toast.LENGTH_SHORT).show();
+            } else {
+                beepManager.playBeepSoundAndVibrate();
             }
 
+//            if (result.getText().equals("078742040370")) {
+//                Drawable image = getResources().getDrawable(R.drawable.water_bottle, null);
+//
+//                showItemDialog(image, "Water Bottle", "This is a water bottle");
+//            } else {
+//                Toast.makeText(requireActivity(), result.getText() + " Not found", Toast.LENGTH_SHORT).show();
+//            }
 
 
-            beepManager.playBeepSoundAndVibrate();
+
+//            beepManager.playBeepSoundAndVibrate();
 
         }
 
@@ -219,6 +234,23 @@ public class ScannerFragment extends BottomSheetDialogFragment {
 
 
     };
+
+    private boolean findBarcode(String result) {
+        ArrayList<Item> items = new ArrayList<>();
+
+        items.add(new Item("Water Bottle", "This is a water bottle", 10, "purified_water", "078742040370"));
+        items.add(new Item("Plastic Bag", "This is a plastic bag", 5, "plastic_bag", "5542040370"));
+
+        for (Item item : items) {
+            if (item.getBarcode().equals(result)) {
+                showItemDialog(item);
+
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public void onStart() {
         super.onStart();
@@ -243,7 +275,7 @@ public class ScannerFragment extends BottomSheetDialogFragment {
         }
     }
 
-    void showItemDialog(Drawable image, String name, String description) {
+    void showItemDialog(Item item) {
         RelativeLayout relativeLayout = requireActivity().findViewById(R.id.fragment_scanner);
         View view = LayoutInflater.from(requireActivity()).inflate(R.layout.item_dialog, relativeLayout);
 
@@ -256,14 +288,24 @@ public class ScannerFragment extends BottomSheetDialogFragment {
         builder.setView(view);
         final AlertDialog dialog = builder.create();
 
+        Drawable image = getResources().getDrawable(getResources().getIdentifier(item.getItemImagePath(), "drawable", requireActivity().getPackageName()), null);
+
         itemImage.setImageDrawable(image);
-        itemName.setText(name);
-        itemDescription.setText(description);
+        itemName.setText(item.getItemName());
+        itemDescription.setText(item.getItemDescription());
 
         openButton.setOnClickListener(v -> {
             // Open the item in the browser
             dialog.dismiss();
 
+            // Create a new instance of ItemInformationFragment with the item
+            ItemInformationFragment itemInformationFragment = ItemInformationFragment.newInstance(item, false);
+
+            // Show the fragment
+            itemInformationFragment.show(((AppCompatActivity) requireContext())
+                    .getSupportFragmentManager(), itemInformationFragment.getTag());
+
+            // TODO: open item information screen
             Toast.makeText(requireActivity(), "Opening item...", Toast.LENGTH_SHORT).show();
         });
 

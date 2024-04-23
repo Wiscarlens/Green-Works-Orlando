@@ -176,18 +176,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         userValues.put("address", "1800 South Kirkman Road, Orlando, FL, USA");
         db.insert("User", null, userValues);
 
-
         populateItemsTable();
-
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Implement schema migration logic here
-        // Example: if(oldVersion < 2) { // apply changes that were added in version 2 }
-
-        //
         db.execSQL("DROP TABLE IF EXISTS User");
         db.execSQL("DROP TABLE IF EXISTS Badge");
         db.execSQL("DROP TABLE IF EXISTS User_Badge");
@@ -196,7 +189,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS EventDay");
 
         onCreate(db);
-
     }
 
     public void populateItemsTable() {

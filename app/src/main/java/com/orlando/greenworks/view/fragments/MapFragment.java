@@ -86,6 +86,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         try {
+            // Log that the map is ready
+            Log.d("MapFragment", "Google Map is ready");
             LatLng orlando = new LatLng(28.5383, -81.3792); // Orlando, FL Map
 
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(orlando, 11)); // adjust default map zoom level

@@ -13,6 +13,7 @@ package com.orlando.greenworks.view.fragments;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.orlando.greenworks.data.local.DatabaseHelper;
 import com.orlando.greenworks.model.EventDay;
 import com.orlando.greenworks.view.MainActivity;
 import com.orlando.greenworks.view.adapter.HeatmapAdapter;
@@ -449,12 +451,18 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadGreenDay() {
-        greenDays.add(new EventDay(23, 1, 2024));
-        greenDays.add(new EventDay(7, 3, 2024, 3));
-        greenDays.add(new EventDay(14, 3, 2024, 2));
-        greenDays.add(new EventDay(12, 3, 2024, 4));
-        greenDays.add(new EventDay(12, 2, 2024, 5));
-        greenDays.add(new EventDay(20, 4, 2024, 1));
+        try (DatabaseHelper databaseHelper = new DatabaseHelper(requireContext())) {
+            greenDays = databaseHelper.getAllEventDays();
+        } catch (Exception e) {
+            Log.d("Database Error", "Error loading green days" + e.getMessage());
+        }
+        // test data
+//        greenDays.add(new EventDay(23, 1, 2024));
+//        greenDays.add(new EventDay(7, 3, 2024, 3));
+//        greenDays.add(new EventDay(14, 3, 2024, 2));
+//        greenDays.add(new EventDay(12, 3, 2024, 4));
+//        greenDays.add(new EventDay(12, 2, 2024, 5));
+//        greenDays.add(new EventDay(20, 4, 2024, 1));
     }
 
     private void setMonthView(ArrayList<EventDay> greenDays) {

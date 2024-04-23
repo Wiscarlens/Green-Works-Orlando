@@ -26,7 +26,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.orlando.greenworks.data.remote.NetworkManager;
+import com.orlando.greenworks.utils.NetworkManager;
 import com.orlando.greenworks.view.MainActivity;
 import com.orlando.greenworks.view.utils.NotificationHelper;
 import com.orlando.greenworks.R;

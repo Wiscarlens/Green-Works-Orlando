@@ -8,6 +8,8 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
+import java.io.ByteArrayOutputStream;
+
 /*
  * This is a collaborative effort by the following team members:
  * Team members:
@@ -57,5 +59,13 @@ public class ImageUtils {
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+    // Store images as BLOBs
+    public static byte[] getBitmapAsByteArray(int drawableId, Context context) {
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), drawableId);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+        return outputStream.toByteArray();
     }
 }

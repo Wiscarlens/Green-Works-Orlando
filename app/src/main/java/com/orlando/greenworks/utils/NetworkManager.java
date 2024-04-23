@@ -1,4 +1,4 @@
-package com.orlando.greenworks.data.remote;
+package com.orlando.greenworks.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

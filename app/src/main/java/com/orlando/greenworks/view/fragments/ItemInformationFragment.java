@@ -17,9 +17,11 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.orlando.greenworks.data.local.DatabaseHelper;
 import com.orlando.greenworks.data.remote.FetchItems;
 import com.orlando.greenworks.model.Item;
 import com.orlando.greenworks.R;
+import com.orlando.greenworks.utils.DateTimeUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -122,8 +124,16 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
         closeBtn.setOnClickListener(v -> dismiss());
 
         disposeButton.setOnClickListener(v -> {
-            dismiss();
+            try(DatabaseHelper databaseHelper = new DatabaseHelper(requireContext())){
+                databaseHelper.addOrUpdateDate(DateTimeUtil.getCurrentDate());
+            } catch (Exception e){
+                Log.e("ItemInformationFragment", e.toString());
+            }
+
             Toast.makeText(requireContext(), "Dispose", Toast.LENGTH_SHORT).show();
+
+            dismiss();
+
         });
 
         suggestItemButton.setOnClickListener(v -> {

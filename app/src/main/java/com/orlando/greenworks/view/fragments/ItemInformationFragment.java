@@ -1,5 +1,7 @@
 package com.orlando.greenworks.view.fragments;
 
+import static com.orlando.greenworks.view.utils.DialogUtils.makeDialogFullscreen;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -298,24 +300,9 @@ public class ItemInformationFragment extends BottomSheetDialogFragment {
     @Override
     public void onStart() {
         super.onStart();
+
         BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
+        makeDialogFullscreen(dialog);
 
-        if (dialog != null) {
-            ViewGroup bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
-            if (bottomSheet != null) {
-                BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
-                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                behavior.setSkipCollapsed(true);
-                behavior.setHideable(true);
-
-                ViewGroup.LayoutParams layoutParams = bottomSheet.getLayoutParams();
-                if (layoutParams != null) {
-                    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                    bottomSheet.setLayoutParams(layoutParams);
-                }
-            }
-
-            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-        }
     }
 }

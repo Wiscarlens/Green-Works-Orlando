@@ -1,5 +1,8 @@
 package com.orlando.greenworks.view.fragments;
 
+import static com.orlando.greenworks.view.utils.DialogUtils.makeDialogFullscreen;
+
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -19,8 +22,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import android.Manifest;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -38,6 +39,7 @@ import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.journeyapps.barcodescanner.DefaultDecoderFactory;
 import com.orlando.greenworks.R;
 import com.orlando.greenworks.model.Item;
+import com.orlando.greenworks.view.utils.ImageUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -111,7 +113,10 @@ public class ScannerFragment extends BottomSheetDialogFragment {
             editTextLayout.setVisibility(View.VISIBLE);
             bottomButtonsLayout.setVisibility(View.GONE);
 
+            barcodeView.pause();
+
             doneButton.setOnClickListener(v1 -> {
+                barcodeView.resume();
                 String barcode = barcodeEditText.getText().toString();
 
                 if (barcode.isEmpty()) {
@@ -187,11 +192,6 @@ public class ScannerFragment extends BottomSheetDialogFragment {
         barcodeView.decodeSingle(callback);
     }
 
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        return barcodeView.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
-//    }
-
     private final BarcodeCallback callback = new BarcodeCallback() {
         @Override
         public void barcodeResult(BarcodeResult result) {
@@ -202,27 +202,14 @@ public class ScannerFragment extends BottomSheetDialogFragment {
 
             lastText = result.getText();
 
+            // TODO: Set last text value back to null after to second
 
-
-
-            // TODO: Add logic to handle the scanned barcode
+            // logic to handle the scanned barcode
             if (!findBarcode(result.getText())) {
                 Toast.makeText(requireActivity(), result.getText() + " Not found", Toast.LENGTH_SHORT).show();
             } else {
                 beepManager.playBeepSoundAndVibrate();
             }
-
-//            if (result.getText().equals("078742040370")) {
-//                Drawable image = getResources().getDrawable(R.drawable.water_bottle, null);
-//
-//                showItemDialog(image, "Water Bottle", "This is a water bottle");
-//            } else {
-//                Toast.makeText(requireActivity(), result.getText() + " Not found", Toast.LENGTH_SHORT).show();
-//            }
-
-
-
-//            beepManager.playBeepSoundAndVibrate();
 
         }
 
@@ -245,6 +232,8 @@ public class ScannerFragment extends BottomSheetDialogFragment {
             if (item.getBarcode().equals(result)) {
                 showItemDialog(item);
 
+                barcodeView.pause();
+
                 return true;
             }
         }
@@ -254,26 +243,12 @@ public class ScannerFragment extends BottomSheetDialogFragment {
 
     public void onStart() {
         super.onStart();
+
         BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
+        makeDialogFullscreen(dialog);
 
-        if (dialog != null) {
-            ViewGroup bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
-            if (bottomSheet != null) {
-                BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
-                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                behavior.setSkipCollapsed(true);
-                behavior.setHideable(true);
-
-                ViewGroup.LayoutParams layoutParams = bottomSheet.getLayoutParams();
-                if (layoutParams != null) {
-                    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                    bottomSheet.setLayoutParams(layoutParams);
-                }
-            }
-
-            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-        }
     }
+
 
     void showItemDialog(Item item) {
         RelativeLayout relativeLayout = requireActivity().findViewById(R.id.fragment_scanner);
@@ -288,15 +263,15 @@ public class ScannerFragment extends BottomSheetDialogFragment {
         builder.setView(view);
         final AlertDialog dialog = builder.create();
 
-        Drawable image = getResources().getDrawable(getResources().getIdentifier(item.getItemImagePath(), "drawable", requireActivity().getPackageName()), null);
+        Drawable image = ImageUtils.getDrawableFromName(requireContext(), item.getItemImagePath());
 
         itemImage.setImageDrawable(image);
         itemName.setText(item.getItemName());
         itemDescription.setText(item.getItemDescription());
 
         openButton.setOnClickListener(v -> {
-            // Open the item in the browser
             dialog.dismiss();
+            barcodeView.resume();
 
             // Create a new instance of ItemInformationFragment with the item
             ItemInformationFragment itemInformationFragment = ItemInformationFragment.newInstance(item, false);
@@ -305,7 +280,6 @@ public class ScannerFragment extends BottomSheetDialogFragment {
             itemInformationFragment.show(((AppCompatActivity) requireContext())
                     .getSupportFragmentManager(), itemInformationFragment.getTag());
 
-            // TODO: open item information screen
             Toast.makeText(requireActivity(), "Opening item...", Toast.LENGTH_SHORT).show();
         });
 
@@ -350,27 +324,4 @@ public class ScannerFragment extends BottomSheetDialogFragment {
                     CAMERA_PERMISSION_REQUEST_CODE);
         }
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {// If request is cancelled, the result arrays are empty.
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission was granted, yay! Do the
-                // camera-related task you need to do.
-                barcodeView.resume();
-            } else {
-                // Permission denied, boo! Disable the
-                // functionality that depends on this permission.
-                Toast.makeText(requireActivity(), "Permission denied to camera", Toast.LENGTH_SHORT).show();
-            }
-            return;
-
-            // Other 'case' lines to check for other
-            // permissions this app might request.
-        }
-    }
-
-
-
 }

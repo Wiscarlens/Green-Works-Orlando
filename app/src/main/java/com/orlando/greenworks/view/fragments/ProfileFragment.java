@@ -1,5 +1,7 @@
 package com.orlando.greenworks.view.fragments;
 
+import static com.orlando.greenworks.view.utils.DialogUtils.makeDialogFullscreen;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +13,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.orlando.greenworks.R;
 import com.orlando.greenworks.view.MainActivity;
 import com.orlando.greenworks.view.utils.NotificationHelper;
-import com.orlando.greenworks.R;
-
-import java.util.Objects;
 
 /*
  * This is a collaborative effort by the following team members:
@@ -75,24 +74,9 @@ public class ProfileFragment extends BottomSheetDialogFragment {
     @Override
     public void onStart() {
         super.onStart();
+
         BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
+        makeDialogFullscreen(dialog);
 
-        if (dialog != null) {
-            ViewGroup bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
-            if (bottomSheet != null) {
-                BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
-                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                behavior.setSkipCollapsed(true);
-                behavior.setHideable(true);
-
-                ViewGroup.LayoutParams layoutParams = bottomSheet.getLayoutParams();
-                if (layoutParams != null) {
-                    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                    bottomSheet.setLayoutParams(layoutParams);
-                }
-            }
-
-            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-        }
     }
 }

@@ -1,26 +1,25 @@
 package com.orlando.greenworks.view.fragments;
 
+import static com.orlando.greenworks.view.utils.DialogUtils.makeDialogFullscreen;
+
 import android.os.Bundle;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.orlando.greenworks.R;
 import com.orlando.greenworks.model.Badge;
 import com.orlando.greenworks.view.adapter.BadgeAdapter;
 import com.orlando.greenworks.view.adapter.BadgeProgressAdapter;
 import com.orlando.greenworks.view.utils.NotificationHelper;
-import com.orlando.greenworks.R;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class RewardsFragment extends BottomSheetDialogFragment {
@@ -78,15 +77,7 @@ public class RewardsFragment extends BottomSheetDialogFragment {
         badgeProgressRecyclerView.setAdapter(badgeProgressAdapter);
 
 
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
-
-
-
+        closeButton.setOnClickListener(v -> dismiss());
 
         return view;
     }
@@ -94,24 +85,9 @@ public class RewardsFragment extends BottomSheetDialogFragment {
     @Override
     public void onStart() {
         super.onStart();
+
         BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
+        makeDialogFullscreen(dialog);
 
-        if (dialog != null) {
-            ViewGroup bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
-            if (bottomSheet != null) {
-                BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
-                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                behavior.setSkipCollapsed(true);
-                behavior.setHideable(true);
-
-                ViewGroup.LayoutParams layoutParams = bottomSheet.getLayoutParams();
-                if (layoutParams != null) {
-                    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                    bottomSheet.setLayoutParams(layoutParams);
-                }
-            }
-
-            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-        }
     }
 }

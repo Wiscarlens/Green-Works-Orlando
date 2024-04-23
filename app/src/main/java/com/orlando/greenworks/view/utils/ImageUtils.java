@@ -25,6 +25,11 @@ public class ImageUtils {
         return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
     }
 
+    public static Drawable getDrawableFromName(Context context, String imageName) {
+        int imageResId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+        return context.getResources().getDrawable(imageResId, null);
+    }
+
     /**
      * Converts a byte array to a Drawable.
      *

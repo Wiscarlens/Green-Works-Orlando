@@ -10,11 +10,7 @@ package com.orlando.greenworks.view.fragments;
  * - Jordan Kinlocke
  * */
 
-import android.app.AlarmManager;
 import android.app.Dialog;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -36,10 +32,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.orlando.greenworks.R;
 import com.orlando.greenworks.view.MainActivity;
 import com.orlando.greenworks.view.adapter.CalendarAdapter;
-import com.orlando.greenworks.view.utils.NotificationReceiver;
-import com.orlando.greenworks.R;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -100,36 +95,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     }
 
 
-    /**
-     * This method schedules notifications for trash pickup.
-     * The notifications are scheduled to start at approximately 2:00 p.m. every day.
-     */
-    private void scheduleNotifications() {
-    AlarmManager alarmManager = (AlarmManager) requireActivity().getSystemService(Context.ALARM_SERVICE);
-    Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
-
-    // Schedule the alarm to start at approximately 2:00 p.m.
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTimeInMillis(System.currentTimeMillis());
-    calendar.set(Calendar.HOUR_OF_DAY, 14);
-
-    // With setInexactRepeating(), you have to use one of the AlarmManager interval
-    // constants--in this case, AlarmManager.INTERVAL_DAY.
-    alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-            AlarmManager.INTERVAL_DAY, pendingIntent);
-}
-
-    /**
-     * This method cancels the notifications for trash pickup.
-     */
-    private void cancelNotifications() {
-        AlarmManager alarmManager = (AlarmManager) requireActivity().getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
-
-        alarmManager.cancel(pendingIntent);
-}
 
     /**
      * This method sets the month view for the calendar.
@@ -315,27 +280,87 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
                 scheduleRecyclingIcon.setImageResource(R.drawable.garbage);
                 scheduleCard.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.medium_dark_green));
 
-                scheduleCard.setOnClickListener(v -> {
-                    showBottomSheetDialog(recyclingType, "Place your garbage bin on the curb by 6:00 a.m. on the day of collection.");
-                });
+                scheduleCard.setOnClickListener(v -> showBottomSheetDialog(recyclingType,
+                        "Garbage\n" +
+                                "\n" +
+                                "Place your garbage at the curb by 6 a.m. on your scheduled collection day.\n" +
+                                "\n" +
+                                "Garbage Regulations\n" +
+                                "Garbage must be placed in carts provided by the City.\n" +
+                                "Request one now.\n" +
+                                "\n" +
+                                "All household garbage should be bagged and placed inside the cart\n" +
+                                "\n" +
+                                " Do not overload the cart or place items on top of the cart\n" +
+                                "\n" +
+                                " For curb collection, carts should be placed at least two feet from obstacles, e.g. mailboxes, utility boxes, trees and shrubs\n" +
+                                "\n" +
+                                " Place the cart at the curb with the handle and the wheels facing the house\n" +
+                                " Carts must be removed from the curb by the morning after your collection. Carts left on the curb the morning after the scheduled pickup may result in a $25 fee\n" +
+                                " Do not place hazardous waste, such as rechargeable batteries, cleaning materials, oil, paint, pesticides or medical waste in the cart."));
 
                 break;
             case "Recycling":
                 scheduleRecyclingIcon.setImageResource(R.drawable.recycling);
                 scheduleCard.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.green));
 
-                scheduleCard.setOnClickListener(v -> {
-                    showBottomSheetDialog(recyclingType, "Put all of your recyclable into one cart. Do not bag your recyclables.");
-                });
+                scheduleCard.setOnClickListener(v -> showBottomSheetDialog(recyclingType,
+                        "Recycling \n" +
+                                "Put all of your recyclables into one cart. Your recycling is collected once per week. Place it on the curb prior to 6 a.m. on your pick up date\n" +
+                                "\n" +
+                                " Best Practices for Recycling\n" +
+                                "\n" +
+                                "The following guidelines will help us provide you with better service:\n" +
+                                "\n" +
+                                " - Place your recycle cart at the curb prior to 6 a.m. on your scheduled date of collection. Keep the cart at least two feet from obstacles such as mailboxes trees and shrubs, utility poles, meter boxes or parked cars.\n" +
+                                " \n" +
+                                "- Keep bags out of the cart by emptying your recycling directly into the cart. Bags and sheets of plastic tangle recycling equipment.\n" +
+                                "\n" +
+                                " -Do not overload the cart or place items on top of the cart.\n" +
+                                " \n" +
+                                "- Do not place garbage, yard waste or hazardous waste in the recycling cart.\n" +
+                                " - Carts left at the curb on the morning after the scheduled pick up may result in a $25.00 roll back fee"));
 
                 break;
             case "Yard Waste":
                 scheduleRecyclingIcon.setImageResource(R.drawable.yard_waste);
                 scheduleCard.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.dark_green));
 
-                scheduleCard.setOnClickListener(v -> {
-                    showBottomSheetDialog(recyclingType, "Yard waste include only grass, clippings, leaves, and small branches. Yard Waste must be bagged or tied in bundles");
-                });
+                scheduleCard.setOnClickListener(v -> showBottomSheetDialog(recyclingType,
+                        "Yard Waste\n" +
+                                "\n" +
+                                "Place it on the curb prior to 6 a.m. on your pick up date.\n" +
+                                "\n" +
+                                "\n" +
+                                "Bag It, Don't Blow It!\n" +
+                                "\n" +
+                                "Yard waste blown into the street or piled up on curbs, or storm drains can cause major flooding and pollute our local waters\n" +
+                                "\n" +
+                                "Bag or bundle your yard waste for the city to collect and properly dispose of it.\n" +
+                                "\n" +
+                                "\n" +
+                                "Things to Keep In Mind\n" +
+                                "\n" +
+                                "Yard waste includes only grass clippings, leaves, branches and twigs.\n" +
+                                "\n" +
+                                "Yard waste must be bagged or tied in bundles (each can only weigh up to 40 pounds each)\n" +
+                                "\n" +
+                                "Large branches can only be four inches in diameter and 40 pounds in weight Branches must also be bundled and tied.\n" +
+                                "\n" +
+                                " A maximum of four cubic yards collected each week. This is equivalent to what can fit in the bed of a standard pick-up truck\n" +
+                                "\n" +
+                                "\n" +
+                                "Things to Avoid\n" +
+                                "\n" +
+                                " Yard waste does not include landscape ties, fences or landscape pressure treated wood.\n" +
+                                "\n" +
+                                " Bagged yard waste must not exceed 40 pounds each\n" +
+                                "\n" +
+                                " Large branches must not exceed four feet in length\n" +
+                                "\n" +
+                                " Yard waste that exceeds four cubic yards or weighs more than 40 pounds is considered a special pick up and may incur an extra charge. Any special pick up will incur a minimum $50 charge Yard waste that fills a claw truck will incur a $350 charge; half a claw truck will be a $175 charge, etc...\n" +
+                                "\n" +
+                                " Yard waste may not be placed inside the garbage cart. If yard waste is placed in the garbage cart, the cart will not be dumped until the yard waste is removed."));
 
                 break;
         }

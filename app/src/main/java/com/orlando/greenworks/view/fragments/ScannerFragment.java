@@ -22,12 +22,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.zxing.BarcodeFormat;
@@ -45,7 +43,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /*
@@ -75,8 +72,7 @@ public class ScannerFragment extends BottomSheetDialogFragment {
 
     }
 
-
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -225,8 +221,16 @@ public class ScannerFragment extends BottomSheetDialogFragment {
     private boolean findBarcode(String result) {
         ArrayList<Item> items = new ArrayList<>();
 
-        items.add(new Item("Water Bottle", "This is a water bottle", 10, "purified_water", "078742040370"));
-        items.add(new Item("Plastic Bag", "This is a plastic bag", 5, "plastic_bag", "5542040370"));
+        items.add(new Item("Purified Water",
+                "To recycle a water water bottle, first empty any remaining water, remove the cap, and rinse the bottle to remove residue. Check for the recycling symbol, typically found on the bottle's bottom. Dasani bottles are usually made of PET plastic, which is recyclable. Place the rinsed bottle in your recycling bin following your local recycling guidelines for plastic bottles.",
+                10, "purified_water", "078742040370"));
+        items.add(new Item("Lysol",
+                "Empty the Container: Make sure the container is completely empty. Use up all the product until there's nothing left inside.\n" +
+                        "Remove the Nozzle: Remove the plastic spray nozzle if it's detachable. This helps in ensuring that the container is properly emptied.\n" +
+                        "Check for Recycling Symbols: Look for recycling symbols on the container. Some Lysol spray bottles are made of recyclable materials, but it's essential to check the label or the bottom of the container for recycling instructions and symbols.\n" +
+                        "Rinse the Container: Rinse the container thoroughly with water to remove any residue. This step helps in preparing the container for recycling and prevents contamination of other recyclable materials.\n" +
+                        "Check with Local Recycling Guidelines: Different municipalities have different recycling guidelines. Check with your local recycling center or municipality's website to find out if they accept Lysol spray bottles for recycling and how they should be prepared.g",
+                5, "lysol", "036241748289"));
 
         for (Item item : items) {
             if (item.getBarcode().equals(result)) {

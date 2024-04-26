@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import android.util.Log;
+import java.net.MalformedURLException;
+import java.io.IOException;
 
 import com.orlando.greenworks.view.fragments.ItemInformationFragment;
 
@@ -81,13 +83,14 @@ public class FetchItems {
             }
         }
 
-        private String performHttpGet(String urlString) throws Exception {
-            URL url = new URL(urlString);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept", "application/json");
+        private String performHttpGet(String urlString) {
+            try {
+                URL url = new URL(urlString);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("Accept", "application/json");
 
-            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                int responseCode = connection.getResponseCode();
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
                 StringBuilder response = new StringBuilder();
@@ -96,8 +99,26 @@ public class FetchItems {
                     response.append(inputLine);
                 }
                 in.close();
-                return response.toString();
-            } else {
+
+                // Log the response code and the response body
+                Log.d("FetchItemsTask", "Response Code: " + responseCode);
+                Log.d("FetchItemsTask", "Response Body: " + response.toString());
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    return response.toString();
+                } else {
+                    // Log the error
+                    Log.e("FetchItemsTask", "Error: HTTP " + responseCode);
+                    return "{}";
+                }
+            } catch (MalformedURLException e) {
+                Log.e("FetchItemsTask", "Error: Invalid URL " + urlString, e);
+                return "{}";
+            } catch (IOException e) {
+                Log.e("FetchItemsTask", "Error: Problem with network or server", e);
+                return "{}";
+            } catch (Exception e) {
+                Log.e("FetchItemsTask", "Error: Unexpected exception", e);
                 return "{}";
             }
         }

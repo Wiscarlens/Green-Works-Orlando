@@ -253,7 +253,6 @@ public class ScannerFragment extends BottomSheetDialogFragment {
 
     }
 
-
     void showItemDialog(Item item) {
         RelativeLayout relativeLayout = requireActivity().findViewById(R.id.fragment_scanner);
         View view = LayoutInflater.from(requireActivity()).inflate(R.layout.item_dialog, relativeLayout);
